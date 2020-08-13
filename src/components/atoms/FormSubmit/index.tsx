@@ -1,15 +1,29 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { colors } from "../../styles";
+import { colors, metrics, fonts } from "../../styles";
 
 export type Props = {
   className?: string;
 };
 
 const FormSubmit: React.FC<Props> = ({ className }) => {
-  return <div className={className}>送信</div>;
+  return (
+    <StyledButton>
+      <StyledText>送信</StyledText>
+    </StyledButton>
+  );
 };
 
-const styledButton = styled.button``;
+const StyledButton = styled.div`
+  background-color: ${colors.lightGreen};
+  padding: ${metrics.padding.buttonMediumFlat};
+  /* width: 100px; */
+  border-radius: ${metrics.borderRadius.button}px;
+`;
+
+const StyledText = styled(fonts.styles.FormSubmit)`
+  color: ${colors.textWhiteBrown};
+  text-align: center;
+`;
 
 export default FormSubmit;
