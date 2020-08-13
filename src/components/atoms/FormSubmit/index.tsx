@@ -14,10 +14,9 @@ const FormSubmit: React.FC<Props> = ({ className }) => {
   );
 };
 
-const StyledButton = styled.div`
+const StyledButton = styled.button`
   background-color: ${colors.lightGreen};
   padding: ${metrics.padding.buttonMediumFlat};
-  /* width: 100px; */
   border-radius: ${metrics.borderRadius.button}px;
 `;
 
