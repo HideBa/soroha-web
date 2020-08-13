@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader";
 
 import Home from "./components/atoms/FormInput";
 
-import GlobalStyles from "./style";
+import { GlobalStyles } from "./components/styles";
 
 const App = () => (
   <>
