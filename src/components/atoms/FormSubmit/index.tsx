@@ -4,11 +4,12 @@ import { colors, metrics, fonts } from "../../styles";
 
 export type Props = {
   className?: string;
+  onClick?: () => void;
 };
 
-const FormSubmit: React.FC<Props> = ({ className }) => {
+const FormSubmit: React.FC<Props> = ({ className, onClick }) => {
   return (
-    <StyledButton>
+    <StyledButton onClick={onClick}>
       <StyledText>送信</StyledText>
     </StyledButton>
   );
