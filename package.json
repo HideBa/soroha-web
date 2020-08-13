@@ -1,8 +1,8 @@
 {
-  "name": "ts-react-boilerplate",
+  "name": "soroha",
   "version": "0.0.0",
   "description": "TypeScript + React + Redux",
-  "repository": "https://github.com/HideBa/react-ts-boilerplate.git",
+  "repository": "https://github.com/HideBa/soroha.git",
   "author": "HideBa",
   "private": true,
   "scripts": {
