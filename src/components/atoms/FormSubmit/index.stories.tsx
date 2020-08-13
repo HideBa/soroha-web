@@ -5,5 +5,5 @@ import { storiesOf } from "@storybook/react";
 import FormSubmit from ".";
 
 export default () => {
-  storiesOf("atom", module).add("default", () => <FormSubmit />);
+  storiesOf("atoms/FormButton", module).add("default", () => <FormSubmit />);
 };
