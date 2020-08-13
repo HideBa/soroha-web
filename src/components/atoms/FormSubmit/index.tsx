@@ -22,7 +22,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledText = styled(fonts.styles.FormSubmit)`
-  color: ${colors.textWhiteBrown};
+  color: ${colors.whiteBrown};
   text-align: center;
 `;
 
