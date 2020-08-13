@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/src
+    docker:
+      - image: node:10.11.0-alpine
+    steps:
+      - checkout
+      - run:
+          name: Install CA certificates
+          command: apk add --no-cache ca-certificates
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Type Check
+          command: yarn run type
+      - run:
+          name: Lint
+          command: yarn run lint
+      - run:
+          name: Test
+          command: yarn test
