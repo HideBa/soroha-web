@@ -3,6 +3,7 @@ export const metrics = {
   borderRadius: {
     button: 10,
     input: 10,
+    circle: 50,
   },
   padding: {
     buttonMedium: "15px",
