@@ -17,23 +17,37 @@ export type Props = {
 const Header: React.FC<Props> = ({ className, links }) => {
   return (
     <Wrapper>
-      <Logo />
-      {links &&
-        links.map(link => {
-          return (
-            <HeaderLink key={link.text} text={link.text} LinkTo={link.LinkTo} />
-          );
-        })}
+      <LeftWrapper>
+        <Logo />
+      </LeftWrapper>
+      <RightWrapper>
+        {links &&
+          links.map(link => {
+            return (
+              <HeaderLink
+                key={link.text}
+                text={link.text}
+                LinkTo={link.LinkTo}
+              />
+            );
+          })}
+      </RightWrapper>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   background-color: ${colors.lightGreen};
-  height: 80px;
+  height: 50px;
   padding: ${metrics.padding.header};
   display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
 `;
+
+const LeftWrapper = styled.div``;
+
+const RightWrapper = styled.div``;
 
 export default Header;
