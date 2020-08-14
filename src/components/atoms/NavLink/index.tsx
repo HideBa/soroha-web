@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
-import { colors, fonts } from "@soroha/components/styles";
+import { colors, fonts, metrics } from "@soroha/components/styles";
 import Icon, { Icons } from "../icons";
 
 export type Props = {
@@ -23,8 +23,8 @@ const NavLink: React.FC<Props> = ({ link }) => {
         <StyledTextLink to={link.linkTo || "/"}>{link.text}</StyledTextLink>
       )}
       {link.type === "icon" && (
-        <StyledIconLink to={link.linkTo || "/"}>
-          <Icon icon={link.icon} />
+        <StyledIconLink to={link.linkTo || "/"} className={"menu-icons"}>
+          <Icon icon={link.icon} color={colors.whiteBrown} size={50} />
         </StyledIconLink>
       )}
     </>
@@ -36,6 +36,9 @@ const StyledTextLink = styled(Link)`
   font-size: ${fonts.size.medium2};
 `;
 
-const StyledIconLink = styled(Link)``;
+const StyledIconLink = styled(Link)`
+  background-color: ${props => (props.color ? props.color : "")};
+  margin: ${metrics.margin.navBarIcon};
+`;
 
 export default NavLink;

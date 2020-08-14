@@ -3,7 +3,6 @@ import { FaUser } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
-import styled from "@emotion/styled";
 
 export type Props = {
   className?: string;
@@ -36,17 +35,13 @@ const Icon: React.FC<Props> = ({
   if (!icon) return null;
   const IconComponent = icons[icon as Icons];
   if (IconComponent) {
-    return (
-      <IconWrapper onClick={onClick} color={wrapperColor}>
-        <IconComponent size={size} color={color} />
-      </IconWrapper>
-    );
+    return <IconComponent size={size} color={color} />;
   }
   return <div className={className}></div>;
 };
 
-const IconWrapper = styled.div<{ color?: string }>`
-  background-color: ${props => (props.color ? props.color : "")};
-`;
+// const IconWrapper = styled.div<{ color?: string }>`
+//   background-color: ${props => (props.color ? props.color : "")};
+// `;
 
 export default Icon;

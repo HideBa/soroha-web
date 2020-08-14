@@ -1,11 +1,10 @@
 import React from "react";
+
 import { storiesOf } from "@storybook/react";
 // import { action } from "@storybook/addon-actions";
-
-import FormSubmit from ".";
-
+import CalculateSubmit from ".";
 export default () => {
-  storiesOf("atoms/FormButton", module).add("default", () => (
-    <FormSubmit text="追加" />
+  storiesOf("molecules/CalculateSubmit", module).add("default", () => (
+    <CalculateSubmit />
   ));
 };

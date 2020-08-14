@@ -12,9 +12,7 @@ export type Props = {
 };
 
 const Home: React.FC<Props> = () => {
-  // const isPC = useMediaQuery({ minDeviceWidth: 769 });
-  const isPC = false;
-  console.log("----", isPC);
+  const isPC = useMediaQuery({ minDeviceWidth: 769 });
   const links: LinkType[] = isPC
     ? [
         { linkTo: "/", type: "text", text: "Login" },
@@ -23,6 +21,7 @@ const Home: React.FC<Props> = () => {
     : [
         { linkTo: "/", type: "icon", icon: "user" },
         { linkTo: "/", type: "icon", icon: "home" },
+        { linkTo: "/", type: "icon", icon: "menu" },
       ];
   return (
     <>

@@ -5,7 +5,6 @@ import Logo from "@soroha/components/atoms/Logo";
 import styled from "@emotion/styled";
 
 export type Props = {
-  className?: string;
   links?: LinkType[];
   isPC?: boolean;
 };

@@ -5,12 +5,13 @@ import { colors, metrics, fonts } from "@soroha/components/styles";
 export type Props = {
   className?: string;
   onClick?: () => void;
+  text?: string;
 };
 
-const FormSubmit: React.FC<Props> = ({ className, onClick }) => {
+const FormSubmit: React.FC<Props> = ({ className, onClick, text }) => {
   return (
     <StyledButton onClick={onClick}>
-      <StyledText>送信</StyledText>
+      <StyledText>{text}</StyledText>
     </StyledButton>
   );
 };

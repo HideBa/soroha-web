@@ -42,7 +42,7 @@ const Form: React.FC<Props> = ({ className }) => {
           );
         })}
       </FormSectionWrapper>
-      <FormSubmit />
+      <FormSubmit text="追加" />
     </Wrapper>
   );
 };

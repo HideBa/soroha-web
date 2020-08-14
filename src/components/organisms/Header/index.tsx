@@ -1,16 +1,25 @@
 import React from "react";
 import Header from "@soroha/components/molecules/Header";
 import { LinkType } from "@soroha/components/atoms/NavLink";
+import styled from "@emotion/styled";
+import { zIndexes } from "@soroha/components/styles";
 
 export type Props = {
-  className?: string;
-  isSignIn?: boolean;
   isPC?: boolean;
   links?: LinkType[];
 };
 
-const NavBar: React.FC<Props> = ({ className, isSignIn, isPC, links }) => {
-  return <Header links={links} isPC={isPC} />;
+const NavBar: React.FC<Props> = ({ isPC, links }) => {
+  return (
+    <Wrapper>
+      <Header links={links} isPC={isPC} />;
+    </Wrapper>
+  );
 };
 
+const Wrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  z-index: ${zIndexes.header};
+`;
 export default NavBar;

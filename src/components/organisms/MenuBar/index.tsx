@@ -1,22 +1,20 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { colors } from "@soroha/components/styles";
+import { colors, zIndexes } from "@soroha/components/styles";
 import { LinkType } from "@soroha/components/atoms/NavLink";
+import { default as NavBarMolecule } from "@soroha/components/molecules/NavBar";
 
 export type Props = {
   className?: string;
-  isSignIn?: boolean;
   isPC?: boolean;
   links?: LinkType[];
 };
 
-const NavBar: React.FC<Props> = ({ isSignIn, isPC, links }) => {
-  return isPC ? (
-    <></>
-  ) : (
+const MenuBar: React.FC<Props> = ({ isPC, links }) => {
+  return isPC ? null : (
     <Wrapper>
       <BottomBar>
-        <NavBar links={links} />
+        <NavBarMolecule links={links} />
       </BottomBar>
     </Wrapper>
   );
@@ -25,11 +23,15 @@ const NavBar: React.FC<Props> = ({ isSignIn, isPC, links }) => {
 const Wrapper = styled.div`
   position: sticky;
   bottom: 30px;
+  z-index: ${zIndexes.footer};
 `;
 
 const BottomBar = styled.div`
   background-color: ${colors.lightGreen};
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
-export default NavBar;
+export default MenuBar;

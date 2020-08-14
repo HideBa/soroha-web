@@ -11,10 +11,12 @@ export const metrics = {
     inputMedium: "15px",
     formWrapper: "30px",
     header: "15px",
+    circleWrapper: "10px",
   },
   margin: {
     buttonMedium: "15px",
     inputMedium: "15px 0",
     inputSubmit: "30px 0",
+    navBarIcon: "10px 20px",
   },
 };
