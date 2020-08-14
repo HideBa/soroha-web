@@ -13,5 +13,6 @@ export const metrics = {
   margin: {
     buttonMedium: "15px",
     inputMedium: "15px 0",
+    inputSubmit: "30px 0",
   },
 };

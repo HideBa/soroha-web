@@ -38,6 +38,11 @@ export const FormSubmit = styled.p`
   font-family: ${type.base};
 `;
 
+export const FormTitle = styled.p`
+  font-size: ${size.large};
+  font-weight: ${weight.bold};
+`;
+
 const styles = {
   H1,
   H2,

@@ -19,6 +19,8 @@ const StyledButton = styled.button`
   background-color: ${colors.lightGreen};
   padding: ${metrics.padding.buttonMediumFlat};
   border-radius: ${metrics.borderRadius.button}px;
+  width: 100%;
+  margin: ${metrics.margin.inputSubmit};
 `;
 
 const StyledText = styled(fonts.styles.FormSubmit)`
