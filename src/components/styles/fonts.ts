@@ -32,6 +32,12 @@ export const H2 = styled.h1`
   font-family: ${type.base};
 `;
 
+export const Type = styled.p`
+  font-size: ${size.extraLarge}px;
+  font-weight: ${weight.normal};
+  font-family: ${type.logoType};
+`;
+
 export const FormSubmit = styled.p`
   font-size: ${size.medium2}px;
   font-weight: ${weight.normal};
