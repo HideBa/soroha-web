@@ -1,14 +1,17 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-
-import Home from "./components/atoms/FormInput";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { GlobalStyles } from "./components/styles";
+import Home from "./components/pages/Home";
 
 const App = () => (
   <>
     <GlobalStyles />
-    <Home />
+    <Router>
+      <Route path="/">
+        <Home />
+      </Route>
+    </Router>
   </>
 );
 
