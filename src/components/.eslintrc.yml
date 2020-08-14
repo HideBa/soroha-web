@@ -1,0 +1,42 @@
+# ESLint rules for atomic design
+overrides:
+  - files: '**/*'
+    rules:
+      'no-restricted-imports':
+        - error
+        - paths:
+            - '@emotion/core'
+            - '@emotion/styled'
+  - files: atoms/**/*
+    rules:
+      'no-restricted-imports':
+        - error
+        - paths:
+            - 'reach-router'
+          patterns:
+            - '@soroha/components/molecules/*'
+            - '@soroha/components/organisms/*'
+            - '@soroha/components/pages/*'
+  - files: molecules/**/*
+    rules:
+      'no-restricted-imports':
+        - error
+        - paths:
+            - 'reach-router'
+          patterns:
+            - '@soroha/components/organisms/*'
+            - '@soroha/components/pages/*'
+  - files: organisms/**/*
+    rules:
+      'no-restricted-imports':
+        - error
+        - patterns:
+            - '@soroha/components/pages/*'
+  - files: organisms/**/*
+    rules:
+      'no-restricted-imports':
+        - error
+  - files: pages/**/*
+    rules:
+      'no-restricted-imports':
+        - error
