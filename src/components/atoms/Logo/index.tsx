@@ -5,14 +5,15 @@ import { colors } from "@soroha/components/styles";
 
 export type Props = {
   className?: string;
+  isPC?: boolean;
 };
 
-const LogoType: React.FC<Props> = ({ className }) => {
-  return <StyledType>soroha</StyledType>;
+const LogoType: React.FC<Props> = ({ className, isPC }) => {
+  return <StyledType isPC={isPC}>soroha</StyledType>;
 };
 
-const StyledType = styled(Type)`
-  color: ${colors.whiteBrown};
+const StyledType = styled(Type)<{ isPC?: boolean }>`
+  color: ${props => (props.isPC ? colors.whiteBrown : colors.textDarkBrown)};
   margin: auto 0px;
 `;
 

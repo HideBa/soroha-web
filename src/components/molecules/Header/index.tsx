@@ -12,31 +12,40 @@ export type Link = {
 export type Props = {
   className?: string;
   links?: Link[];
+  isPC?: boolean;
 };
 
-const Header: React.FC<Props> = ({ className, links }) => {
+const Header: React.FC<Props> = ({ className, links, isPC }) => {
   return (
-    <Wrapper>
-      <LeftWrapper>
-        <Logo />
-      </LeftWrapper>
-      <RightWrapper>
-        {links &&
-          links.map(link => {
-            return (
-              <HeaderLink
-                key={link.text}
-                text={link.text}
-                LinkTo={link.LinkTo}
-              />
-            );
-          })}
-      </RightWrapper>
-    </Wrapper>
+    <>
+      {isPC ? (
+        <PCWrapper>
+          <LeftWrapper>
+            <Logo />
+          </LeftWrapper>
+          <RightWrapper>
+            {links &&
+              links.map(link => {
+                return (
+                  <HeaderLink
+                    key={link.text}
+                    text={link.text}
+                    LinkTo={link.LinkTo}
+                  />
+                );
+              })}
+          </RightWrapper>
+        </PCWrapper>
+      ) : (
+        <SPWrapper>
+          <Logo isPC={isPC} />
+        </SPWrapper>
+      )}
+    </>
   );
 };
 
-const Wrapper = styled.div`
+const PCWrapper = styled.div`
   background-color: ${colors.lightGreen};
   height: 50px;
   padding: ${metrics.padding.header};
@@ -44,6 +53,11 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+`;
+
+const SPWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const LeftWrapper = styled.div``;
