@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { colors, metrics, fonts } from "../../styles";
+import { colors, metrics, fonts } from "@soroha/components/styles";
 
 export type Props = {
   className?: string;

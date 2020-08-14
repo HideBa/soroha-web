@@ -8,6 +8,10 @@ export const metrics = {
     buttonMedium: "15px",
     buttonMediumFlat: "10px 15px",
     inputMedium: "15px",
+    formWrapper: "30px",
   },
-  margin: {},
+  margin: {
+    buttonMedium: "15px",
+    inputMedium: "15px 0",
+  },
 };
