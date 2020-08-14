@@ -34,6 +34,7 @@ const NavLink: React.FC<Props> = ({ link }) => {
 const StyledTextLink = styled(Link)`
   color: ${colors.whiteBrown};
   font-size: ${fonts.size.medium2};
+  padding: ${metrics.padding.headerLink};
 `;
 
 const StyledIconLink = styled(Link)`
