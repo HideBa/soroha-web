@@ -1,4 +1,6 @@
 import React from "react";
+import { hot } from "react-hot-loader/root";
+
 import Form from "@soroha/components/organisms/Form";
 import NavBar from "@soroha/components/organisms/Header";
 import { useMediaQuery } from "react-responsive";
@@ -9,8 +11,9 @@ export type Props = {
   className?: string;
 };
 
-const Home: React.FC<Props> = ({ className }) => {
-  const isPC = useMediaQuery({ minDeviceWidth: 769 });
+const Home: React.FC<Props> = () => {
+  // const isPC = useMediaQuery({ minDeviceWidth: 769 });
+  const isPC = false;
   console.log("----", isPC);
   const links: LinkType[] = isPC
     ? [
@@ -23,11 +26,11 @@ const Home: React.FC<Props> = ({ className }) => {
       ];
   return (
     <>
-      {/* <NavBar isPC={isPC} links={links} /> */}
+      <NavBar isPC={isPC} links={links} />
       <Form />
       <MenuBar isPC={isPC} links={links} />
     </>
   );
 };
 
-export default Home;
+export default hot(Home);

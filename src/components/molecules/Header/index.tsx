@@ -10,7 +10,7 @@ export type Props = {
   isPC?: boolean;
 };
 
-const Header: React.FC<Props> = ({ className, links, isPC }) => {
+const Header: React.FC<Props> = ({ links, isPC }) => {
   return (
     <>
       {isPC ? (

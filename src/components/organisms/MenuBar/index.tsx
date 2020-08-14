@@ -10,8 +10,10 @@ export type Props = {
   links?: LinkType[];
 };
 
-const NavBar: React.FC<Props> = ({ className, isSignIn, isPC, links }) => {
-  return isPC ? null : (
+const NavBar: React.FC<Props> = ({ isSignIn, isPC, links }) => {
+  return isPC ? (
+    <></>
+  ) : (
     <Wrapper>
       <BottomBar>
         <NavBar links={links} />

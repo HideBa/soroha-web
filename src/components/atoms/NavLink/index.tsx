@@ -16,7 +16,7 @@ export type LinkType = {
   icon?: Icons;
 };
 
-const NavLink: React.FC<Props> = ({ className, link }) => {
+const NavLink: React.FC<Props> = ({ link }) => {
   return (
     <>
       {link.type === "text" && (
