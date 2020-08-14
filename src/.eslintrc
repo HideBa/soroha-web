@@ -21,6 +21,7 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-undef": "off",
-    "node/no-unsupported-features/es-syntax": "off"
+    "node/no-unsupported-features/es-syntax": "off",
+    "react/prop-types": "off",
   }
 }
