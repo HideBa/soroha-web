@@ -1,17 +1,12 @@
 import React from "react";
 import { colors, metrics } from "@soroha/components/styles";
-import HeaderLink from "@soroha/components/atoms/HeaderLink";
+import NavLink, { LinkType } from "@soroha/components/atoms/NavLink";
 import Logo from "@soroha/components/atoms/Logo";
 import styled from "@emotion/styled";
 
-export type Link = {
-  text: string;
-  LinkTo: string;
-};
-
 export type Props = {
   className?: string;
-  links?: Link[];
+  links?: LinkType[];
   isPC?: boolean;
 };
 
@@ -26,13 +21,7 @@ const Header: React.FC<Props> = ({ className, links, isPC }) => {
           <RightWrapper>
             {links &&
               links.map(link => {
-                return (
-                  <HeaderLink
-                    key={link.text}
-                    text={link.text}
-                    LinkTo={link.LinkTo}
-                  />
-                );
+                return <NavLink key={link.text} link={link} />;
               })}
           </RightWrapper>
         </PCWrapper>
@@ -58,6 +47,9 @@ const PCWrapper = styled.div`
 const SPWrapper = styled.div`
   display: flex;
   justify-content: center;
+  height: 50px;
+  align-items: center;
+  padding: ${metrics.padding.header};
 `;
 
 const LeftWrapper = styled.div``;
