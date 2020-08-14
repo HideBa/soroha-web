@@ -15,7 +15,8 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "paths": {
-      "*": ["@types/*"]
+      "@soroha/*": ["src/*"],
+      "*": ["src/@types/*"]
     },
     "plugins": [
       {

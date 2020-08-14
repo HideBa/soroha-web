@@ -105,7 +105,9 @@ module.exports = (env, args = {}) => {
       }),
     ],
     resolve: {
+      modules: [path.resolve("./node_modules"), path.resolve("./src")],
       alias: {
+        "@soroha": path.resolve(__dirname, "src/"),
         "react-dom": "@hot-loader/react-dom",
       },
       extensions: [".ts", ".tsx", ".js", ".jsx", ".json", ".mjs"],
