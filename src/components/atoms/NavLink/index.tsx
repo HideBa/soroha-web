@@ -9,12 +9,19 @@ export type Props = {
   link: LinkType;
 };
 
-export type LinkType = {
+export type LinkText = {
   linkTo: string;
-  type: "text" | "icon";
+  type: "text";
   text?: string;
-  icon?: Icons;
 };
+
+export type LinkIcon = {
+  linkTo: string;
+  type: "icon";
+  icon: Icons;
+};
+
+export type LinkType = LinkText | LinkIcon;
 
 const NavLink: React.FC<Props> = ({ link }) => {
   return (

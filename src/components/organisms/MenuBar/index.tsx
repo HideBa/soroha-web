@@ -3,15 +3,16 @@ import styled from "@emotion/styled";
 import { colors, zIndexes } from "@soroha/components/styles";
 import { LinkType } from "@soroha/components/atoms/NavLink";
 import { default as NavBarMolecule } from "@soroha/components/molecules/NavBar";
+import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 
 export type Props = {
   className?: string;
-  isPC?: boolean;
   links?: LinkType[];
   setIsModalOpen?: () => void;
 };
 
-const MenuBar: React.FC<Props> = ({ isPC, links, setIsModalOpen }) => {
+const MenuBar: React.FC<Props> = ({ links, setIsModalOpen }) => {
+  const isPC = useIsPC();
   return isPC ? null : (
     <Wrapper>
       <BottomBar>

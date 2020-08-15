@@ -1,5 +1,5 @@
 import React from "react";
-import NavLink, { LinkType } from "@soroha/components/atoms/NavLink";
+import NavLink, { LinkType, LinkIcon } from "@soroha/components/atoms/NavLink";
 import styled from "@emotion/styled";
 import MenuBarCircle from "@soroha/components/atoms/MenuBarCircle";
 
@@ -23,14 +23,18 @@ const NavBar: React.FC<Props> = ({
           <Wrapper>
             {links &&
               links.map((link, i) => {
-                return i < 2 && <NavLink key={link.icon} link={link} />;
+                return (
+                  i < 2 && <NavLink key={(link as LinkIcon).icon} link={link} />
+                );
               })}
           </Wrapper>
           <MenuBarCircle onClick={setIsModalOpen} />
           <Wrapper>
             {links &&
               links.map((link, i) => {
-                return i > 1 && <NavLink key={link.icon} link={link} />;
+                return (
+                  i > 1 && <NavLink key={(link as LinkIcon).icon} link={link} />
+                );
               })}
           </Wrapper>
         </NavBarWrapper>
