@@ -24,7 +24,7 @@ const NavLink: React.FC<Props> = ({ link }) => {
       )}
       {link.type === "icon" && (
         <StyledIconLink to={link.linkTo || "/"} className={"menu-icons"}>
-          <Icon icon={link.icon} color={colors.whiteBrown} size={50} />
+          <Icon icon={link.icon} color={colors.whiteBrown} size={30} />
         </StyledIconLink>
       )}
     </>

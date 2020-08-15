@@ -3,6 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
+import { RiCloseLine } from "react-icons/ri";
 
 export type Props = {
   className?: string;
@@ -10,7 +11,6 @@ export type Props = {
   size?: string | number;
   alt?: string;
   color?: string;
-  wrapperColor?: string;
   onClick?: () => void;
 };
 
@@ -19,6 +19,7 @@ const icons = {
   menu: RiMenuLine,
   home: TiHome,
   pen: FaPen,
+  close: RiCloseLine,
 };
 
 export type Icons = keyof typeof icons;
@@ -29,19 +30,21 @@ const Icon: React.FC<Props> = ({
   size,
   alt,
   color,
-  wrapperColor,
   onClick,
 }) => {
   if (!icon) return null;
   const IconComponent = icons[icon as Icons];
   if (IconComponent) {
-    return <IconComponent size={size} color={color} />;
+    return (
+      <IconComponent
+        className={className}
+        size={size}
+        color={color}
+        onClick={onClick}
+      />
+    );
   }
-  return <div className={className}></div>;
+  return null;
 };
-
-// const IconWrapper = styled.div<{ color?: string }>`
-//   background-color: ${props => (props.color ? props.color : "")};
-// `;
 
 export default Icon;

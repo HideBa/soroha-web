@@ -13,7 +13,7 @@ const Header: React.FC<Props> = ({ links, isPC }) => {
   return (
     <>
       {isPC ? (
-        <PCWrapper>
+        <PCWrapper className="header">
           <LeftWrapper>
             <Logo />
           </LeftWrapper>
@@ -25,8 +25,8 @@ const Header: React.FC<Props> = ({ links, isPC }) => {
           </RightWrapper>
         </PCWrapper>
       ) : (
-        <SPWrapper>
-          <Logo isPC={isPC} />
+        <SPWrapper className="header">
+          <Logo isPC={isPC} className="logo" />
         </SPWrapper>
       )}
     </>
@@ -35,7 +35,6 @@ const Header: React.FC<Props> = ({ links, isPC }) => {
 
 const PCWrapper = styled.div`
   background-color: ${colors.lightGreen};
-  height: 50px;
   padding: ${metrics.padding.header};
   display: flex;
   justify-content: space-between;
@@ -46,7 +45,6 @@ const PCWrapper = styled.div`
 const SPWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 50px;
   align-items: center;
   padding: ${metrics.padding.header};
 `;

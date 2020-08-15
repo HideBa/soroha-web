@@ -22,6 +22,9 @@ const StyledButton = styled.button`
   border-radius: ${metrics.borderRadius.button}px;
   width: 100%;
   margin: ${metrics.margin.inputSubmit};
+  @media screen and (max-width: ${metrics.breakPoint.tabletOrSP}px) {
+    margin: ${metrics.margin.inputSubmitSP};
+  }
 `;
 
 const StyledText = styled(fonts.styles.FormSubmit)`

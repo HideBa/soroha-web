@@ -23,7 +23,7 @@ const MenuBar: React.FC<Props> = ({ isPC, links, setIsModalOpen }) => {
 
 const Wrapper = styled.div`
   position: sticky;
-  bottom: 30px;
+  bottom: 0px;
   z-index: ${zIndexes.footer};
 `;
 

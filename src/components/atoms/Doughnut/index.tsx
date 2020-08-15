@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "@emotion/styled";
+import { render } from "enzyme";
 
 export type Props = {
   className?: string;
   data?: ChartData;
+  isPC?: boolean;
 };
 
 export type ChartData = {
@@ -16,7 +18,7 @@ export type ChartData = {
   }[];
 };
 
-const DoughnutChart: React.FC<Props> = ({ className }) => {
+const DoughnutChart: React.FC<Props> = ({ className, isPC }) => {
   const data = {
     labels: ["Red", "Green", "Yellow"],
     datasets: [
@@ -27,9 +29,18 @@ const DoughnutChart: React.FC<Props> = ({ className }) => {
       },
     ],
   };
-  return <StyledDoughnut data={data} />;
+  return (
+    <StyledDoughnut
+      data={data}
+      width={isPC ? 400 : 300}
+      height={isPC ? 400 : 300}
+      redraw
+    />
+  );
 };
 
-const StyledDoughnut = styled(Doughnut)``;
+const StyledDoughnut = styled(Doughnut)`
+  width: 100%;
+`;
 
 export default DoughnutChart;

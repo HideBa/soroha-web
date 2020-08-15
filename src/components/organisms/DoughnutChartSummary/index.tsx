@@ -9,9 +9,10 @@ import { metrics } from "@soroha/components/styles";
 
 export type Props = {
   className?: string;
+  isPC?: boolean;
 };
 
-const DoughbutChartSummary: React.FC<Props> = ({ className }) => {
+const DoughbutChartSummary: React.FC<Props> = ({ className, isPC }) => {
   const sampleData = {
     labels: ["Red", "Green", "Yellow"],
     datasets: [
@@ -36,7 +37,11 @@ const DoughbutChartSummary: React.FC<Props> = ({ className }) => {
     <Wrapper>
       <UpperContainer>
         {/* TODO: must change data later */}
-        <DoughnutChart data={sampleData} />
+        <DoughnutChart
+          data={sampleData}
+          className="doughnut-chart"
+          isPC={isPC}
+        />
         {/* TODO: must cahnge data later */}
         <ChartTexts primarySubChartData={sampleTextData} />
       </UpperContainer>
@@ -51,7 +56,7 @@ const Wrapper = styled.div`
   min-width: 300px;
   flex-grow: 2;
   align-items: center;
-  margin: ${metrics.margin.chartBody};
+  width: calc(100% - 30px);
 `;
 
 const UpperContainer = styled.div`
@@ -59,6 +64,8 @@ const UpperContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   position: relative;
+  width: 100%;
+  max-width: 500px;
 `;
 
 export default DoughbutChartSummary;

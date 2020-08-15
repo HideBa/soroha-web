@@ -18,6 +18,7 @@ const CalculateSubmit: React.FC<Props> = ({ onClick }) => {
 };
 
 const SubmitButton = styled(FormSubmit)`
+  margin: ${metrics.margin.buttonMedium};
   padding: ${metrics.padding.buttonMedium};
   background-color: ${colors.deepGreen};
   max-width: 300px;

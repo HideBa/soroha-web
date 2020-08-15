@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { hot } from "react-hot-loader/root";
 
 import Form from "@soroha/components/organisms/Form";
@@ -17,6 +17,9 @@ export type Props = {
 const Home: React.FC<Props> = () => {
   const isPC = useMediaQuery({ minDeviceWidth: metrics.breakPoint.tabletOrSP });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(() => {
+    !isPC && setIsModalOpen(false);
+  }, [isPC]);
   const links: LinkType[] = isPC
     ? [
         { linkTo: "/", type: "text", text: "Login" },
@@ -28,10 +31,10 @@ const Home: React.FC<Props> = () => {
         { linkTo: "/", type: "icon", icon: "menu" },
       ];
   return (
-    <>
+    <Wrapper>
       <NavBar isPC={isPC} links={links} />
       <Body>
-        <DoughbutChartSummary />
+        <DoughbutChartSummary isPC={isPC} />
         <Form
           isPC={isPC}
           isOpen={isModalOpen}
@@ -43,15 +46,25 @@ const Home: React.FC<Props> = () => {
         links={links}
         setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
       />
-    </>
+    </Wrapper>
   );
 };
 
 const Body = styled.div`
-  margin: ${metrics.margin.body};
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  height: 100%;
+  @media screen and (max-width: ${metrics.breakPoint.tabletOrSP}px) {
+    flex-direction: column;
+    align-items: center;
+    padding: ${metrics.padding.body};
+  }
+`;
+
+const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
 `;
 
 export default hot(Home);
