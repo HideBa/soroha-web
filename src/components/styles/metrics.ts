@@ -19,5 +19,6 @@ export const metrics = {
     inputMedium: "15px 0",
     inputSubmit: "30px 0",
     navBarIcon: "10px 20px",
+    chartText: "5px 0 0",
   },
 };
