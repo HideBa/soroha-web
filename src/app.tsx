@@ -8,6 +8,10 @@ import NavBar from "./components/organisms/Header";
 import MenuBar from "./components/organisms/MenuBar";
 import getLinks from "./components/UtilFunctions/Links";
 import { useIsPC } from "./components/UtilFunctions/use-is-pc";
+import Signin from "./components/pages/Signin";
+import Signup from "./components/organisms/Auth/Signup";
+import SigninPage from "./components/pages/Signin";
+import SignupPage from "./components/pages/Signup";
 
 const App = () => {
   const isPC = useIsPC();
@@ -25,7 +29,10 @@ const App = () => {
               <Home />
             </Route>
             <Route exact path="/signin">
-              {/* <Signin /> */}
+              <SigninPage />
+            </Route>
+            <Route exact path="/signup">
+              <SignupPage />
             </Route>
           </Switch>
           <Route path="/">

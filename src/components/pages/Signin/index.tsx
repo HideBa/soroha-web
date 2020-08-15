@@ -1,11 +1,22 @@
 import React from "react";
+import FormInputWrapper from "@soroha/components/molecules/FormInputWrapper";
+import Signin from "@soroha/components/organisms/Auth/Signin";
+import styled from "@emotion/styled";
 
 export type Props = {
   className?: string;
 };
 
-const Signin: React.FC<Props> = ({ className }) => {
-  return <div className={className}></div>;
+const SigninPage: React.FC<Props> = ({ className }) => {
+  return (
+    <Body>
+      <Signin />
+    </Body>
+  );
 };
 
-export default Signin;
+const Body = styled.div`
+  height: 100%;
+`;
+
+export default SigninPage;

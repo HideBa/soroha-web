@@ -28,7 +28,7 @@ export const H1 = styled.h1`
 
 export const H2 = styled.h1`
   font-size: ${size.large}px;
-  font-weight: ${weight.normal};
+  font-weight: ${weight.bold};
   font-family: ${type.base};
 `;
 

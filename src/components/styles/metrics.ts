@@ -26,6 +26,7 @@ export const metrics = {
     navBarIcon: "10px 20px",
     chartText: "5px 0",
     chartBody: "30px",
+    mediumTitle: "20px 0",
   },
   breakPoint: {
     tabletOrSP: 769,

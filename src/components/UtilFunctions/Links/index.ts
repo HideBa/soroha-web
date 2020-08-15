@@ -3,8 +3,8 @@ import { LinkType } from "../../atoms/NavLink";
 const getLinks = (isPC: boolean): LinkType[] => {
   const links: LinkType[] = isPC
     ? [
-        { linkTo: "/", type: "text", text: "Login" },
-        { linkTo: "/", type: "text", text: "SignUp" },
+        { linkTo: "/signin", type: "text", text: "Signin" },
+        { linkTo: "/signup", type: "text", text: "SignUp" },
       ]
     : [
         { linkTo: "/", type: "icon", icon: "user" },
