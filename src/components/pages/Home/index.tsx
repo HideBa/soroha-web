@@ -9,11 +9,11 @@ import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 
 export type Props = {
   className?: string;
-  isPC?: boolean;
+  isModalOpen?: boolean;
+  setIsModalOpen: (isOpen: boolean) => void;
 };
 
-const Home: React.FC<Props> = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const Home: React.FC<Props> = ({ setIsModalOpen, isModalOpen }) => {
   const isPC = useIsPC();
   useEffect(() => {
     !isPC && setIsModalOpen(false);
