@@ -9,7 +9,7 @@ import Icon from "@soroha/components/atoms/icons";
 export type Props = {
   className?: string;
   isPC?: boolean;
-  isOpen?: boolean;
+  isModalOpen?: boolean;
   setIsModalOpen?: () => void;
 };
 
@@ -31,7 +31,12 @@ const formInputs: Input[] = [
   },
 ];
 
-const Form: React.FC<Props> = ({ className, isPC, isOpen, setIsModalOpen }) => {
+const Form: React.FC<Props> = ({
+  className,
+  isPC,
+  isModalOpen,
+  setIsModalOpen,
+}) => {
   return isPC ? (
     <Wrapper>
       <Title>入力</Title>
@@ -49,7 +54,7 @@ const Form: React.FC<Props> = ({ className, isPC, isOpen, setIsModalOpen }) => {
       <FormSubmit text="追加" />
     </Wrapper>
   ) : (
-    <ModalWrapper isOpen={isOpen}>
+    <ModalWrapper isModalOpen={isModalOpen}>
       <ModalBg onClick={setIsModalOpen} />
       <ModalPopup>
         <Title>入力</Title>
@@ -91,13 +96,13 @@ const Title = styled(FormTitle)`
   text-align: center;
 `;
 
-const ModalWrapper = styled.div<{ isOpen?: boolean }>`
+const ModalWrapper = styled.div<{ isModalOpen?: boolean }>`
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
-  display: ${props => (props.isOpen ? "block" : "none")};
+  display: ${props => (props.isModalOpen ? "block" : "none")};
   z-index: ${zIndexes.fullScreenModal};
 `;
 

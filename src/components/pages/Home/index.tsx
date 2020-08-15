@@ -15,16 +15,12 @@ export type Props = {
 
 const Home: React.FC<Props> = ({ setIsModalOpen, isModalOpen }) => {
   const isPC = useIsPC();
-  useEffect(() => {
-    !isPC && setIsModalOpen(false);
-  }, [isPC]);
-
   return (
     <Body>
       <DoughbutChartSummary isPC={isPC} />
       <Form
         isPC={isPC}
-        isOpen={isModalOpen}
+        isModalOpen={isModalOpen}
         setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
       />
     </Body>
