@@ -33,13 +33,10 @@ const Wrapper = styled.div`
 `;
 
 const ChartTextPrimary = styled(ChartText)`
-  font-size: ${fonts.size.medium2}px;
+  font-size: ${fonts.size.medium}px;
   font-weight: bold;
-  margin: ${metrics.margin.chartText};
 `;
 
-const ChartTextSub = styled(ChartText)`
-  margin: ${metrics.margin.chartText};
-`;
+const ChartTextSub = styled(ChartText)``;
 
 export default ChartTexts;

@@ -4,6 +4,8 @@ import DoughnutChart from "@soroha/components/atoms/Doughnut";
 import ChartTexts, {
   PrimarySubChartData,
 } from "@soroha/components/molecules/ChartTexts";
+import CalculateSubmit from "@soroha/components/molecules/Calculate";
+import { metrics } from "@soroha/components/styles";
 
 export type Props = {
   className?: string;
@@ -32,15 +34,31 @@ const DoughbutChartSummary: React.FC<Props> = ({ className }) => {
   };
   return (
     <Wrapper>
-      {/* TODO: must change data later */}
-      <DoughnutChart data={sampleData} />
-      {/* TODO: must cahnge data later */}
-      <ChartTexts primarySubChartData={sampleTextData} />
+      <UpperContainer>
+        {/* TODO: must change data later */}
+        <DoughnutChart data={sampleData} />
+        {/* TODO: must cahnge data later */}
+        <ChartTexts primarySubChartData={sampleTextData} />
+      </UpperContainer>
+      <CalculateSubmit />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  flex-grow: 2;
+  align-items: center;
+  margin: ${metrics.margin.chartBody};
+`;
+
+const UpperContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
 `;
+
 export default DoughbutChartSummary;

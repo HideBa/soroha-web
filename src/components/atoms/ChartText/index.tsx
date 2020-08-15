@@ -15,7 +15,7 @@ export type ChartTextData = {
 
 const ChartText: React.FC<Props> = ({ className, chartTextData }) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <StyledText>{chartTextData.text}</StyledText>
       <StyledCalculatedValue>
         {chartTextData.calculatedValue}円
@@ -29,6 +29,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  margin: ${metrics.margin.chartText};
 `;
 
 const StyledText = styled.p`

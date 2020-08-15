@@ -50,6 +50,10 @@ const Form: React.FC<Props> = ({ className }) => {
 const Wrapper = styled.div`
   background-color: ${colors.orangeBrown};
   padding: ${metrics.padding.formWrapper};
+  min-width: 300px;
+  margin: ${metrics.margin.formBody};
+  border-radius: ${metrics.borderRadius.container}px;
+  flex-grow: 1;
 `;
 
 const Title = styled(FormTitle)`

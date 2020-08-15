@@ -1,5 +1,6 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import styled from "@emotion/styled";
 
 export type Props = {
   className?: string;
@@ -26,7 +27,9 @@ const DoughnutChart: React.FC<Props> = ({ className }) => {
       },
     ],
   };
-  return <Doughnut data={data} />;
+  return <StyledDoughnut data={data} />;
 };
+
+const StyledDoughnut = styled(Doughnut)``;
 
 export default DoughnutChart;

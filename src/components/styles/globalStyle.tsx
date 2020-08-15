@@ -1,6 +1,7 @@
 import React from "react";
 import { Global } from "@emotion/core";
 import css from "@emotion/css";
+import colors from "./colors";
 
 export const commonStyles = css`
   html,
@@ -13,6 +14,7 @@ export const commonStyles = css`
     font-family: sans-serif;
     background-color: #000;
     color: #fff;
+    background-color: ${colors.whiteBrown};
   }
 `;
 

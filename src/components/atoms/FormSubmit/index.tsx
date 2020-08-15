@@ -10,7 +10,7 @@ export type Props = {
 
 const FormSubmit: React.FC<Props> = ({ className, onClick, text }) => {
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton className={className} onClick={onClick}>
       <StyledText>{text}</StyledText>
     </StyledButton>
   );
