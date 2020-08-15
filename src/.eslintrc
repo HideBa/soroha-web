@@ -10,7 +10,8 @@
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "react-hooks"
   ],
   "extends": [
     "plugin:react/recommended",
@@ -23,5 +24,7 @@
     "no-undef": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
