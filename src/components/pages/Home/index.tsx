@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 
 import Form from "@soroha/components/organisms/Form";
@@ -15,7 +15,8 @@ export type Props = {
 };
 
 const Home: React.FC<Props> = () => {
-  const isPC = useMediaQuery({ minDeviceWidth: 769 });
+  const isPC = useMediaQuery({ minDeviceWidth: metrics.breakPoint.tabletOrSP });
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const links: LinkType[] = isPC
     ? [
         { linkTo: "/", type: "text", text: "Login" },
@@ -31,9 +32,17 @@ const Home: React.FC<Props> = () => {
       <NavBar isPC={isPC} links={links} />
       <Body>
         <DoughbutChartSummary />
-        <Form />
+        <Form
+          isPC={isPC}
+          isOpen={isModalOpen}
+          setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
+        />
       </Body>
-      <MenuBar isPC={isPC} links={links} />
+      <MenuBar
+        isPC={isPC}
+        links={links}
+        setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
+      />
     </>
   );
 };

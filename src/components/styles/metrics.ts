@@ -25,4 +25,7 @@ export const metrics = {
     chartText: "5px 0",
     chartBody: "30px",
   },
+  breakPoint: {
+    tabletOrSP: 769,
+  },
 };

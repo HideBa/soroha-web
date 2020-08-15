@@ -8,13 +8,14 @@ export type Props = {
   className?: string;
   isPC?: boolean;
   links?: LinkType[];
+  setIsModalOpen?: () => void;
 };
 
-const MenuBar: React.FC<Props> = ({ isPC, links }) => {
+const MenuBar: React.FC<Props> = ({ isPC, links, setIsModalOpen }) => {
   return isPC ? null : (
     <Wrapper>
       <BottomBar>
-        <NavBarMolecule links={links} />
+        <NavBarMolecule links={links} setIsModalOpen={setIsModalOpen} />
       </BottomBar>
     </Wrapper>
   );
