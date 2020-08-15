@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-imports */
 import React from "react";
 import styled from "@emotion/styled";
-import { colors } from "../styles";
+import { colors } from "../../styles";
 
 export type Props = {
   className?: string;
