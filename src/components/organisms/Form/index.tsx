@@ -95,6 +95,8 @@ const ModalWrapper = styled.div<{ isOpen?: boolean }>`
   width: 100%;
   height: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
   display: ${props => (props.isOpen ? "block" : "none")};
   z-index: ${zIndexes.fullScreenModal};
 `;
@@ -104,7 +106,7 @@ const ModalBg = styled.div`
   width: 100%;
   position: absolute;
   background-color: ${colors.textDarkBrown};
-  opacity: 50%;
+  opacity: ${metrics.opacity.modalBg}%;
 `;
 
 const ModalPopup = styled.div`

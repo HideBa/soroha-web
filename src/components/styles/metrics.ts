@@ -31,4 +31,7 @@ export const metrics = {
   breakPoint: {
     tabletOrSP: 769,
   },
+  opacity: {
+    modalBg: 70,
+  },
 };
