@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FormInputWrapper from "@soroha/components/molecules/FormInputWrapper";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
@@ -9,11 +9,23 @@ export type Props = {
 };
 
 const Signin: React.FC<Props> = ({ className }) => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Wrapper>
       <Title>Sign in</Title>
-      <FormInputWrapper placeHolder="username" title="username" />
-      <FormInputWrapper placeHolder="password" title="password" />
+      <FormInputWrapper
+        placeHolder="username"
+        title="username"
+        text={userName}
+        setText={setUserName}
+      />
+      <FormInputWrapper
+        placeHolder="password"
+        title="password"
+        text={password}
+        setText={setPassword}
+      />
     </Wrapper>
   );
 };

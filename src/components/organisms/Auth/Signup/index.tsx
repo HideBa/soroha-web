@@ -1,19 +1,40 @@
-import React from "react";
-import FormInputWrapper from "@soroha/components/molecules/FormInputWrapper";
+import React, { useState, useEffect } from "react";
+import { default as FormInput } from "@soroha/components/molecules/FormInputWrapper";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";
+import FormSubmit from "@soroha/components/atoms/FormSubmit";
+import useHooks from "@soroha/components/organisms/Auth/hooks";
 
 export type Props = {
   className?: string;
 };
 
 const Signup: React.FC<Props> = ({ className }) => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const handleFormSubmit = () => {
+    console.log("--");
+  };
+  const [validateForm] = useHooks();
   return (
     <Wrapper>
       <Title>Sign up</Title>
-      <FormInputWrapper placeHolder="username" title="username" />
-      <FormInputWrapper placeHolder="password" title="password" />
+      <FormInput
+        placeHolder="username"
+        title="username"
+        text={userName}
+        setText={setUserName}
+        validateForm={() => validateForm("username", userName)}
+      />
+      <FormInput
+        placeHolder="password"
+        title="password"
+        text={password}
+        setText={setPassword}
+        validateForm={() => validateForm("password", password)}
+      />
+      <FormSubmit text="Enter" onClick={handleFormSubmit} />
     </Wrapper>
   );
 };

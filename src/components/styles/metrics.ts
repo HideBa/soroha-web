@@ -16,6 +16,7 @@ export const metrics = {
     headerLink: "0 10px",
     circleWrapper: "10px",
     doughnutChartSP: "0 20px",
+    validationText: "0 20px",
   },
   margin: {
     buttonMedium: "15px",
@@ -27,6 +28,7 @@ export const metrics = {
     chartText: "5px 0",
     chartBody: "30px",
     mediumTitle: "20px 0",
+    validationText: "10px 0 0",
   },
   breakPoint: {
     tabletOrSP: 769,
