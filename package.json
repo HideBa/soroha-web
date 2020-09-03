@@ -48,6 +48,7 @@
     "@types/storybook__react": "^4.0.2",
     "@types/webpack": "^4.32.1",
     "@types/webpack-env": "^1.14.0",
+    "@types/yup": "^0.29.6",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "babel-loader": "^8.0.6",
@@ -81,6 +82,7 @@
     "@emotion/styled": "^10.0.15",
     "@hot-loader/react-dom": "^16.9.0",
     "chart.js": "^2.9.3",
+    "formik": "^2.1.5",
     "react": "^16.9.0",
     "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.9.0",
@@ -91,6 +93,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "yup": "^0.29.3"
   }
 }
