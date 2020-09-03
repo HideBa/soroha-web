@@ -8,12 +8,14 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerPlugin = require("fork-ts-checker-webpack-plugin");
 const HardSourcePlugin = require("hard-source-webpack-plugin");
 const webpack = require("webpack");
+// eslint-disable-next-line node/no-extraneous-require
+const Dotenv = require("dotenv-webpack");
 
 const devServerPort = 3000;
 
 module.exports = (env, args = {}) => {
   const prod = args.mode === "production";
-
+  const mode = prod ? "production" : "local";
   return {
     devServer: {
       clientLogLevel: "none",
@@ -93,7 +95,12 @@ module.exports = (env, args = {}) => {
             new webpack.HotModuleReplacementPlugin(),
             new HardSourcePlugin({
               environmentHash: {
-                files: ["package-lock.json", "yarn.lock", "tsconfig.json"],
+                files: [
+                  "package-lock.json",
+                  "yarn.lock",
+                  "tsconfig.json",
+                  `.env.${mode}`,
+                ],
               },
             }),
             new ForkTsCheckerPlugin({
@@ -102,6 +109,9 @@ module.exports = (env, args = {}) => {
           ]),
       new HtmlWebpackPlugin({
         template: "src/index.html",
+      }),
+      new Dotenv({
+        path: `./.env.${mode}`,
       }),
     ],
     resolve: {
