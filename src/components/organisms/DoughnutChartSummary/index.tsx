@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import DoughnutChart from "@soroha/components/atoms/Doughnut";
 import ChartTexts, {
@@ -12,8 +12,51 @@ export type Props = {
   isPC?: boolean;
 };
 
+export type PerPersonTotalExpenditure = {
+  id: number;
+  name: string;
+  totalExpenditure: number;
+};
+
+type Data = {
+  data?: PerPersonTotalExpenditure[];
+};
+
 const DoughbutChartSummary: React.FC<Props> = ({ className, isPC }) => {
-  const sampleData = {
+  const [data, setData] = useState<PerPersonTotalExpenditure[]>();
+  const url = process.env.SOROHA_WEB_API_ENDPOINT_TEST!;
+  console.log("----", url);
+  useEffect(() => {
+    async () => {
+      const res = await fetch(url, {
+        method: "GET",
+        mode: "cors", //TODO: must be changed to same origin later
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+      });
+      console.log("---", res.json);
+      // setData(res.data);
+    };
+    // setData(await fetchPerPersonTotalExpenditure());
+  });
+  const labelsList = ["red", "green", "yellow", "blue", "brown"];
+  // const data = await fetchPerPersonTotalExpenditure();
+  console.log("====", data);
+  // const data: Promise<
+  //   PerPersonTotalExpenditure[]
+  // > = fetchPerPersonTotalExpenditure().then(d => d);
+  // .then(d => d)
+  // .catch(error => console.error(error));
+  // console.log("----", data);
+  // data.map(d => {
+
+  // })
+  const doughnutsData = {
     labels: ["Red", "Green", "Yellow"],
     datasets: [
       {
@@ -38,7 +81,7 @@ const DoughbutChartSummary: React.FC<Props> = ({ className, isPC }) => {
       <UpperContainer>
         {/* TODO: must change data later */}
         <DoughnutChart
-          data={sampleData}
+          data={doughnutsData}
           className="doughnut-chart"
           isPC={isPC}
         />
