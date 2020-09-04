@@ -6,11 +6,24 @@ export type Props = {
   className?: string;
   onClick?: () => void;
   text?: string;
+  type?: string;
+  disabled?: boolean;
 };
 
-const FormSubmit: React.FC<Props> = ({ className, onClick, text }) => {
+const FormSubmit: React.FC<Props> = ({
+  className,
+  onClick,
+  text,
+  type,
+  disabled,
+}) => {
   return (
-    <StyledButton className={className} onClick={onClick}>
+    <StyledButton
+      className={className}
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+    >
       <StyledText>{text}</StyledText>
     </StyledButton>
   );

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import FormInput from "@soroha/components/atoms/FormInput";
 import styled from "@emotion/styled";
 import { colors, fonts, metrics } from "@soroha/components/styles";
@@ -7,26 +7,33 @@ export type Props = {
   className?: string;
   placeHolder?: string;
   title?: string;
-  text?: string;
-  setText?: (text: string) => void;
-  validateForm?: () => boolean;
+  // text?: string;
+  // setText?: (text: string) => void;
+  // validateForm?: () => boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
 };
 
 const FormInputWrapper: React.FC<Props> = ({
   className,
   placeHolder,
   title,
-  text,
-  setText,
+  value,
+  onChange,
+  name,
 }) => {
   return (
     <Wrapper>
       <Title>{title}</Title>
-      <ValidationText>aaa</ValidationText>
+      {/* <ValidationText>aaa</ValidationText> */}
       <FormInput
         placeHolder={placeHolder}
-        text={text}
-        setText={setText}
+        // text={text}
+        value={value}
+        onChange={onChange}
+        name={name}
+        // setText={setText}
       ></FormInput>
     </Wrapper>
   );

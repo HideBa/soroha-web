@@ -4,37 +4,63 @@ import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";
 import FormSubmit from "@soroha/components/atoms/FormSubmit";
+import { Formik } from "formik";
 import useHooks from "@soroha/components/organisms/Auth/hooks";
 
 export type Props = {
   className?: string;
 };
 
+type FormValue = {
+  username: string;
+  password: string;
+};
+
 const Signup: React.FC<Props> = ({ className }) => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const handleFormSubmit = () => {
-    console.log("--");
-  };
+  // const handleFormSubmit = (values: FormValue, { setSubmitting: FormikHelpers<FormValue>, }) => {
+  //   console.log("--");
+  // };
+
   const [validateForm] = useHooks();
   return (
     <Wrapper>
       <Title>Sign up</Title>
-      <FormInput
-        placeHolder="username"
-        title="username"
-        text={userName}
-        setText={setUserName}
-        validateForm={() => validateForm("username", userName)}
-      />
-      <FormInput
-        placeHolder="password"
-        title="password"
-        text={password}
-        setText={setPassword}
-        validateForm={() => validateForm("password", password)}
-      />
-      <FormSubmit text="Enter" onClick={handleFormSubmit} />
+      <Formik
+        initialValues={{ username: "", password: "" }}
+        // validate={}
+        onSubmit={(value, { isSubmitting }) => console.log("")}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <FormInput
+              placeHolder="username"
+              title="username"
+              name="username"
+              onChange={handleChange}
+              value={values.username}
+              // validateForm={() => validateForm("username", userName)}
+            />
+            <FormInput
+              placeHolder="password"
+              title="password"
+              name="password"
+              onChange={handleChange}
+              value={values.password}
+              // validateForm={() => validateForm("password", password)}
+            />
+            {/* <FormSubmit text="Enter" onClick={handleFormSubmit} /> */}
+            <FormSubmit type="submit" text="Enter" disabled={isSubmitting} />
+          </form>
+        )}
+      </Formik>
     </Wrapper>
   );
 };
