@@ -5,8 +5,9 @@ import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";
 import { default as FormInput } from "@soroha/components/molecules/FormInputWrapper";
 import FormSubmit from "@soroha/components/atoms/FormSubmit";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import { default as useHooks } from "../hooks";
+import { FormValues } from "../types";
 
 export type Props = {
   className?: string;
@@ -16,11 +17,14 @@ const Signin: React.FC<Props> = ({ className }) => {
   const [validate] = useHooks();
   return (
     <Wrapper>
-      <Title>Sign up</Title>
+      <Title>Sign in</Title>
       <Formik
         initialValues={{ username: "", password: "" }}
         validate={validate}
-        onSubmit={(value, { isSubmitting }) => console.log("submit")}
+        onSubmit={(
+          value: FormValues,
+          { setSubmitting }: FormikHelpers<FormValues>,
+        ) => console.log("submit")}
       >
         {({
           values,
