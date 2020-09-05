@@ -1,34 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { default as FormInput } from "@soroha/components/molecules/FormInputWrapper";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";
 import FormSubmit from "@soroha/components/atoms/FormSubmit";
 import { Formik } from "formik";
-import useHooks from "@soroha/components/organisms/Auth/hooks";
+import { default as useHooks } from "../hooks";
 
 export type Props = {
   className?: string;
 };
 
-type FormValue = {
-  username: string;
-  password: string;
-};
-
 const Signup: React.FC<Props> = ({ className }) => {
-  // const handleFormSubmit = (values: FormValue, { setSubmitting: FormikHelpers<FormValue>, }) => {
-  //   console.log("--");
-  // };
-
-  const [validateForm] = useHooks();
+  const [validate] = useHooks();
   return (
     <Wrapper>
       <Title>Sign up</Title>
       <Formik
         initialValues={{ username: "", password: "" }}
-        // validate={}
-        onSubmit={(value, { isSubmitting }) => console.log("")}
+        validate={validate}
+        onSubmit={(value, { isSubmitting }) => console.log("submit")}
       >
         {({
           values,
@@ -46,7 +37,8 @@ const Signup: React.FC<Props> = ({ className }) => {
               name="username"
               onChange={handleChange}
               value={values.username}
-              // validateForm={() => validateForm("username", userName)}
+              error={errors.username}
+              touched={touched.username}
             />
             <FormInput
               placeHolder="password"
@@ -54,7 +46,8 @@ const Signup: React.FC<Props> = ({ className }) => {
               name="password"
               onChange={handleChange}
               value={values.password}
-              // validateForm={() => validateForm("password", password)}
+              error={errors.password}
+              touched={touched.password}
             />
             {/* <FormSubmit text="Enter" onClick={handleFormSubmit} /> */}
             <FormSubmit type="submit" text="Enter" disabled={isSubmitting} />

@@ -3,29 +3,58 @@ import FormInputWrapper from "@soroha/components/molecules/FormInputWrapper";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";
+import { default as FormInput } from "@soroha/components/molecules/FormInputWrapper";
+import FormSubmit from "@soroha/components/atoms/FormSubmit";
+import { Formik } from "formik";
+import { default as useHooks } from "../hooks";
 
 export type Props = {
   className?: string;
 };
 
 const Signin: React.FC<Props> = ({ className }) => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [validate] = useHooks();
   return (
     <Wrapper>
-      <Title>Sign in</Title>
-      <FormInputWrapper
-        placeHolder="username"
-        title="username"
-        text={userName}
-        setText={setUserName}
-      />
-      <FormInputWrapper
-        placeHolder="password"
-        title="password"
-        text={password}
-        setText={setPassword}
-      />
+      <Title>Sign up</Title>
+      <Formik
+        initialValues={{ username: "", password: "" }}
+        validate={validate}
+        onSubmit={(value, { isSubmitting }) => console.log("submit")}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <FormInput
+              placeHolder="username"
+              title="username"
+              name="username"
+              onChange={handleChange}
+              value={values.username}
+              error={errors.username}
+              touched={touched.username}
+            />
+            <FormInput
+              placeHolder="password"
+              title="password"
+              name="password"
+              onChange={handleChange}
+              value={values.password}
+              error={errors.password}
+              touched={touched.password}
+            />
+            {/* <FormSubmit text="Enter" onClick={handleFormSubmit} /> */}
+            <FormSubmit type="submit" text="Enter" disabled={isSubmitting} />
+          </form>
+        )}
+      </Formik>
     </Wrapper>
   );
 };

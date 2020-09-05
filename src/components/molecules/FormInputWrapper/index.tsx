@@ -13,6 +13,8 @@ export type Props = {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
+  error?: string;
+  touched?: boolean;
 };
 
 const FormInputWrapper: React.FC<Props> = ({
@@ -22,19 +24,19 @@ const FormInputWrapper: React.FC<Props> = ({
   value,
   onChange,
   name,
+  error,
+  touched,
 }) => {
   return (
     <Wrapper>
       <Title>{title}</Title>
-      {/* <ValidationText>aaa</ValidationText> */}
+      {error && touched && <ValidationError>{error}</ValidationError>}
       <FormInput
         placeHolder={placeHolder}
-        // text={text}
         value={value}
         onChange={onChange}
         name={name}
-        // setText={setText}
-      ></FormInput>
+      />
     </Wrapper>
   );
 };
@@ -49,7 +51,7 @@ const Title = styled.p`
   font-size: ${fonts.size.medium2};
 `;
 
-const ValidationText = styled.div`
+const ValidationError = styled.div`
   color: ${colors.alert};
   font-size: ${fonts.size.small};
   margin: ${metrics.margin.validationText};

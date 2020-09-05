@@ -19,12 +19,6 @@ const FormInput: React.FC<Props> = ({
   onChange,
   name,
 }) => {
-  // const handleTextChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const value = e.currentTarget.value;
-  //   setText && setText(value);
-  // };
-
-  //TODO: must implement validation for input later
   return (
     <StyledInput
       placeholder={placeHolder && placeHolder}

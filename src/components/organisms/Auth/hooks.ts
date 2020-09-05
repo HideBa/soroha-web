@@ -1,14 +1,16 @@
 import { PASSWORD_MIN_LENGTH } from "@soroha/components/organisms/Auth/config";
-
-export type ValidationType = "username" | "password" | "submit";
+import { FormValues } from "./types";
 
 export default () => {
-  const validateForm = (validateType: ValidationType, validateText: string) => {
-    if (validateType == "password") {
-      if (validateText.length < PASSWORD_MIN_LENGTH) {
-        return "the length of password must be more than 8 characters";
-      }
+  const validate = (values: FormValues) => {
+    const errors: Partial<FormValues> = {};
+    if (values.username === "") {
+      errors.username = "* username is required";
     }
+    if (values.password.length < PASSWORD_MIN_LENGTH) {
+      errors.password = "* password length is too short";
+    }
+    return errors;
   };
-  return [validateForm];
+  return [validate];
 };

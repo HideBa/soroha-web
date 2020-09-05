@@ -20,7 +20,7 @@ export const metrics = {
   },
   margin: {
     buttonMedium: "15px",
-    inputMedium: "15px 0",
+    inputMedium: "10px 0 15px",
     inputSubmit: "30px 0",
     inputSubmitSP: "10px 0",
     formBody: "30px",
