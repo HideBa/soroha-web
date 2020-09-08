@@ -1,9 +1,9 @@
 import {
   PASSWORD_MIN_LENGTH,
   SIGN_UP_URL,
+  SIGN_IN_URL,
 } from "@soroha/components/organisms/Auth/config";
 import { FormValues } from "./types";
-import { useCallback } from "react";
 
 export default () => {
   const validate = (values: FormValues) => {
@@ -17,30 +17,38 @@ export default () => {
     return errors;
   };
 
-  const signIn = useCallback(async (values: FormValues) => {
-    const url = "http://localhost:4000/api/v1/signup";
-    console.log("---", values);
-    console.log();
-    console.log("url ---", SIGN_UP_URL);
-    console.log("url-----------", url);
-    const res = fetch(SIGN_UP_URL, {
+  const signUpIn = async (
+    values: FormValues,
+    signType: "SignUp" | "SignIn",
+  ) => {
+    const data = {
+      user: values,
+    };
+    const res = await fetch(signType === "SignUp" ? SIGN_UP_URL : SIGN_IN_URL, {
       method: "POST",
       mode: "cors",
-      cache: "no-cache",
-      credentials: "include",
+      cache: "default",
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       redirect: "follow",
       referrerPolicy: "no-referrer",
-      body: JSON.stringify(values),
+      body: JSON.stringify(data),
     })
       .then(res => {
-        console.log(res.json);
+        if (res.ok) {
+          const resJSON = res.json();
+          return resJSON;
+        } else {
+          throw new Error("failure to fetch");
+        }
       })
-      .catch(error => console.log("error---", error));
-    // const res = await fetch("http://localhost:4000/api/v1");
-    // console.log("---res---", res.json);
-  }, []);
-  return [validate, signIn];
+      .catch(err => {
+        console.log("an error occured: ", err);
+      });
+    return res;
+  };
+
+  return { validate, signUpIn };
 };

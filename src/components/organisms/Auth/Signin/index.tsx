@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import FormInputWrapper from "@soroha/components/molecules/FormInputWrapper";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
@@ -6,7 +6,7 @@ import { H2 } from "@soroha/components/styles/fonts";
 import { default as FormInput } from "@soroha/components/molecules/FormInputWrapper";
 import FormSubmit from "@soroha/components/atoms/FormSubmit";
 import { Formik, FormikHelpers } from "formik";
-import { default as useHooks } from "../hooks";
+import { default as useAuth } from "../hooks";
 import { FormValues } from "../types";
 
 export type Props = {
@@ -14,17 +14,22 @@ export type Props = {
 };
 
 const Signin: React.FC<Props> = ({ className }) => {
-  const [validate] = useHooks();
+  const { validate, signUpIn } = useAuth();
   return (
     <Wrapper>
       <Title>Sign in</Title>
       <Formik
         initialValues={{ username: "", password: "" }}
         validate={validate}
-        onSubmit={(
-          value: FormValues,
-          { setSubmitting }: FormikHelpers<FormValues>,
-        ) => console.log("submit")}
+        onSubmit={useCallback(
+          async (
+            values: FormValues,
+            { setSubmitting }: FormikHelpers<FormValues>,
+          ) => {
+            const res = await signUpIn(values, "SignIn");
+          },
+          [signUpIn],
+        )}
       >
         {({
           values,

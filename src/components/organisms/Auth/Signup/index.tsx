@@ -13,7 +13,7 @@ export type Props = {
 };
 
 const Signup: React.FC<Props> = ({ className }) => {
-  const [validate, signIn] = useAuth();
+  const { validate, signUpIn } = useAuth();
   return (
     <Wrapper>
       <Title>Sign up</Title>
@@ -25,14 +25,9 @@ const Signup: React.FC<Props> = ({ className }) => {
             values: FormValues,
             { setSubmitting }: FormikHelpers<FormValues>,
           ) => {
-            try {
-              console.log("--");
-              signIn(values);
-            } catch {
-              console.log("error");
-            }
+            const res = await signUpIn(values, "SignUp");
           },
-          [],
+          [signUpIn],
         )}
       >
         {({
