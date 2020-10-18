@@ -36,9 +36,10 @@ export default () => {
       referrerPolicy: "no-referrer",
       body: JSON.stringify(data),
     })
-      .then(res => {
+      .then(async res => {
         if (res.ok) {
-          const resJSON = res.json();
+          const resJSON = await res.json();
+          localStorage.setItem("token", resJSON.user.token);
           return resJSON;
         } else {
           throw new Error("failure to fetch");
