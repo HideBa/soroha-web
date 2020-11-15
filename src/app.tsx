@@ -10,6 +10,7 @@ import getLinks from "./components/UtilFunctions/Links";
 import { useIsPC } from "./components/UtilFunctions/use-is-pc";
 import SigninPage from "./components/pages/Signin";
 import SignupPage from "./components/pages/Signup";
+import { RecoilRoot } from "recoil";
 
 const App = () => {
   const isPC = useIsPC();
@@ -18,7 +19,8 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Wrapper>
+      {/* <Wrapper> */}
+      <RecoilRoot>
         <Router>
           <Route path="/">
             <NavBar links={links} />
@@ -44,14 +46,15 @@ const App = () => {
             />
           </Route>
         </Router>
-      </Wrapper>
+      </RecoilRoot>
+      {/* </Wrapper> */}
     </>
   );
 };
 
-const Wrapper = styled.div`
-  height: 100%;
-  width: 100%;
-`;
+// const Wrapper = styled.div`
+//   height: 100%;
+//   width: 100%;
+// `;
 
 export default hot(module)(App);

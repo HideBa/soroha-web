@@ -40,7 +40,6 @@
     "@types/react-dom": "^16.8.5",
     "@types/react-hot-loader": "^4.1.0",
     "@types/react-icons": "^3.0.0",
-    "@types/react-redux": "^7.1.2",
     "@types/react-responsive": "^8.0.2",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.5",
@@ -88,12 +87,10 @@
     "react-dom": "^16.9.0",
     "react-hot-loader": "^4.12.11",
     "react-icon": "^1.0.0",
-    "react-redux": "^7.1.0",
     "react-responsive": "^8.1.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8",
+    "recoil": "^0.1.2",
     "yup": "^0.29.3"
   }
 }
