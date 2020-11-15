@@ -1,13 +1,14 @@
-import React, { useState, FormEvent, ChangeEvent, useEffect } from "react";
+import React from "react";
 import styled from "@emotion/styled";
-import { metrics, colors } from "@soroha/components/styles";
+import { metrics, colors, fonts } from "@soroha/components/styles";
 
 export type Props = {
   className?: string;
   placeHolder?: string;
-  // text?: string;
-  // setText?: (text: string) => void;
   value?: string;
+  title?: string;
+  error?: string;
+  touched?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
 };
@@ -16,18 +17,43 @@ const FormInput: React.FC<Props> = ({
   className,
   placeHolder,
   value,
+  title,
+  error,
+  touched,
   onChange,
   name,
 }) => {
   return (
-    <StyledInput
-      placeholder={placeHolder && placeHolder}
-      value={value}
-      onChange={onChange}
-      name={name}
-    ></StyledInput>
+    <Wrapper className={className}>
+      {title && <Title>{title}</Title>}
+      {error && touched && <ValidationError>{error}</ValidationError>}
+      <StyledInput
+        placeholder={placeHolder && placeHolder}
+        value={value}
+        onChange={onChange}
+        name={name}
+      ></StyledInput>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Title = styled.p`
+  color: ${colors.textDarkBrown};
+  font-size: ${fonts.size.medium2};
+`;
+
+const ValidationError = styled.div`
+  color: ${colors.alert};
+  font-size: ${fonts.size.small};
+  margin: ${metrics.margin.validationText};
+  padding: ${metrics.padding.validationText};
+  text-align: left;
+`;
 
 const StyledInput = styled.input`
   padding: ${metrics.padding.inputMedium};

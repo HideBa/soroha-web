@@ -1,42 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { hot } from "react-hot-loader/root";
 
-import Form from "@soroha/components/organisms/Form";
+import ExpenseForm from "@soroha/components/organisms/ExpenseForm";
 import DoughbutChartSummary from "@soroha/components/organisms/DoughnutChartSummary";
-import styled from "@emotion/styled";
-import { metrics } from "@soroha/components/styles";
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
+import { default as HomeBody } from "@soroha/components/atoms/Home";
 
 export type Props = {
   className?: string;
   isModalOpen?: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
+  setIsModalOpen: () => void;
 };
 
 const Home: React.FC<Props> = ({ setIsModalOpen, isModalOpen }) => {
   const isPC = useIsPC();
   return (
-    <Body>
+    <HomeBody>
       <DoughbutChartSummary isPC={isPC} />
-      <Form
-        isPC={isPC}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
-      />
-    </Body>
+      <ExpenseForm open={isModalOpen} toggleModal={setIsModalOpen} />
+    </HomeBody>
   );
 };
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  height: 100%;
-  @media screen and (max-width: ${metrics.breakPoint.tabletOrSP}px) {
-    flex-direction: column;
-    align-items: center;
-    padding: ${metrics.padding.body};
-  }
-`;
 
 export default hot(Home);
