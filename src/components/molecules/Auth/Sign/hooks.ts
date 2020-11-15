@@ -1,17 +1,30 @@
-import { Sign } from "@soroha/components/molecules/Auth/Sign";
 import {
+  PASSWORD_MIN_LENGTH,
   SIGN_UP_URL,
   SIGN_IN_URL,
 } from "@soroha/components/organisms/Auth/config";
-import { FormValues } from "../../molecules/Auth/Sign/types";
+import { FormValues } from "./types";
 
-type SignType = Sign;
-export default (mode: SignType) => {
-  const signUpIn = async (values: FormValues) => {
+export default () => {
+  const validate = (values: FormValues) => {
+    const errors: Partial<FormValues> = {};
+    if (values.username === "") {
+      errors.username = "* username is required";
+    }
+    if (values.password.length < PASSWORD_MIN_LENGTH) {
+      errors.password = "* password length is too short";
+    }
+    return errors;
+  };
+
+  const signUpIn = async (
+    values: FormValues,
+    signType: "SignUp" | "SignIn",
+  ) => {
     const data = {
       user: values,
     };
-    const res = await fetch(mode === "signup" ? SIGN_UP_URL : SIGN_IN_URL, {
+    const res = await fetch(signType === "SignUp" ? SIGN_UP_URL : SIGN_IN_URL, {
       method: "POST",
       mode: "cors",
       cache: "default",
@@ -38,5 +51,5 @@ export default (mode: SignType) => {
     return res;
   };
 
-  return { signUpIn };
+  return { validate, signUpIn };
 };
