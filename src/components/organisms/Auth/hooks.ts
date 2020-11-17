@@ -1,8 +1,5 @@
 import { Sign } from "@soroha/components/molecules/Auth/Sign";
-import {
-  SIGN_UP_URL,
-  SIGN_IN_URL,
-} from "@soroha/components/organisms/Auth/config";
+import { SIGN_UP_URL, SIGN_IN_URL } from "@soroha/entryPoint";
 import { FormValues } from "../../molecules/Auth/Sign/types";
 
 type SignType = Sign;
@@ -26,6 +23,7 @@ export default (mode: SignType) => {
       .then(async res => {
         if (res.ok) {
           const resJSON = await res.json();
+          console.log("toke", resJSON.user);
           localStorage.setItem("token", resJSON.user.token);
           return resJSON;
         } else {

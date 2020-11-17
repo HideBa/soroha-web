@@ -1,6 +1,6 @@
 import React from "react";
 import { colors, metrics } from "@soroha/components/styles";
-import NavLink, { LinkType, LinkText } from "@soroha/components/atoms/NavLink";
+import NavLink, { LinkType } from "@soroha/components/atoms/NavLink";
 import Logo from "@soroha/components/atoms/Logo";
 import styled from "@emotion/styled";
 
@@ -15,12 +15,14 @@ const Header: React.FC<Props> = ({ links, isPC }) => {
       {isPC ? (
         <PCWrapper className="header">
           <LeftWrapper>
-            <Logo />
+            <NavLink key="logo" link={{ type: "icon", linkTo: "/" }}>
+              <Logo />
+            </NavLink>
           </LeftWrapper>
           <RightWrapper>
             {links &&
-              links.map(link => {
-                return <NavLink key={(link as LinkText).text} link={link} />;
+              links.map((l, i) => {
+                return <NavLink key={i} link={l} />;
               })}
           </RightWrapper>
         </PCWrapper>

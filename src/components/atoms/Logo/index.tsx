@@ -15,6 +15,8 @@ const LogoType: React.FC<Props> = ({ className, isPC }) => {
 const StyledType = styled(Type)<{ isPC?: boolean }>`
   color: ${props => (props.isPC ? colors.whiteBrown : colors.textDarkBrown)};
   margin: auto 0px;
+  display: flex;
+  align-items: center;
 `;
 
 export default LogoType;

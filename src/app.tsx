@@ -3,7 +3,6 @@ import { hot } from "react-hot-loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { GlobalStyles } from "./components/styles";
 import Home from "./components/pages/Home";
-import styled from "@emotion/styled";
 import NavBar from "./components/organisms/Header";
 import MenuBar from "./components/organisms/MenuBar";
 import getLinks from "./components/UtilFunctions/Links";
@@ -19,7 +18,6 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      {/* <Wrapper> */}
       <RecoilRoot>
         <Router>
           <Route path="/">
@@ -47,14 +45,8 @@ const App = () => {
           </Route>
         </Router>
       </RecoilRoot>
-      {/* </Wrapper> */}
     </>
   );
 };
-
-// const Wrapper = styled.div`
-//   height: 100%;
-//   width: 100%;
-// `;
 
 export default hot(module)(App);

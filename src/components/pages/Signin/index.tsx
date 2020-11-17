@@ -1,5 +1,4 @@
 import React from "react";
-import FormInputWrapper from "@soroha/components/molecules/FormInputWrapper";
 import Signin from "@soroha/components/organisms/Auth/Signin";
 import styled from "@emotion/styled";
 

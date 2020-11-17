@@ -7,6 +7,7 @@ import Icon, { Icons } from "../icons";
 export type Props = {
   className?: string;
   link: LinkType;
+  children?: React.ReactNode;
 };
 
 export type LinkText = {
@@ -18,12 +19,12 @@ export type LinkText = {
 export type LinkIcon = {
   linkTo: string;
   type: "icon";
-  icon: Icons;
+  icon?: Icons;
 };
 
 export type LinkType = LinkText | LinkIcon;
 
-const NavLink: React.FC<Props> = ({ link }) => {
+const NavLink: React.FC<Props> = ({ link, children }) => {
   return (
     <>
       {link.type === "text" && (
@@ -31,7 +32,11 @@ const NavLink: React.FC<Props> = ({ link }) => {
       )}
       {link.type === "icon" && (
         <StyledIconLink to={link.linkTo || "/"} className={"menu-icons"}>
-          <Icon icon={link.icon} color={colors.whiteBrown} size={30} />
+          {children ? (
+            children
+          ) : (
+            <Icon icon={link.icon} color={colors.whiteBrown} size={30} />
+          )}
         </StyledIconLink>
       )}
     </>
@@ -46,7 +51,7 @@ const StyledTextLink = styled(Link)`
 
 const StyledIconLink = styled(Link)`
   background-color: ${props => (props.color ? props.color : "")};
-  margin: ${metrics.margin.navBarIcon};
+  /* margin: ${metrics.margin.navBarIcon}; */
 `;
 
 export default NavLink;

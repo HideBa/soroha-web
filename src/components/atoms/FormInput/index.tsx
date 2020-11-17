@@ -11,6 +11,7 @@ export type Props = {
   touched?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
+  type?: string;
 };
 
 const FormInput: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const FormInput: React.FC<Props> = ({
   touched,
   onChange,
   name,
+  type,
 }) => {
   return (
     <Wrapper className={className}>
@@ -32,6 +34,7 @@ const FormInput: React.FC<Props> = ({
         value={value}
         onChange={onChange}
         name={name}
+        type={type}
       ></StyledInput>
     </Wrapper>
   );

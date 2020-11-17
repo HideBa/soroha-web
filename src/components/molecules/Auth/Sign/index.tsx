@@ -1,9 +1,8 @@
-import React, { useState, useCallback } from "react";
-import FormInputWrapper from "@soroha/components/molecules/FormInputWrapper";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";
-import { default as FormInput } from "@soroha/components/molecules/FormInputWrapper";
+import { default as FormInput } from "@soroha/components/atoms/FormInput";
 import FormSubmit from "@soroha/components/atoms/FormSubmit";
 import { Formik, FormikHelpers } from "formik";
 import { default as useAuth } from "./hooks";
@@ -65,6 +64,7 @@ const Sign = <T extends Sign>({ className, mode, onSend }: Props<T>) => {
               placeHolder="password"
               title="password"
               name="password"
+              type="password"
               onChange={handleChange}
               value={values.password}
               error={errors.password}
