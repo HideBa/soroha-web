@@ -1,9 +1,15 @@
 import { Sign } from "@soroha/components/molecules/Auth/Sign";
 import { SIGN_UP_URL, SIGN_IN_URL } from "@soroha/entryPoint";
 import { FormValues } from "../../molecules/Auth/Sign/types";
+import { User as UserType, userState } from "@soroha/recoil/atoms";
+import { useSetRecoilState } from "recoil";
+import { useHistory } from "react-router";
 
 type SignType = Sign;
 export default (mode: SignType) => {
+  const setUser = useSetRecoilState<UserType>(userState);
+  // const user = useRecoilValue(currentUser);
+  const history = useHistory();
   const signUpIn = async (values: FormValues) => {
     const data = {
       user: values,
@@ -24,7 +30,12 @@ export default (mode: SignType) => {
         if (res.ok) {
           const resJSON = await res.json();
           console.log("toke", resJSON.user);
-          localStorage.setItem("token", resJSON.user.token);
+          await localStorage.setItem("token", resJSON.user.token);
+          await setUser(oldValue => ({
+            ...oldValue,
+            userName: resJSON.user.username,
+          }));
+          history.push("/");
           return resJSON;
         } else {
           throw new Error("failure to fetch");

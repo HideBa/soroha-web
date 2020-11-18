@@ -3,17 +3,13 @@ import { hot } from "react-hot-loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { GlobalStyles } from "./components/styles";
 import Home from "./components/pages/Home";
-import NavBar from "./components/organisms/Header";
-import MenuBar from "./components/organisms/MenuBar";
-import getLinks from "./components/UtilFunctions/Links";
-import { useIsPC } from "./components/UtilFunctions/use-is-pc";
+import NavBar from "./components/organisms/Nav/Header";
+import MenuBar from "./components/organisms/Nav/MenuBar";
 import SigninPage from "./components/pages/Signin";
 import SignupPage from "./components/pages/Signup";
 import { RecoilRoot } from "recoil";
 
 const App = () => {
-  const isPC = useIsPC();
-  const links = getLinks(isPC);
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
@@ -21,7 +17,7 @@ const App = () => {
       <RecoilRoot>
         <Router>
           <Route path="/">
-            <NavBar links={links} />
+            <NavBar />
           </Route>
           <Switch>
             <Route exact path="/">
@@ -38,10 +34,7 @@ const App = () => {
             </Route>
           </Switch>
           <Route path="/">
-            <MenuBar
-              links={links}
-              setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
-            />
+            <MenuBar setIsModalOpen={() => setIsModalOpen(!isModalOpen)} />
           </Route>
         </Router>
       </RecoilRoot>

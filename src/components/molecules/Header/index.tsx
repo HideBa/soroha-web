@@ -7,9 +7,10 @@ import styled from "@emotion/styled";
 export type Props = {
   links?: LinkType[];
   isPC?: boolean;
+  isSignedIn?: boolean;
 };
 
-const Header: React.FC<Props> = ({ links, isPC }) => {
+const Header: React.FC<Props> = ({ links, isPC, isSignedIn }) => {
   return (
     <>
       {isPC ? (

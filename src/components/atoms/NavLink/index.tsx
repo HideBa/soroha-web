@@ -14,12 +14,14 @@ export type LinkText = {
   linkTo: string;
   type: "text";
   text?: string;
+  onClick?: () => void;
 };
 
 export type LinkIcon = {
   linkTo: string;
   type: "icon";
   icon?: Icons;
+  onClick?: () => void;
 };
 
 export type LinkType = LinkText | LinkIcon;

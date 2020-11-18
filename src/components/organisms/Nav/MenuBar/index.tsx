@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { colors, zIndexes } from "@soroha/components/styles";
-import { LinkType } from "@soroha/components/atoms/NavLink";
 import { default as NavBarMolecule } from "@soroha/components/molecules/NavBar";
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
+import useHooks from "../hooks";
 
 export type Props = {
   className?: string;
-  links?: LinkType[];
+  // links?: LinkType[];
   setIsModalOpen?: () => void;
 };
 
-const MenuBar: React.FC<Props> = ({ links, setIsModalOpen }) => {
+const MenuBar: React.FC<Props> = ({ setIsModalOpen }) => {
+  const { links } = useHooks();
   const isPC = useIsPC();
   return isPC ? null : (
     <Wrapper>

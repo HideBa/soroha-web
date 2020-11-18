@@ -1,12 +1,12 @@
 import { atom } from "recoil";
 
 export type User = {
-  username: string;
+  userName: string;
   teamId: string;
 };
 
 const initialUser: User = {
-  username: "",
+  userName: "",
   teamId: "",
 };
 

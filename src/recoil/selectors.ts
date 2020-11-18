@@ -1,7 +1,7 @@
 import { selector } from "recoil";
 import { userState } from "./atoms";
 
-export const username = selector({
-  key: "username",
+export const currentUser = selector({
+  key: "currentUser",
   get: ({ get }) => get(userState),
 });
