@@ -14,6 +14,7 @@ export type Props = {
 const MenuBar: React.FC<Props> = ({ setIsModalOpen }) => {
   const { links } = useHooks();
   const isPC = useIsPC();
+  // const isSignedIn = useContext(AuthContext).isSignedIn;
   return isPC ? null : (
     <Wrapper>
       <BottomBar>

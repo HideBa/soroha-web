@@ -7,6 +7,7 @@ import FormSubmit from "@soroha/components/atoms/FormSubmit";
 import { Formik, FormikHelpers } from "formik";
 import { default as useAuth } from "./hooks";
 import { FormValues } from "./types";
+import FormError from "@soroha/components/atoms/FormError";
 
 export type Sign = "signin" | "signup";
 
@@ -14,13 +15,14 @@ export type Props<T extends Sign> = {
   className?: string;
   mode?: T;
   onSend?: (value: FormValues) => void;
+  err?: string;
 };
 
 const formTitle = {
   signin: "Sign in",
   signup: "Sign up",
 };
-const Sign = <T extends Sign>({ className, mode, onSend }: Props<T>) => {
+const Sign = <T extends Sign>({ className, mode, onSend, err }: Props<T>) => {
   const { validate } = useAuth();
   return (
     <Wrapper className={className}>
@@ -70,6 +72,7 @@ const Sign = <T extends Sign>({ className, mode, onSend }: Props<T>) => {
               error={errors.password}
               touched={touched.password}
             />
+            {err && <FormError err={err} />}
             {/* <FormSubmit text="Enter" onClick={handleFormSubmit} /> */}
             <FormSubmit type="submit" text="Enter" disabled={isSubmitting} />
           </form>

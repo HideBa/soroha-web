@@ -6,15 +6,14 @@ import { useSetRecoilState } from "recoil";
 import { useHistory } from "react-router";
 
 type SignType = Sign;
-export default (mode: SignType) => {
+export default (mode: SignType, setErr: (err: string | undefined) => void) => {
   const setUser = useSetRecoilState<UserType>(userState);
-  // const user = useRecoilValue(currentUser);
   const history = useHistory();
   const signUpIn = async (values: FormValues) => {
     const data = {
       user: values,
     };
-    const res = await fetch(mode === "signup" ? SIGN_UP_URL : SIGN_IN_URL, {
+    await fetch(mode === "signup" ? SIGN_UP_URL : SIGN_IN_URL, {
       method: "POST",
       mode: "cors",
       cache: "default",
@@ -29,22 +28,20 @@ export default (mode: SignType) => {
       .then(async res => {
         if (res.ok) {
           const resJSON = await res.json();
-          console.log("toke", resJSON.user);
           await localStorage.setItem("token", resJSON.user.token);
           await setUser(oldValue => ({
             ...oldValue,
             userName: resJSON.user.username,
           }));
           history.push("/");
-          return resJSON;
+          setErr(undefined);
         } else {
-          throw new Error("failure to fetch");
+          setErr("username or login password is incorrect");
         }
       })
       .catch(err => {
         console.log("an error occured: ", err);
       });
-    return res;
   };
 
   return { signUpIn };

@@ -5,6 +5,8 @@ import ExpenseForm from "@soroha/components/organisms/ExpenseForm";
 import DoughbutChartSummary from "@soroha/components/organisms/DoughnutChartSummary";
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { default as HomeBody } from "@soroha/components/atoms/Home";
+import { Redirect } from "react-router";
+import useAuth from "@soroha/components/Auth";
 
 export type Props = {
   className?: string;
@@ -14,11 +16,14 @@ export type Props = {
 
 const Home: React.FC<Props> = ({ setIsModalOpen, isModalOpen }) => {
   const isPC = useIsPC();
-  return (
+  const { isSignedIn } = useAuth();
+  return isSignedIn ? (
     <HomeBody>
       <DoughbutChartSummary isPC={isPC} />
       <ExpenseForm open={isModalOpen} toggleModal={setIsModalOpen} />
     </HomeBody>
+  ) : (
+    <Redirect to="/signin" />
   );
 };
 

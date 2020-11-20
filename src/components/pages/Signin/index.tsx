@@ -8,7 +8,7 @@ export type Props = {
 
 const SigninPage: React.FC<Props> = ({ className }) => {
   return (
-    <Body>
+    <Body className={className}>
       <Signin />
     </Body>
   );

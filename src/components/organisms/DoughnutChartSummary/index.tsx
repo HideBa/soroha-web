@@ -25,7 +25,6 @@ type Data = {
 const DoughbutChartSummary: React.FC<Props> = ({ className, isPC }) => {
   const [data, setData] = useState<PerPersonTotalExpenditure[]>();
   const url = process.env.SOROHA_WEB_API_ENDPOINT_TEST!;
-  console.log("----", url);
   useEffect(() => {
     async () => {
       const res = await fetch(url, {
@@ -39,14 +38,12 @@ const DoughbutChartSummary: React.FC<Props> = ({ className, isPC }) => {
         redirect: "follow",
         referrerPolicy: "no-referrer",
       });
-      console.log("---", res.json);
       // setData(res.data);
     };
     // setData(await fetchPerPersonTotalExpenditure());
   });
   const labelsList = ["red", "green", "yellow", "blue", "brown"];
   // const data = await fetchPerPersonTotalExpenditure();
-  console.log("====", data);
   // const data: Promise<
   //   PerPersonTotalExpenditure[]
   // > = fetchPerPersonTotalExpenditure().then(d => d);

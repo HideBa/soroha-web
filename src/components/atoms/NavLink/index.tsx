@@ -30,10 +30,16 @@ const NavLink: React.FC<Props> = ({ link, children }) => {
   return (
     <>
       {link.type === "text" && (
-        <StyledTextLink to={link.linkTo || "/"}>{link.text}</StyledTextLink>
+        <StyledTextLink to={link.linkTo || "/"} onClick={link.onClick}>
+          {link.text}
+        </StyledTextLink>
       )}
       {link.type === "icon" && (
-        <StyledIconLink to={link.linkTo || "/"} className={"menu-icons"}>
+        <StyledIconLink
+          to={link.linkTo || "/"}
+          className={"menu-icons"}
+          onClick={link.onClick}
+        >
           {children ? (
             children
           ) : (
