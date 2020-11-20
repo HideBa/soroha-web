@@ -4,12 +4,15 @@ import { FormValues } from "../../molecules/Auth/Sign/types";
 import { User as UserType, userState } from "@soroha/recoil/atoms";
 import { useSetRecoilState } from "recoil";
 import { useHistory } from "react-router";
+import { useState } from "react";
 
 type SignType = Sign;
 export default (mode: SignType, setErr: (err: string | undefined) => void) => {
+  const [loading, setLoading] = useState(false);
   const setUser = useSetRecoilState<UserType>(userState);
   const history = useHistory();
   const signUpIn = async (values: FormValues) => {
+    setLoading(old => true);
     const data = {
       user: values,
     };
@@ -35,8 +38,10 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
           }));
           history.push("/");
           setErr(undefined);
+          setLoading(false);
         } else {
           setErr("username or login password is incorrect");
+          setLoading(false);
         }
       })
       .catch(err => {
@@ -44,5 +49,5 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
       });
   };
 
-  return { signUpIn };
+  return { signUpIn, loading };
 };

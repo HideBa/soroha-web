@@ -8,10 +8,16 @@ export type Props = {
 
 const Signin: React.FC<Props> = ({ className }) => {
   const [err, setErr] = useState<string | undefined>(undefined);
-  const { signUpIn } = useAuth("signin", setErr);
+  const { signUpIn, loading } = useAuth("signin", setErr);
 
   return (
-    <Sign className={className} onSend={signUpIn} mode="signin" err={err} />
+    <Sign
+      className={className}
+      onSend={signUpIn}
+      mode="signin"
+      err={err}
+      loading={loading}
+    />
   );
 };
 

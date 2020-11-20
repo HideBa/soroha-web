@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";
@@ -8,6 +8,7 @@ import { Formik, FormikHelpers } from "formik";
 import { default as useAuth } from "./hooks";
 import { FormValues } from "./types";
 import FormError from "@soroha/components/atoms/FormError";
+import Loading from "@soroha/components/atoms/Loading";
 
 export type Sign = "signin" | "signup";
 
@@ -16,15 +17,24 @@ export type Props<T extends Sign> = {
   mode?: T;
   onSend?: (value: FormValues) => void;
   err?: string;
+  loading?: boolean;
 };
 
 const formTitle = {
   signin: "Sign in",
   signup: "Sign up",
 };
-const Sign = <T extends Sign>({ className, mode, onSend, err }: Props<T>) => {
+const Sign = <T extends Sign>({
+  className,
+  mode,
+  onSend,
+  err,
+  loading,
+}: Props<T>) => {
   const { validate } = useAuth();
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <Wrapper className={className}>
       <Title>
         {mode && mode in formTitle && formTitle[mode as keyof typeof formTitle]}
@@ -32,16 +42,13 @@ const Sign = <T extends Sign>({ className, mode, onSend, err }: Props<T>) => {
       <Formik
         initialValues={{ username: "", password: "" }}
         validate={validate}
-        onSubmit={useCallback(
-          (
-            values: FormValues,
-            { setSubmitting }: FormikHelpers<FormValues>,
-          ) => {
-            if (!onSend) return;
-            onSend(values);
-          },
-          [onSend],
-        )}
+        onSubmit={(
+          values: FormValues,
+          { setSubmitting }: FormikHelpers<FormValues>,
+        ) => {
+          if (!onSend) return;
+          onSend(values);
+        }}
       >
         {({
           values,

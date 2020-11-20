@@ -1,16 +1,18 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/core";
+import { colors } from "@soroha/components/styles";
 import React from "react";
+import HashLoader from "react-spinners/HashLoader";
 
-export type Props = {
-  className?: string;
-};
-
-const Loading: React.FC<Props> = ({ className }) => {
-  return <Wrapper>loading</Wrapper>;
-};
-
-const Wrapper = styled.div`
-  background-color: red;
+const overrideSpinner = css`
+  display: block;
+  margin: 0 auto;
+  color: red;
 `;
+
+const Loading = () => {
+  return (
+    <HashLoader css={overrideSpinner} color={colors.deepGreen} size={300} />
+  );
+};
 
 export default Loading;
