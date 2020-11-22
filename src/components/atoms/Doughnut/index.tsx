@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "@emotion/styled";
-import { render } from "enzyme";
 
 export type Props = {
-  className?: string;
   data?: ChartData;
   isPC?: boolean;
 };
@@ -18,7 +16,7 @@ export type ChartData = {
   }[];
 };
 
-const DoughnutChart: React.FC<Props> = ({ className, isPC }) => {
+const DoughnutChart: React.FC<Props> = ({ isPC }) => {
   const data = {
     labels: ["Red", "Green", "Yellow"],
     datasets: [

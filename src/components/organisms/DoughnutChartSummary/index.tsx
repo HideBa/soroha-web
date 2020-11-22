@@ -1,11 +1,10 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import DoughnutChart from "@soroha/components/atoms/Doughnut";
 import ChartTexts, {
   PrimarySubChartData,
 } from "@soroha/components/molecules/ChartTexts";
 import CalculateSubmit from "@soroha/components/molecules/Calculate";
-import { metrics } from "@soroha/components/styles";
 
 export type Props = {
   className?: string;
@@ -22,11 +21,12 @@ type Data = {
   data?: PerPersonTotalExpenditure[];
 };
 
-const DoughbutChartSummary: React.FC<Props> = ({ className, isPC }) => {
+const DoughbutChartSummary: React.FC<Props> = ({ isPC, className }) => {
   const [data, setData] = useState<PerPersonTotalExpenditure[]>();
-  const url = process.env.SOROHA_WEB_API_ENDPOINT_TEST!;
+  const url = process.env.SOROHA_WEB_API_ENDPOINT_TEST;
   useEffect(() => {
     async () => {
+      if (!url) return;
       const res = await fetch(url, {
         method: "GET",
         mode: "cors", //TODO: must be changed to same origin later
@@ -74,14 +74,10 @@ const DoughbutChartSummary: React.FC<Props> = ({ className, isPC }) => {
     },
   };
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <UpperContainer>
         {/* TODO: must change data later */}
-        <DoughnutChart
-          data={doughnutsData}
-          className="doughnut-chart"
-          isPC={isPC}
-        />
+        <DoughnutChart data={doughnutsData} isPC={isPC} />
         {/* TODO: must cahnge data later */}
         <ChartTexts primarySubChartData={sampleTextData} />
       </UpperContainer>

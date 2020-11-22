@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { metrics, colors } from "@soroha/components/styles";
 import { H2 } from "@soroha/components/styles/fonts";

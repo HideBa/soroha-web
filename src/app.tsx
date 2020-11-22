@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { hot } from "react-hot-loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { GlobalStyles } from "./components/styles";
