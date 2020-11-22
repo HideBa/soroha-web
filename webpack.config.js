@@ -3,7 +3,7 @@
 const path = require("path");
 const os = require("os");
 
-const CleanPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerPlugin = require("fork-ts-checker-webpack-plugin");
 const HardSourcePlugin = require("hard-source-webpack-plugin");
@@ -36,18 +36,18 @@ module.exports = (env, args = {}) => {
           test: /\.tsx?$/,
           exclude: /node_modules/,
           use: [
-            {
-              loader: "thread-loader",
-              options: {
-                workers: Math.max(os.cpus().length - 1, 1),
-              },
-            },
+            // {
+            //   loader: "thread-loader",
+            //   options: {
+            //     workers: Math.max(os.cpus().length - 1, 1),
+            //   },
+            // },
             {
               loader: "babel-loader",
               options: {
-                babelrc: false,
+                // babelrc: false,
                 cacheDirectory: true,
-                plugins: ["react-hot-loader/babel"],
+                plugins: prod ? [] : ["react-hot-loader/babel"],
               },
             },
             {
@@ -90,7 +90,7 @@ module.exports = (env, args = {}) => {
     },
     plugins: [
       ...(prod
-        ? [new CleanPlugin("build")]
+        ? [new CleanWebpackPlugin({ cleanAfterEveryBuildPatterns: ["build"] })]
         : [
             new webpack.HotModuleReplacementPlugin(),
             new HardSourcePlugin({
