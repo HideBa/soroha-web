@@ -47,7 +47,9 @@ const Sign = <T extends Sign>({
           { setSubmitting }: FormikHelpers<FormValues>,
         ) => {
           if (!onSend) return;
+          setSubmitting(true);
           onSend(values);
+          setSubmitting(false);
         }}
       >
         {({
@@ -80,7 +82,6 @@ const Sign = <T extends Sign>({
               touched={touched.password}
             />
             {err && <FormError err={err} />}
-            {/* <FormSubmit text="Enter" onClick={handleFormSubmit} /> */}
             <FormSubmit type="submit" text="Enter" disabled={isSubmitting} />
           </form>
         )}
