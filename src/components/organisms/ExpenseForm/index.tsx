@@ -1,19 +1,19 @@
 import React from "react";
 import { default as RawExpenseForm } from "@soroha/components/molecules/ExpenseForm";
+import useHooks from "./hooks";
 
 export type Props = {
   className?: string;
-  open?: boolean;
-  toggleModal?: () => void;
 };
 
-const ExpenseForm: React.FC<Props> = ({ className, open, toggleModal }) => {
+const ExpenseForm: React.FC<Props> = ({ className }) => {
+  const { isModalOpen, handleToggleModal, sendExpense } = useHooks();
   return (
     <RawExpenseForm
       className={className}
-      onSend={() => console.log("send")}
-      isModalOpen={open}
-      setIsModalOpen={toggleModal}
+      onSend={() => sendExpense}
+      isModalOpen={isModalOpen}
+      setIsModalOpen={handleToggleModal}
     />
   );
 };

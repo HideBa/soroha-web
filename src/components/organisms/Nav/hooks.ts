@@ -1,10 +1,14 @@
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { LinkType } from "../../atoms/NavLink";
 import useAuth from "@soroha/components/Auth";
+import { useSetRecoilState } from "recoil";
+import { isExpenseModalOpen } from "@soroha/recoil/atoms";
 
 export default () => {
   const isPC = useIsPC();
   const { signOut, isSignedIn } = useAuth();
+  const setIsModalOpen = useSetRecoilState(isExpenseModalOpen);
+  const openModal = () => setIsModalOpen(true);
 
   const links: LinkType[] = isPC
     ? isSignedIn
@@ -25,5 +29,5 @@ export default () => {
         { linkTo: "/", type: "icon", icon: "home" },
         { linkTo: "/", type: "icon", icon: "menu" },
       ];
-  return { links };
+  return { links, openModal };
 };

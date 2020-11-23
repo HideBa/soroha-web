@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { hot } from "react-hot-loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { GlobalStyles } from "./components/styles";
@@ -10,7 +10,6 @@ import SignupPage from "./components/pages/Signup";
 import { RecoilRoot } from "recoil";
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <GlobalStyles />
@@ -21,10 +20,7 @@ const App = () => {
           </Route>
           <Switch>
             <Route exact path="/">
-              <Home
-                setIsModalOpen={() => setIsModalOpen(!isModalOpen)}
-                isModalOpen={isModalOpen}
-              />
+              <Home />
             </Route>
             <Route exact path="/signin">
               <SigninPage />
@@ -34,7 +30,7 @@ const App = () => {
             </Route>
           </Switch>
           <Route path="/">
-            <MenuBar setIsModalOpen={() => setIsModalOpen(!isModalOpen)} />
+            <MenuBar />
           </Route>
         </Router>
       </RecoilRoot>

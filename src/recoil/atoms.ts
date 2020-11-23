@@ -15,4 +15,9 @@ export const userState = atom({
   default: initialUser,
 });
 
+export const isExpenseModalOpen = atom({
+  key: "expenseModal",
+  default: false,
+});
+
 export const loading = atom({ key: "loading", default: false });

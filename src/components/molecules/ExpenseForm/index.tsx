@@ -11,7 +11,7 @@ import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 export type Props = {
   className?: string;
   isModalOpen?: boolean;
-  setIsModalOpen?: () => void;
+  setIsModalOpen?: (willOpen: boolean) => void;
   onSend?: () => void;
 };
 
@@ -40,6 +40,7 @@ const ExpenseForm: React.FC<Props> = ({
   onSend,
 }) => {
   const isPC = useIsPC();
+  const closeModal = () => setIsModalOpen && setIsModalOpen(false);
   return isPC ? (
     <FormContainer className={className}>
       <Title>入力</Title>
@@ -53,7 +54,7 @@ const ExpenseForm: React.FC<Props> = ({
       <FormSubmit text="追加" />
     </FormContainer>
   ) : (
-    <Modal className={className} onClose={setIsModalOpen} open={isModalOpen}>
+    <Modal className={className} onClose={closeModal} open={isModalOpen}>
       <Title>入力</Title>
       <div>
         {formInputs.map(f => {

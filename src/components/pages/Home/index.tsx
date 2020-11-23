@@ -10,18 +10,16 @@ import useAuth from "@soroha/components/Auth";
 
 export type Props = {
   className?: string;
-  isModalOpen?: boolean;
-  setIsModalOpen: () => void;
 };
 
-const Home: React.FC<Props> = ({ setIsModalOpen, isModalOpen }) => {
+const Home: React.FC<Props> = () => {
   const isPC = useIsPC();
   const { isSignedIn } = useAuth();
 
   return isSignedIn ? (
     <HomeBody>
       <DoughbutChartSummary isPC={isPC} />
-      <ExpenseForm open={isModalOpen} toggleModal={setIsModalOpen} />
+      <ExpenseForm />
     </HomeBody>
   ) : (
     <Redirect to="/signin" />

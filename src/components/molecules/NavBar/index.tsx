@@ -7,19 +7,14 @@ export type Props = {
   className?: string;
   links?: LinkType[];
   isPC?: boolean;
-  setIsModalOpen?: () => void;
+  openModal?: () => void;
 };
 
-const NavBar: React.FC<Props> = ({
-  className,
-  links,
-  isPC,
-  setIsModalOpen,
-}) => {
+const NavBar: React.FC<Props> = ({ className, links, isPC, openModal }) => {
   return (
     <>
       {!isPC && (
-        <NavBarWrapper>
+        <NavBarWrapper className={className}>
           <Wrapper>
             {links &&
               links.map((link, i) => {
@@ -28,7 +23,7 @@ const NavBar: React.FC<Props> = ({
                 );
               })}
           </Wrapper>
-          <MenuBarCircle onClick={setIsModalOpen} />
+          <MenuBarCircle onClick={openModal} />
           <Wrapper>
             {links &&
               links.map((link, i) => {

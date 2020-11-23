@@ -7,3 +7,5 @@ export const SIGN_IN_URL =
   process.env.SOROHA_WEB_API_ENDPOINT + "/users/signin";
 
 export const ME_URL = process.env.SOROHA_WEB_API_ENDPOINT + "/user";
+
+export const SEND_EXPENSE = process.env.SOROHA_WEB_ENDPOPINT + "";

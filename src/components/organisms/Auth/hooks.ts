@@ -12,7 +12,7 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
   const setUser = useSetRecoilState<UserType>(userState);
   const history = useHistory();
   const signUpIn = async (values: FormValues) => {
-    setLoading(old => true);
+    setLoading(() => true);
     const data = {
       user: values,
     };

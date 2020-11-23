@@ -7,18 +7,15 @@ import useHooks from "../hooks";
 
 export type Props = {
   className?: string;
-  // links?: LinkType[];
-  setIsModalOpen?: () => void;
 };
 
-const MenuBar: React.FC<Props> = ({ setIsModalOpen }) => {
-  const { links } = useHooks();
+const MenuBar: React.FC<Props> = () => {
+  const { links, openModal } = useHooks();
   const isPC = useIsPC();
-  // const isSignedIn = useContext(AuthContext).isSignedIn;
   return isPC ? null : (
     <Wrapper>
       <BottomBar>
-        <NavBarMolecule links={links} setIsModalOpen={setIsModalOpen} />
+        <NavBarMolecule links={links} openModal={openModal} />
       </BottomBar>
     </Wrapper>
   );
