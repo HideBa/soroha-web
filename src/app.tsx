@@ -8,6 +8,7 @@ import MenuBar from "./components/organisms/Nav/MenuBar";
 import SigninPage from "./components/pages/Signin";
 import SignupPage from "./components/pages/Signup";
 import { RecoilRoot } from "recoil";
+import Setting from "./components/pages/Setting";
 
 const App = () => {
   return (
@@ -27,6 +28,9 @@ const App = () => {
             </Route>
             <Route exact path="/signup">
               <SignupPage />
+            </Route>
+            <Route exact path="/settings">
+              <Setting />
             </Route>
           </Switch>
           <Route path="/">

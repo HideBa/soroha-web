@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
-import { colors, fonts, metrics } from "@soroha/components/styles";
+import { colors, metrics } from "@soroha/components/styles";
 import Icon, { Icons } from "../icons";
+import { string } from "yup";
 
 export type Props = {
   className?: string;
@@ -11,31 +12,41 @@ export type Props = {
 };
 
 export type LinkText = {
-  linkTo: string;
   type: "text";
-  text?: string;
-  onClick?: () => void;
-};
+} & Omit<LinkAllType, "icon">;
 
 export type LinkIcon = {
-  linkTo: string;
   type: "icon";
-  icon?: Icons;
+} & Omit<LinkAllType, "text">;
+
+export type LinkBoth = {
+  type: "both";
+} & LinkAllType;
+
+export type LinkChild = {
+  type: "child";
+} & Omit<LinkAllType, "icon" | "text">;
+
+type LinkAllType = {
+  linkTo: string;
   onClick?: () => void;
+  icon: Icons;
+  text: string;
+  color?: string;
 };
 
-export type LinkType = LinkText | LinkIcon;
+export type LinkType = LinkText | LinkIcon | LinkBoth | LinkChild;
 
 const NavLink: React.FC<Props> = ({ link, children }) => {
   return (
     <>
       {link.type === "text" && (
-        <StyledTextLink to={link.linkTo || "/"} onClick={link.onClick}>
+        <StyledLink to={link.linkTo || "/"} onClick={link.onClick}>
           {link.text}
-        </StyledTextLink>
+        </StyledLink>
       )}
       {link.type === "icon" && (
-        <StyledIconLink
+        <StyledLink
           to={link.linkTo || "/"}
           className={"menu-icons"}
           onClick={link.onClick}
@@ -45,21 +56,42 @@ const NavLink: React.FC<Props> = ({ link, children }) => {
           ) : (
             <Icon icon={link.icon} color={colors.whiteBrown} size={30} />
           )}
-        </StyledIconLink>
+        </StyledLink>
+      )}
+      {link.type == "both" && (
+        <StyledLink
+          to={link.linkTo || "/"}
+          className={"header-links"}
+          onClick={link.onClick}
+          color={link.color}
+        >
+          <Icon icon={link.icon} color={link.color || colors.textDarkBrown} />
+          <LinkText>{link.text}</LinkText>
+        </StyledLink>
+      )}
+      {link.type == "child" && (
+        <StyledLink
+          to={link.linkTo || "/"}
+          onClick={link.onClick}
+          color={link.color}
+        >
+          {children}
+        </StyledLink>
       )}
     </>
   );
 };
 
-const StyledTextLink = styled(Link)`
-  color: ${colors.whiteBrown};
-  font-size: ${fonts.size.medium2};
-  padding: ${metrics.padding.headerLink};
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin: ${metrics.padding.headerLink};
 `;
 
-const StyledIconLink = styled(Link)`
-  background-color: ${props => (props.color ? props.color : "")};
-  /* margin: ${metrics.margin.navBarIcon}; */
+const LinkText = styled.div<{ color?: string }>`
+  color: ${props => (props.color ? props.color : colors.textDarkBrown)};
+  margin: 5px;
 `;
 
 export default NavLink;

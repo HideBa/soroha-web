@@ -3,6 +3,7 @@ import { LinkType } from "../../atoms/NavLink";
 import useAuth from "@soroha/components/Auth";
 import { useSetRecoilState } from "recoil";
 import { isExpenseModalOpen } from "@soroha/recoil/atoms";
+import { colors } from "@soroha/components/styles";
 
 export default () => {
   const isPC = useIsPC();
@@ -14,9 +15,17 @@ export default () => {
     ? isSignedIn
       ? [
           {
+            linkTo: "/settings",
+            type: "both",
+            text: "Setting",
+            icon: "setting",
+            color: undefined,
+          },
+          {
             linkTo: "/",
-            type: "text",
+            type: "both",
             text: "SignOut",
+            icon: "signOut",
             onClick: signOut,
           },
         ]

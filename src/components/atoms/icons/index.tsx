@@ -4,6 +4,9 @@ import { RiMenuLine } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
 import { RiCloseLine } from "react-icons/ri";
+import { IoIosLogOut } from "react-icons/io";
+import { AiOutlineSetting } from "react-icons/ai";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 export type Props = {
   className?: string;
@@ -20,6 +23,9 @@ const icons = {
   home: TiHome,
   pen: FaPen,
   close: RiCloseLine,
+  signOut: IoIosLogOut,
+  setting: AiOutlineSetting,
+  dropDown: IoMdArrowDropdown,
 };
 
 export type Icons = keyof typeof icons;

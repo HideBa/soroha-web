@@ -15,7 +15,7 @@ const Header: React.FC<Props> = ({ links, isPC }) => {
       {isPC ? (
         <PCWrapper className="header">
           <LeftWrapper>
-            <NavLink key="logo" link={{ type: "icon", linkTo: "/" }}>
+            <NavLink key="logo" link={{ type: "child", linkTo: "/" }}>
               <Logo />
             </NavLink>
           </LeftWrapper>
@@ -53,6 +53,8 @@ const SPWrapper = styled.div`
 
 const LeftWrapper = styled.div``;
 
-const RightWrapper = styled.div``;
+const RightWrapper = styled.div`
+  display: flex;
+`;
 
 export default Header;
