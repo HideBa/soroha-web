@@ -7,6 +7,8 @@ import { RiCloseLine } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { GrAdd } from "react-icons/gr";
+import styled from "@emotion/styled";
 
 export type Props = {
   className?: string;
@@ -14,6 +16,7 @@ export type Props = {
   size?: string | number;
   alt?: string;
   color?: string;
+  text?: string;
   onClick?: () => void;
 };
 
@@ -26,6 +29,7 @@ const icons = {
   signOut: IoIosLogOut,
   setting: AiOutlineSetting,
   dropDown: IoMdArrowDropdown,
+  add: GrAdd,
 };
 
 export type Icons = keyof typeof icons;
@@ -37,20 +41,33 @@ const Icon: React.FC<Props> = ({
   alt,
   color,
   onClick,
+  text,
 }) => {
   if (!icon) return null;
   const IconComponent = icons[icon as Icons];
   if (IconComponent) {
     return (
-      <IconComponent
-        className={className}
-        size={size}
-        color={color}
-        onClick={onClick}
-      />
+      <Wrapper>
+        <IconComponent
+          className={className}
+          size={size}
+          color={color}
+          onClick={onClick}
+        />
+        {text && <Text>{text}</Text>}
+      </Wrapper>
     );
   }
   return null;
 };
+
+const Text = styled.div`
+  margin: 0 5px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default Icon;

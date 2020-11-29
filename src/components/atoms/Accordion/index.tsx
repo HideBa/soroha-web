@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
-import React, { useState } from "react";
+import React from "react";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import { default as MaterialUIAccordion } from "@material-ui/core/Accordion";
@@ -22,7 +21,7 @@ const Accordion: React.FC<Props> = ({
   disabled = false,
 }) => {
   return (
-    <MaterialUIAccordion disabled={disabled}>
+    <MaterialUIAccordion className={className} disabled={disabled}>
       <AccordionSummary expandIcon={<Icon icon="dropDown" />}>
         <Title>{title}</Title>
       </AccordionSummary>

@@ -41,6 +41,7 @@ const FormInput: React.FC<Props> = ({
 };
 
 const Wrapper = styled.div`
+  margin: ${metrics.margin.inputMedium};
   display: flex;
   flex-direction: column;
 `;
@@ -59,8 +60,8 @@ const ValidationError = styled.div`
 `;
 
 const StyledInput = styled.input`
+  /* margin: ${metrics.margin.inputMedium}; */
   padding: ${metrics.padding.inputMedium};
-  margin: ${metrics.margin.inputMedium};
   background-color: ${colors.whiteBrown};
   color: ${colors.textDarkBrown};
   border-radius: ${metrics.borderRadius.input}px;
