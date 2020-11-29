@@ -14,6 +14,7 @@ export default () => {
   };
 
   const fetchMe = async () => {
+    const beforeURL = window.location.pathname;
     const url = ME_URL;
     const token = localStorage.getItem("token");
     const res = await fetch(url, {
@@ -31,7 +32,7 @@ export default () => {
         ...oldV,
         userName: resJSON.user.username,
       }));
-      history.push("/");
+      history.push(beforeURL.includes("sign") ? "/" : beforeURL);
     }
   };
 
