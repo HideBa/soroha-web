@@ -7,9 +7,16 @@ export type Props = {
 };
 
 const Setting: React.FC<Props> = ({ className }) => {
-  const { loading, createTeam } = useHooks();
+  const { loading, createTeam, teams, fetchTeams } = useHooks();
 
-  return <RawSetting loading={loading} onTeamCreate={createTeam} />;
+  return (
+    <RawSetting
+      loading={loading}
+      onTeamCreate={createTeam}
+      teams={teams}
+      onGetTeams={fetchTeams}
+    />
+  );
 };
 
 export default Setting;

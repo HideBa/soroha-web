@@ -8,16 +8,28 @@ export type Props = {
   className?: string;
   loading?: boolean;
   onTeamCreate?: (teamName: string) => void;
+  teams?: string[];
+  onGetTeams?: () => void;
 };
 
-const Setting: React.FC<Props> = ({ className, onTeamCreate, loading }) => {
+const Setting: React.FC<Props> = ({
+  className,
+  onTeamCreate,
+  loading,
+  teams,
+  onGetTeams,
+}) => {
   return loading ? (
     <Loading />
   ) : (
     <Wrapper className={className}>
       <Accordion title="Account">設定項目</Accordion>
       <Accordion title="Team">
-        <Team onTeamCreate={onTeamCreate} />
+        <Team
+          onTeamCreate={onTeamCreate}
+          teams={teams}
+          onGetTeams={onGetTeams}
+        />
       </Accordion>
       <Accordion title="sample" disabled>
         チーム設定

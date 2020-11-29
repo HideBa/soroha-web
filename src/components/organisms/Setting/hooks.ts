@@ -1,4 +1,4 @@
-import { CREATE_TEAM } from "@soroha/entryPoint";
+import { CREATE_TEAM, TEAM_LIST } from "@soroha/entryPoint";
 import { userState } from "@soroha/recoil/atoms";
 import { useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 export default () => {
   const [loading, setLoading] = useState(false);
   const [localUserState, setLocalUserState] = useRecoilState(userState);
+  const [teams, setTeams] = useState([""]);
 
   const createTeam = useCallback(async (teamName: string) => {
     setLoading(true);
@@ -40,8 +41,35 @@ export default () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const fetchTeams = async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(TEAM_LIST, {
+      method: "get",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Token: `${token}`,
+      },
+    })
+      .then(res => {
+        const resJSON = res.json();
+        return resJSON;
+      })
+      .catch(err => console.log("failure to fetch teams", err));
+    //reset team array
+    teams.length = 0;
+    setTeams(
+      response.teams.map((t: any) => {
+        return t.teamName;
+      }),
+    );
+  };
+
   return {
     loading,
     createTeam,
+    teams,
+    fetchTeams,
   };
 };

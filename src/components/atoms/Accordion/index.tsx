@@ -3,11 +3,12 @@ import React from "react";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import { default as MaterialUIAccordion } from "@material-ui/core/Accordion";
-import Icon from "../icons";
+import Icon, { Icons } from "../icons";
 
 export type Props = {
   className?: string;
   title?: string;
+  icon?: Icons;
   content?: string;
   children?: React.ReactNode;
   disabled?: boolean;
@@ -16,6 +17,7 @@ export type Props = {
 const Accordion: React.FC<Props> = ({
   className,
   title,
+  icon,
   content,
   children,
   disabled = false,
@@ -24,6 +26,7 @@ const Accordion: React.FC<Props> = ({
     <MaterialUIAccordion className={className} disabled={disabled}>
       <AccordionSummary expandIcon={<Icon icon="dropDown" />}>
         <Title>{title}</Title>
+        <StyledIcon icon={icon} />
       </AccordionSummary>
       <AccordionDetails>
         {content}
@@ -34,5 +37,9 @@ const Accordion: React.FC<Props> = ({
 };
 
 const Title = styled.div``;
+
+const StyledIcon = styled(Icon)`
+  margin: 0 5px;
+`;
 
 export default Accordion;

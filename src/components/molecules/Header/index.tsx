@@ -3,13 +3,16 @@ import { colors, metrics } from "@soroha/components/styles";
 import NavLink, { LinkType } from "@soroha/components/atoms/NavLink";
 import Logo from "@soroha/components/atoms/Logo";
 import styled from "@emotion/styled";
+import UserIndicator from "@soroha/components/atoms/User";
 
 export type Props = {
   links?: LinkType[];
   isPC?: boolean;
+  userName?: string;
+  teamName?: string;
 };
 
-const Header: React.FC<Props> = ({ links, isPC }) => {
+const Header: React.FC<Props> = ({ links, isPC, userName, teamName }) => {
   return (
     <>
       {isPC ? (
@@ -18,6 +21,7 @@ const Header: React.FC<Props> = ({ links, isPC }) => {
             <NavLink key="logo" link={{ type: "child", linkTo: "/" }}>
               <Logo />
             </NavLink>
+            <UserIndicator userName={userName} teamName={teamName} />
           </LeftWrapper>
           <RightWrapper>
             {links &&
@@ -51,7 +55,9 @@ const SPWrapper = styled.div`
   padding: ${metrics.padding.header};
 `;
 
-const LeftWrapper = styled.div``;
+const LeftWrapper = styled.div`
+  display: flex;
+`;
 
 const RightWrapper = styled.div`
   display: flex;

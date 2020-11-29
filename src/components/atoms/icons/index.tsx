@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaExchangeAlt } from "react-icons/fa";
 import { RiMenuLine } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
@@ -30,6 +30,7 @@ const icons = {
   setting: AiOutlineSetting,
   dropDown: IoMdArrowDropdown,
   add: GrAdd,
+  switch: FaExchangeAlt,
 };
 
 export type Icons = keyof typeof icons;

@@ -1,8 +1,8 @@
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { LinkType } from "../../atoms/NavLink";
 import useAuth from "@soroha/components/Auth";
-import { useSetRecoilState } from "recoil";
-import { isExpenseModalOpen } from "@soroha/recoil/atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isExpenseModalOpen, userState } from "@soroha/recoil/atoms";
 import { colors } from "@soroha/components/styles";
 
 export default () => {
@@ -10,6 +10,7 @@ export default () => {
   const { signOut, isSignedIn } = useAuth();
   const setIsModalOpen = useSetRecoilState(isExpenseModalOpen);
   const openModal = () => setIsModalOpen(true);
+  const userLocalState = useRecoilValue(userState);
 
   const links: LinkType[] = isPC
     ? isSignedIn
@@ -38,5 +39,8 @@ export default () => {
         { linkTo: "/", type: "icon", icon: "home" },
         { linkTo: "/", type: "icon", icon: "menu" },
       ];
-  return { links, openModal };
+
+  const userName = userLocalState.userName;
+  const teamName = userLocalState.teamId;
+  return { links, openModal, userName, teamName };
 };

@@ -11,18 +11,24 @@ import useHooks from "./hooks";
 export type Props = {
   className?: string;
   onTeamCreate?: (teamName: string) => void;
+  teams?: string[];
+  onGetTeams?: () => void;
 };
 
-const Team: React.FC<Props> = ({ className, onTeamCreate }) => {
+const Team: React.FC<Props> = ({
+  className,
+  onTeamCreate,
+  teams,
+  onGetTeams,
+}) => {
   const {
     isClosableBoxVisible,
     toggleClosableBox,
     teamName,
     handleTeamNameChange,
     handleTeamCreate,
-    teams,
-  } = useHooks({ createTeam: onTeamCreate });
-  console.log(teams);
+    switchTeam,
+  } = useHooks({ createTeam: onTeamCreate, getTeams: onGetTeams });
   return (
     <Wrapper>
       <Item>
@@ -46,12 +52,16 @@ const Team: React.FC<Props> = ({ className, onTeamCreate }) => {
           </CreateButton>
         </ClosableItemContainer>
       </Item>
-      <StyledAccordion title="チーム一覧">
+      <StyledAccordion title="チーム切り替え" icon="switch">
         <div>
-          {teams.map(t => {
-            console.log(t);
-            return <Title key={t}>{t}</Title>;
-          })}
+          {teams &&
+            teams.map(t => {
+              return (
+                <Title key={t} onClick={() => switchTeam(t)}>
+                  {t}
+                </Title>
+              );
+            })}
         </div>
       </StyledAccordion>
     </Wrapper>

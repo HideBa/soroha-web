@@ -1,51 +1,36 @@
-import { TEAM_LIST } from "@soroha/entryPoint";
+import { userState } from "@soroha/recoil/atoms";
 import { ChangeEvent, useEffect, useState } from "react";
+import { FaOldRepublic } from "react-icons/fa";
+import { useRecoilState } from "recoil";
 
 type Props = {
   createTeam?: (teamName: string) => void;
+  getTeams?: () => void;
 };
 
-export default ({ createTeam }: Props) => {
+export default ({ createTeam, getTeams }: Props) => {
   const [isClosableBoxVisible, toggleClosableBox] = useState(false);
   const [teamName, setTeamName] = useState("");
-  const [teams, setTeams] = useState([""]);
+  const [localUserState, setLocalUserState] = useRecoilState(userState);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const fetchTeams = async () => {
-      const response = await fetch(TEAM_LIST, {
-        method: "get",
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Token: `${token}`,
-        },
-      })
-        .then(res => {
-          const resJSON = res.json();
-          return resJSON;
-        })
-        .catch(err => console.log("failure to fetch teams", err));
-      //reset team array
-      teams.length = 0;
-      setTeams(
-        response.teams.map((t: any) => {
-          return t.teamName;
-        }),
-      );
-    };
-    fetchTeams();
+    getTeams && getTeams();
   }, []);
 
   const handleTeamNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTeamName(e.currentTarget.value);
   };
 
-  useEffect(() => {
-    console.log(teams);
-  }, [teams]);
-
   const handleTeamCreate = () => createTeam && createTeam(teamName);
+
+  const switchTeam = (teamName: string) => {
+    setLocalUserState(old => {
+      return {
+        ...old,
+        teamId: teamName,
+      };
+    });
+  };
 
   return {
     isClosableBoxVisible,
@@ -53,6 +38,6 @@ export default ({ createTeam }: Props) => {
     teamName,
     handleTeamNameChange,
     handleTeamCreate,
-    teams,
+    switchTeam,
   };
 };
