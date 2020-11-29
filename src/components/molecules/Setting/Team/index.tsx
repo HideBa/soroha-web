@@ -28,6 +28,7 @@ const Team: React.FC<Props> = ({
     handleTeamNameChange,
     handleTeamCreate,
     switchTeam,
+    currentTeam,
   } = useHooks({ createTeam: onTeamCreate, getTeams: onGetTeams });
   return (
     <Wrapper>
@@ -57,9 +58,16 @@ const Team: React.FC<Props> = ({
           {teams &&
             teams.map(t => {
               return (
-                <Title key={t} onClick={() => switchTeam(t)}>
-                  {t}
-                </Title>
+                <TeamNameContainer key={t}>
+                  <Title onClick={() => switchTeam(t)}>{t}</Title>
+                  <CurrentTeamIndicator
+                    icon="selected"
+                    alt="selected team"
+                    // color={colors.lightGreen}
+                    color="red"
+                    visible={t === currentTeam}
+                  />
+                </TeamNameContainer>
               );
             })}
         </div>
@@ -91,6 +99,9 @@ const InputTitle = styled.div``;
 const Title = styled.div`
   cursor: pointer;
   padding: 15px;
+  :hover {
+    background-color: ${colors.whiteBrown};
+  }
 `;
 
 const StyledInput = styled(FormInput)`
@@ -105,6 +116,17 @@ const CreateButton = styled(FormSubmit)`
 const StyledAccordion = styled(Accordion)`
   margin: 15px 0;
   width: 100%;
+`;
+
+const TeamNameContainer = styled.div`
+  :hover {
+    background-color: ${colors.whiteBrown};
+  }
+  display: flex;
+`;
+
+const CurrentTeamIndicator = styled(Icon)<{ visible?: boolean }>`
+  display: ${props => !props.visible && "none"};
 `;
 
 export default Team;

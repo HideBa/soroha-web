@@ -7,7 +7,7 @@ import { RiCloseLine } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { GrAdd } from "react-icons/gr";
+import { GrAdd, GrRadialSelected } from "react-icons/gr";
 import styled from "@emotion/styled";
 
 export type Props = {
@@ -31,6 +31,7 @@ const icons = {
   dropDown: IoMdArrowDropdown,
   add: GrAdd,
   switch: FaExchangeAlt,
+  selected: GrRadialSelected,
 };
 
 export type Icons = keyof typeof icons;

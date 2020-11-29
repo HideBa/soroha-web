@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import React from "react";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
+import RawAccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import { default as MaterialUIAccordion } from "@material-ui/core/Accordion";
 import Icon, { Icons } from "../icons";
+import { colors } from "@soroha/components/styles";
 
 export type Props = {
   className?: string;
@@ -40,6 +41,12 @@ const Title = styled.div``;
 
 const StyledIcon = styled(Icon)`
   margin: 0 5px;
+`;
+
+const AccordionSummary = styled(RawAccordionSummary)`
+  :hover {
+    background-color: ${colors.whiteBrown};
+  }
 `;
 
 export default Accordion;

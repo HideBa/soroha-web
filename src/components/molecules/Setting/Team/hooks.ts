@@ -12,6 +12,7 @@ export default ({ createTeam, getTeams }: Props) => {
   const [isClosableBoxVisible, toggleClosableBox] = useState(false);
   const [teamName, setTeamName] = useState("");
   const [localUserState, setLocalUserState] = useRecoilState(userState);
+  const currentTeam = localUserState.teamId;
 
   useEffect(() => {
     getTeams && getTeams();
@@ -39,5 +40,6 @@ export default ({ createTeam, getTeams }: Props) => {
     handleTeamNameChange,
     handleTeamCreate,
     switchTeam,
+    currentTeam,
   };
 };
