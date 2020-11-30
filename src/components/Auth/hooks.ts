@@ -31,6 +31,7 @@ export default () => {
       await setUser(oldV => ({
         ...oldV,
         userName: resJSON.user.username,
+        teamId: resJSON.user.username,
       }));
       history.push(beforeURL.includes("sign") ? "/" : beforeURL);
     }

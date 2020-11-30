@@ -35,6 +35,7 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
           await setUser(oldValue => ({
             ...oldValue,
             userName: resJSON.user.username,
+            teamId: resJSON.user.username,
           }));
           history.push("/");
           setErr(undefined);
