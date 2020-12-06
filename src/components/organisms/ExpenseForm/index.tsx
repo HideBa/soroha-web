@@ -11,7 +11,7 @@ const ExpenseForm: React.FC<Props> = ({ className }) => {
   return (
     <RawExpenseForm
       className={className}
-      onSend={() => sendExpense}
+      onSend={(price: number, comment: string) => sendExpense(price, comment)}
       isModalOpen={isModalOpen}
       setIsModalOpen={handleToggleModal}
     />

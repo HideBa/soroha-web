@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { Avatar } from "@material-ui/core";
-import { colors, metrics } from "@soroha/components/styles";
+import { colors, fonts, metrics } from "@soroha/components/styles";
 import React from "react";
-import { boolean } from "yup";
+import Icon from "../icons";
 
 export type Props = {
   className?: string;
@@ -21,8 +20,13 @@ const UserIndicator: React.FC<Props> = ({
     <Wrapper className={className}>
       {imagePath ? <Avator src={imagePath} alt="avator" /> : <Circle />}
       <Right>
-        <UserName>{userName}</UserName>
-        <TeamName>{teamName}</TeamName>
+        <RightContainer>
+          <UserName>{userName}</UserName>
+        </RightContainer>
+        <RightContainer>
+          <StyledIcon icon="team" />
+          <TeamName>{teamName}</TeamName>
+        </RightContainer>
       </Right>
     </Wrapper>
   );
@@ -53,10 +57,20 @@ const Right = styled.div`
   margin: 0 10px;
 `;
 
-const TeamName = styled.div``;
+const RightContainer = styled.div`
+  display: flex;
+`;
+
+const StyledIcon = styled(Icon)`
+  margin: 0 5px 0 0;
+`;
+
+const TeamName = styled.div`
+  font-weight: bold;
+`;
 
 const UserName = styled.div`
-  font-weight: bold;
+  font-size: ${fonts.size.small}px;
 `;
 
 export default UserIndicator;

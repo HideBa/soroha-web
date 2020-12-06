@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { colors } from "@soroha/components/styles";
 import { FormTitle } from "@soroha/components/styles/fonts";
@@ -12,7 +12,7 @@ export type Props = {
   className?: string;
   isModalOpen?: boolean;
   setIsModalOpen?: (willOpen: boolean) => void;
-  onSend?: () => void;
+  onSend?: (price: number, comment: string) => void;
 };
 
 type Input = {
@@ -41,6 +41,14 @@ const ExpenseForm: React.FC<Props> = ({
 }) => {
   const isPC = useIsPC();
   const closeModal = () => setIsModalOpen && setIsModalOpen(false);
+  const [price, setPrice] = useState(0);
+  const [comment, setComment] = useState("");
+
+  const handleSend = () => {
+    onSend?.(price, comment);
+    setPrice(0);
+    setComment("");
+  }
   return isPC ? (
     <FormContainer className={className}>
       <Title>入力</Title>

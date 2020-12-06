@@ -1,17 +1,52 @@
-import { isExpenseModalOpen } from "@soroha/recoil/atoms";
-import { useCallback } from "react";
+import { SEND_EXPENSE } from "@soroha/entryPoint";
+import { isExpenseModalOpen, userState } from "@soroha/recoil/atoms";
+import { useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 
 export default () => {
   const [isModalOpen, toggleModal] = useRecoilState(isExpenseModalOpen);
+  const [userLocalState, setUserLocalState] = useRecoilState(userState);
+  const [loading, setLoading] = useState(false);
+
   const handleToggleModal = (willOpen: boolean) => {
     toggleModal(willOpen);
   };
 
-  // const sendExpense = useCallback(async () => {
-  //   const url = await fetch();
-  // }, []);
-  const sendExpense = console.log("expense---");
+  const sendExpense = useCallback(
+    async (price: number, comment: string) => {
+      if (!userLocalState.teamId) return;
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const data = {
+        expense: {
+          price: price,
+          comment: comment,
+        },
+        team: {
+          teamName: userLocalState.teamId,
+        },
+      };
+      await fetch(SEND_EXPENSE, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Token: `${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then(async res => {
+          const resJSON = await res.json();
+          console.log(resJSON);
+        })
+        .catch(err => console.log("failure to send expense ", err));
+      setLoading(false);
+    },
+    [userLocalState.teamId],
+  );
+  // const sendExpense = console.log("expense---");
 
   return {
     isModalOpen,

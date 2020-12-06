@@ -1,9 +1,8 @@
 import React from "react";
 import { FaUser, FaExchangeAlt } from "react-icons/fa";
-import { RiMenuLine } from "react-icons/ri";
+import { RiMenuLine, RiGroupLine, RiCloseLine } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
-import { RiCloseLine } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineSetting } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -32,6 +31,7 @@ const icons = {
   add: GrAdd,
   switch: FaExchangeAlt,
   selected: GrRadialSelected,
+  team: RiGroupLine,
 };
 
 export type Icons = keyof typeof icons;
