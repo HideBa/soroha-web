@@ -15,7 +15,7 @@ const FormSubmit: React.FC<Props> = ({
   onClick,
   text,
   type,
-  disabled,
+  disabled = false,
 }) => {
   return (
     <StyledButton

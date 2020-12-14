@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import { colors } from "@soroha/components/styles";
 import { FormTitle } from "@soroha/components/styles/fonts";
@@ -7,6 +7,8 @@ import FormContainer from "@soroha/components/atoms/FormContainer";
 import FormInput from "@soroha/components/atoms/FormInput";
 import Modal from "@soroha/components/atoms/Modal";
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
+import { Formik, FormikHelpers } from "formik";
+import useHooks from "./hooks";
 
 export type Props = {
   className?: string;
@@ -15,23 +17,19 @@ export type Props = {
   onSend?: (price: number, comment: string) => void;
 };
 
+export type ExpenseFormValues = {
+  price: string;
+  comment: string;
+};
+
 type Input = {
   id: string;
   title: string;
   formType: "string" | "number";
   placeHolder: string;
+  value?: number | string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
-
-const formInputs: Input[] = [
-  { id: "date", title: "日付", formType: "string", placeHolder: "2020年" },
-  { id: "price", title: "金額", formType: "number", placeHolder: "2000" },
-  {
-    id: "memo",
-    title: "メモ",
-    formType: "string",
-    placeHolder: "りんごを買ったよ",
-  },
-];
 
 const ExpenseForm: React.FC<Props> = ({
   className,
@@ -41,37 +39,75 @@ const ExpenseForm: React.FC<Props> = ({
 }) => {
   const isPC = useIsPC();
   const closeModal = () => setIsModalOpen && setIsModalOpen(false);
-  const [price, setPrice] = useState(0);
-  const [comment, setComment] = useState("");
+  const { validate } = useHooks();
 
-  const handleSend = () => {
-    onSend?.(price, comment);
-    setPrice(0);
-    setComment("");
-  }
+  const Form = () => {
+    return (
+      <Formik
+        initialValues={{ price: "", comment: "" }}
+        validate={validate}
+        onSubmit={(
+          values: ExpenseFormValues,
+          { setSubmitting }: FormikHelpers<ExpenseFormValues>,
+        ) => {
+          if (!onSend) return;
+          setSubmitting(true);
+          onSend(parseInt(values.price), values.comment);
+          setSubmitting(false);
+        }}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <Title>入力</Title>
+            <FormInput
+              key={"price"}
+              title={"金額"}
+              placeHolder={"1000"}
+              onChange={handleChange}
+              error={errors.price}
+              type="number"
+              name="price"
+              touched={touched.price}
+              value={values.price}
+            />
+            <FormInput
+              key={"comment"}
+              title={"メモ"}
+              placeHolder={"りんごを100個買ったよ"}
+              onChange={handleChange}
+              error={errors.comment}
+              type="text"
+              name="comment"
+              touched={touched.comment}
+              value={values.comment}
+            />
+            {/* {err && <FormError err={err}} */}
+            <FormSubmit
+              type="submit"
+              text={isSubmitting ? "送信中..." : "追加"}
+              disabled={isSubmitting}
+            />
+          </form>
+        )}
+      </Formik>
+    );
+  };
+
   return isPC ? (
     <FormContainer className={className}>
-      <Title>入力</Title>
-      <div>
-        {formInputs.map(f => {
-          return (
-            <FormInput key={f.id} title={f.title} placeHolder={f.placeHolder} />
-          );
-        })}
-      </div>
-      <FormSubmit text="追加" />
+      <Form />
     </FormContainer>
   ) : (
     <Modal className={className} onClose={closeModal} open={isModalOpen}>
-      <Title>入力</Title>
-      <div>
-        {formInputs.map(f => {
-          return (
-            <FormInput key={f.id} title={f.title} placeHolder={f.placeHolder} />
-          );
-        })}
-      </div>
-      <FormSubmit text="追加" onClick={onSend} />
+      <Form />
     </Modal>
   );
 };

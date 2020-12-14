@@ -5,7 +5,7 @@ import { metrics, colors, fonts } from "@soroha/components/styles";
 export type Props = {
   className?: string;
   placeHolder?: string;
-  value?: string;
+  value?: string | number;
   title?: string;
   error?: string;
   touched?: boolean;
@@ -30,7 +30,7 @@ const FormInput: React.FC<Props> = ({
       {title && <Title>{title}</Title>}
       {error && touched && <ValidationError>{error}</ValidationError>}
       <StyledInput
-        placeholder={placeHolder && placeHolder}
+        placeholder={placeHolder}
         value={value}
         onChange={onChange}
         name={name}
