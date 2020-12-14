@@ -9,12 +9,14 @@ import Modal from "@soroha/components/atoms/Modal";
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { Formik, FormikHelpers } from "formik";
 import useHooks from "./hooks";
+import FormError from "@soroha/components/atoms/FormError";
 
 export type Props = {
   className?: string;
   isModalOpen?: boolean;
   setIsModalOpen?: (willOpen: boolean) => void;
   onSend?: (price: number, comment: string) => void;
+  err?: string;
 };
 
 export type ExpenseFormValues = {
@@ -22,20 +24,12 @@ export type ExpenseFormValues = {
   comment: string;
 };
 
-type Input = {
-  id: string;
-  title: string;
-  formType: "string" | "number";
-  placeHolder: string;
-  value?: number | string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
 const ExpenseForm: React.FC<Props> = ({
   className,
   isModalOpen,
   setIsModalOpen,
   onSend,
+  err,
 }) => {
   const isPC = useIsPC();
   const closeModal = () => setIsModalOpen && setIsModalOpen(false);
@@ -50,6 +44,7 @@ const ExpenseForm: React.FC<Props> = ({
           values: ExpenseFormValues,
           { setSubmitting }: FormikHelpers<ExpenseFormValues>,
         ) => {
+          console.log("sending-");
           if (!onSend) return;
           setSubmitting(true);
           onSend(parseInt(values.price), values.comment);
@@ -89,7 +84,7 @@ const ExpenseForm: React.FC<Props> = ({
               touched={touched.comment}
               value={values.comment}
             />
-            {/* {err && <FormError err={err}} */}
+            {err && <FormError err={err} />}
             <FormSubmit
               type="submit"
               text={isSubmitting ? "送信中..." : "追加"}

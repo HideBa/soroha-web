@@ -3,7 +3,7 @@ import { isExpenseModalOpen, userState } from "@soroha/recoil/atoms";
 import { useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 
-export default () => {
+export default (setErr: (err: string | undefined) => void) => {
   const [isModalOpen, toggleModal] = useRecoilState(isExpenseModalOpen);
   const [userLocalState, setUserLocalState] = useRecoilState(userState);
   const [loading, setLoading] = useState(false);
@@ -26,6 +26,7 @@ export default () => {
           teamName: userLocalState.teamId,
         },
       };
+      console.log(data);
       await fetch(SEND_EXPENSE, {
         method: "POST",
         mode: "cors",
@@ -37,11 +38,16 @@ export default () => {
         },
         body: JSON.stringify(data),
       })
-        .then(async res => {
-          const resJSON = await res.json();
-          console.log(resJSON);
+        .then(async (res) => {
+          if (res.ok) {
+            const resJSON = await res.json();
+
+            console.log(resJSON);
+          } else {
+            setErr("failure---");
+          }
         })
-        .catch(err => console.log("failure to send expense ", err));
+        .catch((err) => console.log("failure to send expense ", err));
       setLoading(false);
     },
     [userLocalState.teamId],

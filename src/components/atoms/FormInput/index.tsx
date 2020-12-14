@@ -49,6 +49,7 @@ const Wrapper = styled.div`
 const Title = styled.p`
   color: ${colors.textDarkBrown};
   font-size: ${fonts.size.medium2};
+  margin: 5px 0;
 `;
 
 const ValidationError = styled.div`

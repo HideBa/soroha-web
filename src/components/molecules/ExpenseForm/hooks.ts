@@ -4,16 +4,17 @@ export default () => {
   const validate = (values: ExpenseFormValues) => {
     const errors: Partial<ExpenseFormValues> = {};
     if (values.price === "") {
-      errors.price = "* price is required";
+      errors.price = "* 金額は必須です。";
     }
     if (values.comment === "") {
-      errors.comment = "* comment is required";
+      errors.comment = "* コメントは必須です。";
     }
     try {
       parseInt(values.price);
     } catch {
-      errors.price = "price should be number";
+      errors.price = "金額は数値を入力してください。";
     }
+    return errors;
   };
   return { validate };
 };

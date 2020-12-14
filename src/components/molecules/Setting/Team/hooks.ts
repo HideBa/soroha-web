@@ -15,7 +15,7 @@ export default ({ createTeam, getTeams }: Props) => {
   const currentTeam = localUserState.teamId;
 
   useEffect(() => {
-    getTeams && getTeams();
+    getTeams?.();
   }, []);
 
   const handleTeamNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ export default ({ createTeam, getTeams }: Props) => {
   const handleTeamCreate = () => createTeam && createTeam(teamName);
 
   const switchTeam = (teamName: string) => {
-    setLocalUserState(old => {
+    setLocalUserState((old) => {
       return {
         ...old,
         teamId: teamName,
