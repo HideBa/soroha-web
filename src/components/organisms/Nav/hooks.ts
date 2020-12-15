@@ -4,10 +4,12 @@ import useAuth from "@soroha/components/Auth";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isExpenseModalOpen, userState } from "@soroha/recoil/atoms";
 import { colors } from "@soroha/components/styles";
+import useTeam from "@soroha/components/UtilFunctions/use-team";
 
 export default () => {
   const isPC = useIsPC();
   const { signOut, isSignedIn } = useAuth();
+  const { teams, switchTeam } = useTeam();
   const setIsModalOpen = useSetRecoilState(isExpenseModalOpen);
   const openModal = () => setIsModalOpen(true);
   const userLocalState = useRecoilValue(userState);
@@ -42,5 +44,5 @@ export default () => {
 
   const userName = userLocalState.userName;
   const teamName = userLocalState.teamId;
-  return { links, openModal, userName, teamName };
+  return { links, openModal, userName, teamName, teams, switchTeam };
 };

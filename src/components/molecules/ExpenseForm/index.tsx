@@ -44,7 +44,6 @@ const ExpenseForm: React.FC<Props> = ({
           values: ExpenseFormValues,
           { setSubmitting }: FormikHelpers<ExpenseFormValues>,
         ) => {
-          console.log("sending-");
           if (!onSend) return;
           setSubmitting(true);
           onSend(parseInt(values.price), values.comment);

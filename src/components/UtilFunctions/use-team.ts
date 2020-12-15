@@ -1,6 +1,6 @@
 import { CREATE_TEAM, TEAM_LIST } from "@soroha/entryPoint";
 import { userState } from "@soroha/recoil/atoms";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 export default () => {
@@ -65,10 +65,24 @@ export default () => {
     );
   };
 
+  useEffect(() => {
+    fetchTeams();
+  }, []);
+
+  const switchTeam = (teamName: string) => {
+    setLocalUserState((old) => {
+      return {
+        ...old,
+        teamId: teamName,
+      };
+    });
+  };
+
   return {
     loading,
     createTeam,
     teams,
     fetchTeams,
+    switchTeam,
   };
 };

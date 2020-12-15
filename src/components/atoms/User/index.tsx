@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Accordion from "@soroha/components/atoms/Accordion";
 import { colors, fonts, metrics } from "@soroha/components/styles";
 import React from "react";
 import Icon from "../icons";
@@ -8,6 +9,8 @@ export type Props = {
   imagePath?: string;
   teamName?: string;
   userName?: string;
+  teams?: string[];
+  onTeamSwitch?: (teamName: string) => void;
 };
 
 const UserIndicator: React.FC<Props> = ({
@@ -15,6 +18,8 @@ const UserIndicator: React.FC<Props> = ({
   imagePath,
   teamName,
   userName,
+  teams,
+  onTeamSwitch,
 }) => {
   return (
     <Wrapper className={className}>
@@ -25,6 +30,14 @@ const UserIndicator: React.FC<Props> = ({
         </RightContainer>
         <RightContainer>
           <StyledIcon icon="team" />
+          <StyledAccordion title={teamName} icon="switch">
+            <div>
+              {teams &&
+                teams.map((t) => {
+                  return <TeamName key={t}>{t}</TeamName>;
+                })}
+            </div>
+          </StyledAccordion>
           <TeamName>{teamName}</TeamName>
         </RightContainer>
       </Right>
@@ -63,6 +76,11 @@ const RightContainer = styled.div`
 
 const StyledIcon = styled(Icon)`
   margin: 0 5px 0 0;
+`;
+
+const StyledAccordion = styled(Accordion)`
+  margin: 5px;
+  z-index: 2;
 `;
 
 const TeamName = styled.div`

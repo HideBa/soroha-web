@@ -26,7 +26,6 @@ export default (setErr: (err: string | undefined) => void) => {
           teamName: userLocalState.teamId,
         },
       };
-      console.log(data);
       await fetch(SEND_EXPENSE, {
         method: "POST",
         mode: "cors",

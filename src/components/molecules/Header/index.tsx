@@ -10,9 +10,18 @@ export type Props = {
   isPC?: boolean;
   userName?: string;
   teamName?: string;
+  teams?: string[];
+  switchTeam?: (teamName: string) => void;
 };
 
-const Header: React.FC<Props> = ({ links, isPC, userName, teamName }) => {
+const Header: React.FC<Props> = ({
+  links,
+  isPC,
+  userName,
+  teamName,
+  teams,
+  switchTeam,
+}) => {
   return (
     <>
       {isPC ? (
@@ -21,7 +30,12 @@ const Header: React.FC<Props> = ({ links, isPC, userName, teamName }) => {
             <NavLink key="logo" link={{ type: "child", linkTo: "/" }}>
               <Logo />
             </NavLink>
-            <UserIndicator userName={userName} teamName={teamName} />
+            <UserIndicator
+              userName={userName}
+              teamName={teamName}
+              teams={teams}
+              onTeamSwitch={switchTeam}
+            />
           </LeftWrapper>
           <RightWrapper>
             {links &&

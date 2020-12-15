@@ -1,6 +1,5 @@
 import { userState } from "@soroha/recoil/atoms";
 import { ChangeEvent, useEffect, useState } from "react";
-import { FaOldRepublic } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 
 type Props = {
