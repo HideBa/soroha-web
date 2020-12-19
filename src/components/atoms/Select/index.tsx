@@ -1,66 +1,86 @@
-import React, { useState } from "react";
-// import { Dropdown } from "rsuite";
-import styled from "@emotion/styled";
-import PullDownItem from "./item";
+import React, { CSSProperties } from "react";
 import ReactSelect from "react-select";
-// import { DropdownTrigger } from "rsuite/lib/Dropdown";
+import { colors } from "@soroha/components/styles";
+
+export type Option = {
+  value?: string;
+  label?: string;
+};
 
 export type Props = {
   className?: string;
-  value?: string;
-  onChange?: (value: string) => void;
-  children?: React.ReactNode;
-  options?: Options;
+  defaultOption?: Option;
+  onSelect?: (value: string) => void;
+  options?: Option[];
   title?: string;
-  // trigger?: DropdownTrigger;
+  isMulti?: boolean;
+  value?: Option;
 };
-
-export type Options = {
-  value: string;
-  label: string;
-}[];
 
 const Select: React.FC<Props> = ({
   className,
-  value,
-  onChange,
-  children,
+  defaultOption,
+  onSelect,
   options,
   title,
-  // trigger,
+  isMulti = false,
+  value,
 }) => {
-  const [selected, select] = useState(value);
-  const handleChange = (value: string) => {
-    console.log("new----", value);
-    select(value);
+  const handleSelect = (newValue: any) => {
+    if (!newValue) return;
+    onSelect?.(newValue.value);
   };
-  console.log(options);
-  // const convertedOptions = options?.map((o) => {
-  //   return { value: o, label: o };
-  // });
+
+  const colorStyle = {
+    control: (styles: CSSProperties | undefined) => ({
+      ...styles,
+      backgroundColor: colors.lightGreen,
+      width: "200px",
+      cursor: "pointer",
+      margin: "5px",
+      minHeight: "none",
+      color: colors.textDarkBrown,
+      ":focus": {
+        outlineColor: colors.orangeBrown,
+      },
+    }),
+    option: (
+      styles: CSSProperties | undefined,
+      { isDisabled, isSelected }: { isDisabled: boolean; isSelected: boolean },
+    ) => {
+      return {
+        ...styles,
+        backgroundColor: isSelected ? colors.deepGreen : colors.lightGreen,
+        width: "100%",
+        ":hover": {
+          ...(styles as any)[":hover"],
+          backgroundColor: colors.deepGreen,
+        },
+      };
+    },
+    menu: (styles: CSSProperties | undefined) => ({
+      ...styles,
+      background: colors.deepGreen,
+    }),
+    valueContainer: (styles: CSSProperties | undefined) => ({
+      ...styles,
+    }),
+  };
+
   return (
-    <StyledSelect
+    <ReactSelect
       name={title}
-      defaultValue={selected}
+      defaultValue={defaultOption}
+      placeholder={defaultOption?.label}
       className={className}
       options={options}
-      onChange={handleChange}
-      isMulti={false}
-      value={selected}
-    >
-      {options?.map((o) => (
-        <StyledOption value={o} key={o}>
-          {o}
-        </StyledOption>
-      ))}
-    </StyledSelect>
+      onChange={handleSelect}
+      isMulti={isMulti}
+      value={value}
+      styles={colorStyle}
+      defaultInputValue={defaultOption?.label}
+    ></ReactSelect>
   );
 };
-
-const StyledSelect = styled(ReactSelect)`
-  width: 200px;
-`;
-
-const StyledOption = styled.option``;
 
 export default Select;
