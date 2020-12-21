@@ -32,7 +32,10 @@ const Select: React.FC<Props> = ({
   };
 
   const colorStyle = {
-    control: (styles: CSSProperties | undefined) => ({
+    control: (
+      styles: CSSProperties | undefined,
+      { isFocused }: { isFocused: boolean },
+    ) => ({
       ...styles,
       backgroundColor: colors.lightGreen,
       width: "200px",
@@ -40,8 +43,13 @@ const Select: React.FC<Props> = ({
       margin: "5px",
       minHeight: "none",
       color: colors.textDarkBrown,
+      borderColor: isFocused ? colors.whiteBrown : colors.gray,
+      ":hover": {
+        backgroundColor: colors.deepGreen,
+        borderColor: colors.gray,
+      },
       ":focus": {
-        outlineColor: colors.orangeBrown,
+        outlineColor: colors.gray,
       },
     }),
     option: (

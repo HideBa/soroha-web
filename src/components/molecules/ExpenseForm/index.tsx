@@ -47,9 +47,6 @@ const ExpenseForm: React.FC<Props> = ({
           if (!onSend) return;
           setSubmitting(true);
           onSend(parseInt(values.price), values.comment);
-          setTimeout(() => {
-            console.log("hello");
-          }, 4000);
           setSubmitting(false);
         }}
       >

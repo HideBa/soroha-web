@@ -20,4 +20,16 @@ export const isExpenseModalOpen = atom({
   default: false,
 });
 
+export type Notification =
+  | {
+      type: "alert" | "warning" | "notice";
+      message: string;
+    }
+  | undefined;
+
+export const notificationState = atom<Notification>({
+  key: "notification",
+  default: undefined,
+});
+
 export const loading = atom({ key: "loading", default: false });

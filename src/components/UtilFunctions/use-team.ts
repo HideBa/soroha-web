@@ -42,6 +42,7 @@ export default () => {
   }, []);
 
   const fetchTeams = async () => {
+    if (!localUserState) return;
     const token = localStorage.getItem("token");
     const response = await fetch(TEAM_LIST, {
       method: "get",

@@ -5,10 +5,12 @@ import { User as UserType, userState } from "@soroha/recoil/atoms";
 import { useSetRecoilState } from "recoil";
 import { useHistory } from "react-router";
 import { useState } from "react";
+import useTeam from "@soroha/components/UtilFunctions/use-team";
 
 type SignType = Sign;
 export default (mode: SignType, setErr: (err: string | undefined) => void) => {
   const [loading, setLoading] = useState(false);
+  const { fetchTeams } = useTeam();
   const setUser = useSetRecoilState<UserType>(userState);
   const history = useHistory();
   const signUpIn = async (values: FormValues) => {
@@ -28,16 +30,18 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
       referrerPolicy: "no-referrer",
       body: JSON.stringify(data),
     })
-      .then(async res => {
+      .then(async (res) => {
         if (res.ok) {
           const resJSON = await res.json();
           await localStorage.setItem("token", resJSON.user.token);
-          await setUser(oldValue => ({
+          await setUser((oldValue) => ({
             ...oldValue,
             userName: resJSON.user.username,
             teamId: resJSON.user.username,
           }));
           history.push("/");
+          // TODO: replace fetchTeams() ---> just return value
+          await fetchTeams();
           setErr(undefined);
           setLoading(false);
         } else {
@@ -45,7 +49,7 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
           setLoading(false);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("an error occured: ", err);
       });
   };

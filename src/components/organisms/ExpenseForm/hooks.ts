@@ -15,6 +15,7 @@ export default (setErr: (err: string | undefined) => void) => {
   const sendExpense = useCallback(
     async (price: number, comment: string) => {
       if (!userLocalState.teamId) return;
+      setErr(undefined);
       setLoading(true);
       const token = localStorage.getItem("token");
       const data = {

@@ -9,7 +9,16 @@ export type Props = {
 };
 
 const NavBar: React.FC<Props> = () => {
-  const { links, teamName, userName, teams, switchTeam } = useHooks();
+  const {
+    links,
+    teamName,
+    userName,
+    teams,
+    switchTeam,
+    notification,
+    onNotify,
+    closeNotification,
+  } = useHooks();
   const isPC = useIsPC();
   return (
     <Wrapper className="header-wrapper">
@@ -20,6 +29,8 @@ const NavBar: React.FC<Props> = () => {
         teamName={teamName}
         teams={teams}
         switchTeam={switchTeam}
+        notification={notification}
+        onNotificationClose={closeNotification}
       />
     </Wrapper>
   );

@@ -4,6 +4,10 @@ import NavLink, { LinkType } from "@soroha/components/atoms/NavLink";
 import Logo from "@soroha/components/atoms/Logo";
 import styled from "@emotion/styled";
 import UserIndicator from "@soroha/components/atoms/User";
+import SnackBar from "@soroha/components/atoms/SnackBar";
+import { Notification as NotificationType } from "@soroha/components/atoms/SnackBar";
+
+export type Notification = NotificationType;
 
 export type Props = {
   links?: LinkType[];
@@ -12,6 +16,8 @@ export type Props = {
   teamName?: string;
   teams?: string[];
   switchTeam?: (teamName: string) => void;
+  notification?: Notification;
+  onNotificationClose?: () => void;
 };
 
 const Header: React.FC<Props> = ({
@@ -21,11 +27,18 @@ const Header: React.FC<Props> = ({
   teamName,
   teams,
   switchTeam,
+  notification,
+  onNotificationClose,
 }) => {
   return (
     <>
       {isPC ? (
         <PCWrapper className="header">
+          <SnackBar
+            notification={notification}
+            onClose={onNotificationClose}
+            isOpen={!!notification}
+          />
           <LeftWrapper>
             <NavLink key="logo" link={{ type: "child", linkTo: "/" }}>
               <Logo />

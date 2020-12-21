@@ -10,12 +10,23 @@ export type Props = {
 };
 
 const MenuBar: React.FC<Props> = () => {
-  const { links, openModal } = useHooks();
+  const {
+    links,
+    openModal,
+    notification,
+    onNotify,
+    closeNotification,
+  } = useHooks();
   const isPC = useIsPC();
   return isPC ? null : (
     <Wrapper>
       <BottomBar>
-        <NavBarMolecule links={links} openModal={openModal} />
+        <NavBarMolecule
+          links={links}
+          openModal={openModal}
+          notification={notification}
+          onNotificationClose={closeNotification}
+        />
       </BottomBar>
     </Wrapper>
   );

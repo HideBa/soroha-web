@@ -86,11 +86,15 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   display: flex;
   align-items: center;
-  margin: ${metrics.padding.headerLink};
+  padding: ${metrics.padding.headerLink};
+  border-radius: ${metrics.borderRadius.button}px;
+  :hover {
+    background-color: ${colors.deepGreen};
+  }
 `;
 
-const LinkText = styled.div<{ color?: string }>`
-  color: ${props => (props.color ? props.color : colors.textDarkBrown)};
+const LinkText = styled.div<{ color?: string; hoverColor?: string }>`
+  color: ${(props) => (props.color ? props.color : colors.textDarkBrown)};
   margin: 5px;
 `;
 

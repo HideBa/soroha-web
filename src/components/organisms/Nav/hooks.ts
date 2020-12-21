@@ -1,10 +1,15 @@
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { LinkType } from "../../atoms/NavLink";
 import useAuth from "@soroha/components/Auth";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isExpenseModalOpen, userState } from "@soroha/recoil/atoms";
-import { colors } from "@soroha/components/styles";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  isExpenseModalOpen,
+  notificationState,
+  userState,
+} from "@soroha/recoil/atoms";
 import useTeam from "@soroha/components/UtilFunctions/use-team";
+import { useEffect, useState } from "react";
+import { Notification } from "@soroha/components/molecules/Header";
 
 export default () => {
   const isPC = useIsPC();
@@ -13,7 +18,20 @@ export default () => {
   const setIsModalOpen = useSetRecoilState(isExpenseModalOpen);
   const openModal = () => setIsModalOpen(true);
   const userLocalState = useRecoilValue(userState);
+  const [notification, setNotification] = useRecoilState(notificationState);
 
+  const onNotify = (notification: Notification) => {
+    setNotification(notification);
+  };
+
+  const closeNotification = () => setNotification(undefined);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNotification({ type: "warning", message: "warning" });
+    }, 2000);
+    return timer;
+  }, []);
   const links: LinkType[] = isPC
     ? isSignedIn
       ? [
@@ -44,5 +62,15 @@ export default () => {
 
   const userName = userLocalState.userName;
   const teamName = userLocalState.teamId;
-  return { links, openModal, userName, teamName, teams, switchTeam };
+  return {
+    links,
+    openModal,
+    userName,
+    teamName,
+    teams,
+    switchTeam,
+    notification,
+    onNotify,
+    closeNotification,
+  };
 };

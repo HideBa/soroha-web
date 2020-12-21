@@ -22,6 +22,9 @@ const SubmitButton = styled(FormSubmit)`
   padding: ${metrics.padding.buttonMedium};
   background-color: ${colors.deepGreen};
   max-width: 300px;
+  :hover {
+    background-color: ${colors.extraDeepGreen};
+  }
 `;
 
 export default CalculateSubmit;

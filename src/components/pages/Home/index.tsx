@@ -7,6 +7,7 @@ import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { default as HomeBody } from "@soroha/components/atoms/Home";
 import { Redirect } from "react-router";
 import useAuth from "@soroha/components/Auth";
+import InfoBar from "@soroha/components/atoms/SnackBar";
 
 export type Props = {
   className?: string;
@@ -20,6 +21,7 @@ const Home: React.FC<Props> = () => {
     <HomeBody>
       <DoughbutChartSummary isPC={isPC} />
       <ExpenseForm />
+      <InfoBar />
     </HomeBody>
   ) : (
     <Redirect to="/signin" />

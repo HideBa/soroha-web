@@ -4,7 +4,7 @@ import { RiMenuLine, RiGroupLine, RiCloseLine } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
-import { AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineInfoCircle, AiOutlineSetting } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { GrAdd, GrRadialSelected } from "react-icons/gr";
 import styled from "@emotion/styled";
@@ -32,6 +32,7 @@ const icons = {
   switch: FaExchangeAlt,
   selected: GrRadialSelected,
   team: RiGroupLine,
+  notice: AiOutlineInfoCircle,
 };
 
 export type Icons = keyof typeof icons;

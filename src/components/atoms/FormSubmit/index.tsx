@@ -35,6 +35,9 @@ const StyledButton = styled.button`
   border-radius: ${metrics.borderRadius.button}px;
   width: 100%;
   margin: ${metrics.margin.inputSubmit};
+  :hover {
+    background-color: ${colors.deepGreen};
+  }
   @media screen and (max-width: ${metrics.breakPoint.tabletOrSP}px) {
     margin: ${metrics.margin.inputSubmitSP};
   }
