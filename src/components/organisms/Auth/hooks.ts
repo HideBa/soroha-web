@@ -1,7 +1,11 @@
 import { Sign } from "@soroha/components/molecules/Auth/Sign";
 import { SIGN_UP_URL, SIGN_IN_URL } from "@soroha/entryPoint";
 import { FormValues } from "../../molecules/Auth/Sign/types";
-import { User as UserType, userState } from "@soroha/recoil/atoms";
+import {
+  notificationState,
+  User as UserType,
+  userState,
+} from "@soroha/recoil/atoms";
 import { useSetRecoilState } from "recoil";
 import { useHistory } from "react-router";
 import { useState } from "react";
@@ -12,7 +16,9 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
   const [loading, setLoading] = useState(false);
   const { fetchTeams } = useTeam();
   const setUser = useSetRecoilState<UserType>(userState);
+  const setNotification = useSetRecoilState(notificationState);
   const history = useHistory();
+
   const signUpIn = async (values: FormValues) => {
     setLoading(() => true);
     const data = {
@@ -42,9 +48,11 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
           history.push("/");
           // TODO: replace fetchTeams() ---> just return value
           await fetchTeams();
+          setNotification({ type: "notice", message: "ログインしました" });
           setErr(undefined);
           setLoading(false);
         } else {
+          setNotification({ type: "alert", message: "認証に失敗しました" });
           setErr("username or login password is incorrect");
           setLoading(false);
         }

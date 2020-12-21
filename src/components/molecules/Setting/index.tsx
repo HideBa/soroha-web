@@ -38,6 +38,8 @@ const Setting: React.FC<Props> = ({
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100%;
+`;
 
 export default Setting;

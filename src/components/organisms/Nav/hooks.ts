@@ -26,12 +26,6 @@ export default () => {
 
   const closeNotification = () => setNotification(undefined);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setNotification({ type: "warning", message: "warning" });
-    }, 2000);
-    return timer;
-  }, []);
   const links: LinkType[] = isPC
     ? isSignedIn
       ? [
@@ -55,7 +49,7 @@ export default () => {
           { linkTo: "/signup", type: "text", text: "SignUp" },
         ]
     : [
-        { linkTo: "/", type: "icon", icon: "user" },
+        { linkTo: "/settings", type: "icon", icon: "user" },
         { linkTo: "/", type: "icon", icon: "home" },
         { linkTo: "/", type: "icon", icon: "menu" },
       ];

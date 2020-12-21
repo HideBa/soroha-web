@@ -57,6 +57,7 @@ const NavBar: React.FC<Props> = ({
 const NavBarWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  padding: 10px 0;
 `;
 
 const Wrapper = styled.div`

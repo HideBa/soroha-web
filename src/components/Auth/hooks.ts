@@ -1,16 +1,22 @@
 import { ME_URL } from "@soroha/entryPoint";
-import { userState } from "@soroha/recoil/atoms";
+import { notificationState, userState } from "@soroha/recoil/atoms";
 import { useLayoutEffect } from "react";
 import { useHistory } from "react-router";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 export default () => {
   const [user, setUser] = useRecoilState(userState);
+  const setNotification = useSetRecoilState(notificationState);
   const history = useHistory();
 
   const signOut = () => {
-    setUser({ userName: "", teamId: "" });
-    localStorage.removeItem("token");
+    try {
+      setUser({ userName: "", teamId: "" });
+      localStorage.removeItem("token");
+      setNotification({ type: "notice", message: "ログアウトしました" });
+    } catch {
+      setNotification({ type: "alert", message: "エラーが発生しました" });
+    }
   };
 
   const fetchMe = async () => {
@@ -28,7 +34,7 @@ export default () => {
     if (res.ok) {
       const resJSON = await res.json();
       await localStorage.setItem("token", resJSON.user.token);
-      await setUser(oldV => ({
+      await setUser((oldV) => ({
         ...oldV,
         userName: resJSON.user.username,
         teamId: resJSON.user.username,

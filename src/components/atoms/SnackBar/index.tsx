@@ -36,7 +36,7 @@ const SnackBar: React.FC<Props> = ({
   return (
     <StyledSnackBar
       className={className}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      anchorOrigin={{ vertical: isPC ? "bottom" : "top", horizontal: "right" }}
       open={isOpen}
       autoHideDuration={5000}
       onClose={handleClose}

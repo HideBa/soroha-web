@@ -1,11 +1,16 @@
 import { SEND_EXPENSE } from "@soroha/entryPoint";
-import { isExpenseModalOpen, userState } from "@soroha/recoil/atoms";
+import {
+  isExpenseModalOpen,
+  notificationState,
+  userState,
+} from "@soroha/recoil/atoms";
 import { useCallback, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 export default (setErr: (err: string | undefined) => void) => {
   const [isModalOpen, toggleModal] = useRecoilState(isExpenseModalOpen);
   const [userLocalState, setUserLocalState] = useRecoilState(userState);
+  const setNotification = useSetRecoilState(notificationState);
   const [loading, setLoading] = useState(false);
 
   const handleToggleModal = (willOpen: boolean) => {
@@ -41,10 +46,11 @@ export default (setErr: (err: string | undefined) => void) => {
         .then(async (res) => {
           if (res.ok) {
             const resJSON = await res.json();
-
+            setNotification({ type: "notice", message: "送信完了しました" });
             console.log(resJSON);
           } else {
             setErr("failure---");
+            setNotification({ type: "alert", message: "送信に失敗しました" });
           }
         })
         .catch((err) => console.log("failure to send expense ", err));
