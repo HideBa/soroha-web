@@ -67,7 +67,11 @@ export default () => {
   };
 
   useEffect(() => {
-    fetchTeams();
+    const unmounted = false;
+    !unmounted && fetchTeams();
+    return () => {
+      true;
+    };
   }, []);
 
   const switchTeam = (teamName: string) => {

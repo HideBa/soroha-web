@@ -26,6 +26,8 @@ const DoughbutChartSummary: React.FC<Props> = ({ isPC, className }) => {
   const url = process.env.SOROHA_WEB_API_ENDPOINT_TEST;
   useEffect(() => {
     async () => {
+      const unmounted = false;
+      if (unmounted) return;
       if (!url) return;
       const res = await fetch(url, {
         method: "GET",
@@ -38,6 +40,9 @@ const DoughbutChartSummary: React.FC<Props> = ({ isPC, className }) => {
         redirect: "follow",
         referrerPolicy: "no-referrer",
       });
+      return () => {
+        true;
+      };
       // setData(res.data);
     };
     // setData(await fetchPerPersonTotalExpenditure());

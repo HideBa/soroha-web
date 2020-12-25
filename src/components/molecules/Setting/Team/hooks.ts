@@ -14,7 +14,11 @@ export default ({ createTeam, getTeams }: Props) => {
   const currentTeam = localUserState.teamId;
 
   useEffect(() => {
-    getTeams?.();
+    let unmounted = false;
+    !unmounted && getTeams?.();
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
   const handleTeamNameChange = (e: ChangeEvent<HTMLInputElement>) => {

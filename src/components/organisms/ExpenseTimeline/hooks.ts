@@ -1,0 +1,76 @@
+import { TEAM_EXPENSES, TEAM_MY_EXPENSES } from "@soroha/entryPoint";
+import { userState } from "@soroha/recoil/atoms";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRecoilValue } from "recoil";
+
+export default () => {
+  const [loading, setLoading] = useState(false);
+  const currentTeam = useRecoilValue(userState).teamId;
+  const userName = useRecoilValue(userState).userName;
+
+  const fetchTeamExpenses = useCallback(async () => {
+    setLoading(true);
+    if (!currentTeam) return;
+    const token = localStorage.getItem("token");
+    const res = await fetch(TEAM_EXPENSES(currentTeam), {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Token: `${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (res) => {
+        const resJSON = await res.json();
+        console.log(resJSON);
+        return resJSON;
+      })
+      .catch((err) => {
+        console.log("failure to fetch expenses", err);
+        return err;
+      });
+    setLoading(false);
+    return res;
+  }, [currentTeam]);
+
+  const fetchMyExpensesInTeam = async () => {
+    setLoading(true);
+    if (!currentTeam) return;
+    const token = localStorage.getItem("token");
+    const res = await fetch(TEAM_MY_EXPENSES(currentTeam), {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Token: `${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (res) => {
+        const resJSON = await res.json();
+        console.log(resJSON);
+        return resJSON;
+      })
+      .catch((err) => {
+        console.log("failure to fetch expenses", err);
+        return err;
+      });
+    setLoading(false);
+  };
+
+  const expenses = useMemo(() => fetchTeamExpenses(), [fetchTeamExpenses]);
+  // const expenses = "hoge";
+
+  // useEffect(() => {
+  //   fetchTeamExpenses();
+  //   fetchMyExpensesInTeam();
+  // }, [currentTeam]);
+
+  return {
+    fetchTeamExpenses,
+    expenses,
+  };
+};

@@ -1,6 +1,6 @@
 import { ME_URL } from "@soroha/entryPoint";
 import { notificationState, userState } from "@soroha/recoil/atoms";
-import { useLayoutEffect } from "react";
+import { useCallback, useLayoutEffect } from "react";
 import { useHistory } from "react-router";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
@@ -9,7 +9,7 @@ export default () => {
   const setNotification = useSetRecoilState(notificationState);
   const history = useHistory();
 
-  const signOut = () => {
+  const signOut = useCallback(() => {
     try {
       setUser({ userName: "", teamId: "" });
       localStorage.removeItem("token");
@@ -17,9 +17,9 @@ export default () => {
     } catch {
       setNotification({ type: "alert", message: "エラーが発生しました" });
     }
-  };
+  }, [setNotification, setUser]);
 
-  const fetchMe = async () => {
+  const fetchMe = useCallback(async () => {
     const beforeURL = window.location.pathname;
     const url = ME_URL;
     const token = localStorage.getItem("token");
@@ -39,9 +39,12 @@ export default () => {
         userName: resJSON.user.username,
         teamId: resJSON.user.username,
       }));
-      history.push(beforeURL.includes("sign") ? "/" : beforeURL);
+      console.log(resJSON);
+      history.push(
+        beforeURL.includes("sign") ? `/${resJSON.user.username}` : beforeURL,
+      );
     }
-  };
+  }, [history, setUser]);
 
   const isSignedIn = !!user.userName;
 

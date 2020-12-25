@@ -8,7 +8,6 @@ import {
   userState,
 } from "@soroha/recoil/atoms";
 import useTeam from "@soroha/components/UtilFunctions/use-team";
-import { useEffect, useState } from "react";
 import { Notification } from "@soroha/components/molecules/Header";
 
 export default () => {

@@ -9,6 +9,7 @@ import SigninPage from "./components/pages/Signin";
 import SignupPage from "./components/pages/Signup";
 import { RecoilRoot } from "recoil";
 import Setting from "./components/pages/Setting";
+import Summary from "./components/pages/Summary";
 
 const App = () => {
   return (
@@ -20,20 +21,27 @@ const App = () => {
             <NavBar />
           </Route>
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
             <Route exact path="/signin">
               <SigninPage />
             </Route>
             <Route exact path="/signup">
               <SignupPage />
             </Route>
-            <Route exact path="/settings">
+            <Route exact path="/">
+              <SignupPage />
+            </Route>
+            {/* <Route exact path="/"> */}
+            <Route exact path="/:teamName">
+              <Home />
+            </Route>
+            <Route exact path="/:userName/settings">
               <Setting />
             </Route>
+            <Route exact path="/:teamName/summary">
+              <Summary />
+            </Route>
           </Switch>
-          <Route path="/">
+          <Route path="/:teamName">
             <MenuBar />
           </Route>
         </Router>

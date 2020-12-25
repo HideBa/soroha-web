@@ -13,4 +13,11 @@ export const CREATE_TEAM = API_BASE_URL + "/teams";
 
 export const TEAM_LIST = API_BASE_URL + "/teams";
 
+// ################# Expenses
 export const SEND_EXPENSE = API_BASE_URL + "/expenses";
+
+export const TEAM_EXPENSES = (teamName: string) =>
+  API_BASE_URL + "/teams/" + teamName + "/expenses";
+
+export const TEAM_MY_EXPENSES = (teamName: string) =>
+  API_BASE_URL + "/teams/" + teamName + "/user" + "/expenses";
