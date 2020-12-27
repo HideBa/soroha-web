@@ -4,10 +4,12 @@ import { hot } from "react-hot-loader/root";
 import ExpenseForm from "@soroha/components/organisms/ExpenseForm";
 import DoughbutChartSummary from "@soroha/components/organisms/DoughnutChartSummary";
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
-import { default as HomeBody } from "@soroha/components/atoms/Home";
-import { Redirect } from "react-router";
+import HomePageMolecule from "@soroha/components/molecules/PageFrame/Home";
+import { Redirect, useHistory } from "react-router";
 import useAuth from "@soroha/components/Auth";
-import InfoBar from "@soroha/components/atoms/SnackBar";
+import NavBar from "@soroha/components/organisms/Nav/Header";
+import { useRecoilValue } from "recoil";
+import { userState } from "@soroha/recoil/atoms";
 
 export type Props = {
   className?: string;
@@ -16,16 +18,19 @@ export type Props = {
 const Home: React.FC<Props> = () => {
   const isPC = useIsPC();
   const { isSignedIn } = useAuth();
+  const userName = useRecoilValue(userState).userName;
+  const history = useHistory();
+  isSignedIn && history.push(`/${userName}`);
 
   return isSignedIn ? (
-    <HomeBody>
-      <DoughbutChartSummary isPC={isPC} />
-      <ExpenseForm />
-      <InfoBar />
-    </HomeBody>
+    <HomePageMolecule
+      header={<NavBar />}
+      bodyLeft={<DoughbutChartSummary isPC={isPC} />}
+      bodyRight={<ExpenseForm />}
+    />
   ) : (
     <Redirect to="/signin" />
   );
 };
 
-export default hot(Home);
+export default Home;

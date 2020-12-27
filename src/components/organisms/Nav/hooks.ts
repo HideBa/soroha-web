@@ -10,18 +10,24 @@ import {
 import useTeam from "@soroha/components/UtilFunctions/use-team";
 import { Notification } from "@soroha/components/molecules/Header";
 
-export default () => {
+export default (teamNameFromURL?: string) => {
   const isPC = useIsPC();
   const { signOut, isSignedIn } = useAuth();
   const { teams, switchTeam } = useTeam();
   const setIsModalOpen = useSetRecoilState(isExpenseModalOpen);
   const openModal = () => setIsModalOpen(true);
-  const userLocalState = useRecoilValue(userState);
+  const [userLocalState, setUserLocalState] = useRecoilState(userState);
   const [notification, setNotification] = useRecoilState(notificationState);
-
   const onNotify = (notification: Notification) => {
     setNotification(notification);
   };
+
+  console.log(userLocalState);
+  // teamNameFromURL &&
+  //   setUserLocalState({
+  //     userName: userLocalState.userName,
+  //     teamId: teamNameFromURL,
+  //   });
 
   const closeNotification = () => setNotification(undefined);
 
@@ -29,7 +35,7 @@ export default () => {
     ? isSignedIn
       ? [
           {
-            linkTo: "/settings",
+            linkTo: `${userLocalState.userName}/settings`,
             type: "both",
             text: "Setting",
             icon: "setting",
@@ -48,13 +54,21 @@ export default () => {
           { linkTo: "/signup", type: "text", text: "SignUp" },
         ]
     : [
-        { linkTo: "/settings", type: "icon", icon: "user" },
-        { linkTo: "/", type: "icon", icon: "home" },
+        {
+          linkTo: `${userLocalState.userName}/settings`,
+          type: "icon",
+          icon: "user",
+        },
+        {
+          linkTo: `/${userLocalState.teamId ?? userLocalState.userName}`,
+          type: "icon",
+          icon: "home",
+        },
         { linkTo: "/", type: "icon", icon: "menu" },
       ];
 
   const userName = userLocalState.userName;
-  const teamName = userLocalState.teamId;
+  const teamName = teamNameFromURL ?? userLocalState.teamId;
   return {
     links,
     openModal,

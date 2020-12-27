@@ -10,6 +10,7 @@ import SignupPage from "./components/pages/Signup";
 import { RecoilRoot } from "recoil";
 import Setting from "./components/pages/Setting";
 import Summary from "./components/pages/Summary";
+import NotFound from "./components/pages/Error/NotFound";
 
 const App = () => {
   return (
@@ -17,33 +18,18 @@ const App = () => {
       <GlobalStyles />
       <RecoilRoot>
         <Router>
-          <Route path="/">
-            <NavBar />
-          </Route>
           <Switch>
-            <Route exact path="/signin">
-              <SigninPage />
-            </Route>
-            <Route exact path="/signup">
-              <SignupPage />
-            </Route>
-            <Route exact path="/">
-              <SignupPage />
-            </Route>
-            {/* <Route exact path="/"> */}
+            <Route exact path="/signin" component={SigninPage} />
+            <Route exact path="/signup" component={SignupPage} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:userName/settings" component={Setting} />
             <Route exact path="/:teamName">
               <Home />
             </Route>
-            <Route exact path="/:userName/settings">
-              <Setting />
-            </Route>
-            <Route exact path="/:teamName/summary">
-              <Summary />
-            </Route>
+            <Route exact path="/:teamName/summary" component={Summary} />
           </Switch>
-          <Route path="/:teamName">
-            <MenuBar />
-          </Route>
+          <Route path="/:teamName" component={MenuBar} />
+          <Route component={NotFound} />
         </Router>
       </RecoilRoot>
     </>

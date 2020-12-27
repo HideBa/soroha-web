@@ -6,19 +6,22 @@ import useHooks from "../hooks";
 
 export type Props = {
   // links?: LinkType[];
+  userName?: string;
+  teamName?: string;
 };
 
-const NavBar: React.FC<Props> = () => {
+const NavBar: React.FC<Props> = ({ userName, teamName }) => {
+  console.log("passwd---", teamName, userName);
   const {
     links,
-    teamName,
-    userName,
+    // teamName,
+    // userName,
     teams,
     switchTeam,
     notification,
     onNotify,
     closeNotification,
-  } = useHooks();
+  } = useHooks(teamName);
   const isPC = useIsPC();
   return (
     <Wrapper className="header-wrapper">

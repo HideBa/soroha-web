@@ -1,12 +1,14 @@
 import { CREATE_TEAM, TEAM_LIST } from "@soroha/entryPoint";
 import { userState } from "@soroha/recoil/atoms";
 import { useCallback, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { useRecoilState } from "recoil";
 
 export default () => {
   const [loading, setLoading] = useState(false);
   const [localUserState, setLocalUserState] = useRecoilState(userState);
   const [teams, setTeams] = useState([""]);
+  const history = useHistory();
 
   const createTeam = useCallback(async (teamName: string) => {
     setLoading(true);
@@ -67,10 +69,10 @@ export default () => {
   };
 
   useEffect(() => {
-    const unmounted = false;
+    let unmounted = false;
     !unmounted && fetchTeams();
     return () => {
-      true;
+      unmounted = true;
     };
   }, []);
 
@@ -81,6 +83,7 @@ export default () => {
         teamId: teamName,
       };
     });
+    history.push("/" + teamName);
   };
 
   return {

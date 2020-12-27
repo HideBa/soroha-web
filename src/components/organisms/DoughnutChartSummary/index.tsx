@@ -24,27 +24,29 @@ type Data = {
 const DoughbutChartSummary: React.FC<Props> = ({ isPC, className }) => {
   const [data, setData] = useState<PerPersonTotalExpenditure[]>();
   const url = process.env.SOROHA_WEB_API_ENDPOINT_TEST;
+
+  const fetchDoughnutsData = async () => {
+    if (!url) return;
+    await fetch(url, {
+      method: "GET",
+      mode: "cors", //TODO: must be changed to same origin later
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+    });
+    // setData(res.data);
+  };
   useEffect(() => {
-    async () => {
-      const unmounted = false;
-      if (unmounted) return;
-      if (!url) return;
-      const res = await fetch(url, {
-        method: "GET",
-        mode: "cors", //TODO: must be changed to same origin later
-        cache: "no-cache",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-      });
-      return () => {
-        true;
-      };
-      // setData(res.data);
+    let unmounted = false;
+    !unmounted && fetchDoughnutsData();
+    return () => {
+      unmounted = true;
     };
+    // setData(res.data);
     // setData(await fetchPerPersonTotalExpenditure());
   });
   const labelsList = ["red", "green", "yellow", "blue", "brown"];

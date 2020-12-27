@@ -1,5 +1,6 @@
 import { userState } from "@soroha/recoil/atoms";
 import { ChangeEvent, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { useRecoilState } from "recoil";
 
 type Props = {
@@ -12,6 +13,7 @@ export default ({ createTeam, getTeams }: Props) => {
   const [teamName, setTeamName] = useState("");
   const [localUserState, setLocalUserState] = useRecoilState(userState);
   const currentTeam = localUserState.teamId;
+  const histroy = useHistory();
 
   useEffect(() => {
     let unmounted = false;
@@ -34,6 +36,7 @@ export default ({ createTeam, getTeams }: Props) => {
         teamId: teamName,
       };
     });
+    histroy.push(teamName);
   };
 
   return {

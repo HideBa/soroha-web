@@ -35,7 +35,7 @@ export default () => {
     return res;
   }, [currentTeam]);
 
-  const fetchMyExpensesInTeam = async () => {
+  const fetchMyExpensesInTeam = useCallback(async () => {
     setLoading(true);
     if (!currentTeam) return;
     const token = localStorage.getItem("token");
@@ -59,11 +59,14 @@ export default () => {
         return err;
       });
     setLoading(false);
-  };
+    return res;
+  }, [currentTeam]);
 
-  const expenses = useMemo(() => fetchTeamExpenses(), [fetchTeamExpenses]);
-  // const expenses = "hoge";
-
+  const teamExpenses = useMemo(() => fetchTeamExpenses(), [fetchTeamExpenses]);
+  const myExpensesInTeam = useMemo(() => fetchMyExpensesInTeam(), [
+    fetchMyExpensesInTeam,
+  ]);
+  console.log("team-------", teamExpenses);
   // useEffect(() => {
   //   fetchTeamExpenses();
   //   fetchMyExpensesInTeam();
@@ -71,6 +74,8 @@ export default () => {
 
   return {
     fetchTeamExpenses,
-    expenses,
+    fetchMyExpensesInTeam,
+    teamExpenses,
+    myExpensesInTeam,
   };
 };
