@@ -28,7 +28,6 @@ const ExpenseTimeline: React.FC<Props> = ({ className }) => {
     teamExpenses,
     fetchMyExpensesInTeam,
   } = useHooks();
-  console.log(teamExpenses);
   return <Timeline items={temp} className={className} />;
 };
 

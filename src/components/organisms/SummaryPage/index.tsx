@@ -6,12 +6,14 @@ import MenuBar from "../Nav/MenuBar";
 
 export type Props = {
   className?: string;
+  teamName?: string;
 };
 
-const Summary: React.FC<Props> = ({ className }) => {
+const Summary: React.FC<Props> = ({ className, teamName }) => {
   return (
     <MoleculeSummaryPage
-      header={<NavBar />}
+      className={className}
+      header={<NavBar teamName={teamName} />}
       timeline={<ExpenseTimeline />}
       bottom={<MenuBar />}
     />

@@ -9,6 +9,7 @@ import {
 } from "@soroha/recoil/atoms";
 import useTeam from "@soroha/components/UtilFunctions/use-team";
 import { Notification } from "@soroha/components/molecules/Header";
+import { useEffect } from "react";
 
 export default (teamNameFromURL?: string) => {
   const isPC = useIsPC();
@@ -22,7 +23,6 @@ export default (teamNameFromURL?: string) => {
     setNotification(notification);
   };
 
-  console.log(userLocalState);
   // teamNameFromURL &&
   //   setUserLocalState({
   //     userName: userLocalState.userName,
@@ -31,11 +31,17 @@ export default (teamNameFromURL?: string) => {
 
   const closeNotification = () => setNotification(undefined);
 
+  useEffect(() => {
+    if (!teamNameFromURL) return;
+    setUserLocalState((oldState) => ({ ...oldState, teamId: teamNameFromURL }));
+  }, [setUserLocalState, teamNameFromURL]);
+
+  console.log("local state----", userLocalState);
   const links: LinkType[] = isPC
     ? isSignedIn
       ? [
           {
-            linkTo: `${userLocalState.userName}/settings`,
+            linkTo: `settings/${userLocalState.userName}`,
             type: "both",
             text: "Setting",
             icon: "setting",
@@ -55,7 +61,7 @@ export default (teamNameFromURL?: string) => {
         ]
     : [
         {
-          linkTo: `${userLocalState.userName}/settings`,
+          linkTo: `settings/${userLocalState.userName}`,
           type: "icon",
           icon: "user",
         },
@@ -67,13 +73,13 @@ export default (teamNameFromURL?: string) => {
         { linkTo: "/", type: "icon", icon: "menu" },
       ];
 
-  const userName = userLocalState.userName;
-  const teamName = teamNameFromURL ?? userLocalState.teamId;
+  // const userName = userLocalState.userName;
+  // const teamName = teamNameFromURL ?? userLocalState.teamId;
   return {
     links,
     openModal,
-    userName,
-    teamName,
+    // userName,
+    // teamName,
     teams,
     switchTeam,
     notification,

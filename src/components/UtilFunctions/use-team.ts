@@ -1,7 +1,7 @@
 import { CREATE_TEAM, TEAM_LIST } from "@soroha/entryPoint";
 import { userState } from "@soroha/recoil/atoms";
 import { useCallback, useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
 import { useRecoilState } from "recoil";
 
 export default () => {
@@ -31,14 +31,13 @@ export default () => {
     })
       .then(async (res) => {
         const resJSON = await res.json();
-        console.log(resJSON);
         setLocalUserState((localUserState) => {
           return { ...localUserState, teamId: resJSON.team };
         });
         setLoading(false);
       })
       .catch((err) => {
-        console.log("failure to create team", err);
+        console.error("failure to create team", err);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,13 +76,13 @@ export default () => {
   }, []);
 
   const switchTeam = (teamName: string) => {
-    setLocalUserState((old) => {
-      return {
-        ...old,
-        teamId: teamName,
-      };
-    });
-    history.push("/" + teamName);
+    // TODO: should be refactored
+    console.log("histroy", history.location.pathname);
+    const TargetURL = history.location.pathname.replace(
+      /[A-Za-z0-9_-]*$/,
+      teamName,
+    );
+    history.push(TargetURL);
   };
 
   return {

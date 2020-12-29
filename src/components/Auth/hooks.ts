@@ -39,7 +39,6 @@ export default () => {
         userName: resJSON.user.username,
         teamId: resJSON.user.username,
       }));
-      console.log(resJSON);
       history.push(
         beforeURL.includes("sign") ? `/${resJSON.user.username}` : beforeURL,
       );

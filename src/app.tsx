@@ -22,13 +22,10 @@ const App = () => {
             <Route exact path="/signin" component={SigninPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/" component={Home} />
-            <Route exact path="/:userName/settings" component={Setting} />
-            <Route exact path="/:teamName">
-              <Home />
-            </Route>
-            <Route exact path="/:teamName/summary" component={Summary} />
+            <Route exact path="/settings/:userName" component={Setting} />
+            <Route exact path="/:teamName" component={Home} />
+            <Route exact path="/summary/:teamName" component={Summary} />
           </Switch>
-          <Route path="/:teamName" component={MenuBar} />
           <Route component={NotFound} />
         </Router>
       </RecoilRoot>

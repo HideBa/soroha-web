@@ -24,11 +24,10 @@ export default () => {
     })
       .then(async (res) => {
         const resJSON = await res.json();
-        console.log(resJSON);
         return resJSON;
       })
       .catch((err) => {
-        console.log("failure to fetch expenses", err);
+        console.error("failure to fetch expenses", err);
         return err;
       });
     setLoading(false);
@@ -51,11 +50,10 @@ export default () => {
     })
       .then(async (res) => {
         const resJSON = await res.json();
-        console.log(resJSON);
         return resJSON;
       })
       .catch((err) => {
-        console.log("failure to fetch expenses", err);
+        console.error("failure to fetch expenses", err);
         return err;
       });
     setLoading(false);
@@ -66,7 +64,6 @@ export default () => {
   const myExpensesInTeam = useMemo(() => fetchMyExpensesInTeam(), [
     fetchMyExpensesInTeam,
   ]);
-  console.log("team-------", teamExpenses);
   // useEffect(() => {
   //   fetchTeamExpenses();
   //   fetchMyExpensesInTeam();

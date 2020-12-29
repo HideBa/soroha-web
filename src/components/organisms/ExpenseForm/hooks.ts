@@ -47,13 +47,12 @@ export default (setErr: (err: string | undefined) => void) => {
           if (res.ok) {
             const resJSON = await res.json();
             setNotification({ type: "notice", message: "送信完了しました" });
-            console.log(resJSON);
           } else {
             setErr("failure---");
             setNotification({ type: "alert", message: "送信に失敗しました" });
           }
         })
-        .catch((err) => console.log("failure to send expense ", err));
+        .catch((err) => console.error("failure to send expense ", err));
       setLoading(false);
     },
     [userLocalState.teamId],

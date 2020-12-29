@@ -5,18 +5,22 @@ import NavBar from "@soroha/components/organisms/Nav/Header";
 import MenuBar from "@soroha/components/organisms/Nav/MenuBar";
 import { match } from "react-router";
 
+type SettingsMatch = {
+  teamName?: string;
+};
 export type Props = {
   className?: string;
   path?: string;
   userName?: string;
-  match?: match;
+  match?: match<SettingsMatch>;
 };
 
 const SettingPage: React.FC<Props> = ({ className, match }) => {
-  console.log("match", match);
+  const teamName = match?.params.teamName;
   return (
     <MoleculeSettingPage
-      header={<NavBar />}
+      className={className}
+      header={<NavBar teamName={teamName} />}
       body={<Setting />}
       bottom={<MenuBar />}
     />

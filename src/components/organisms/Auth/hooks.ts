@@ -59,7 +59,7 @@ export default (mode: SignType, setErr: (err: string | undefined) => void) => {
           }
         })
         .catch((err) => {
-          console.log("an error occured: ", err);
+          console.error("an error occured: ", err);
         });
     },
     [fetchTeams, history, mode, setErr, setNotification, setUser],

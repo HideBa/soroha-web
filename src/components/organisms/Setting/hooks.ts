@@ -29,14 +29,13 @@ export default () => {
     })
       .then(async (res) => {
         const resJSON = await res.json();
-        console.log(resJSON);
         setLocalUserState((localUserState) => {
           return { ...localUserState, teamId: resJSON.team };
         });
         setLoading(false);
       })
       .catch((err) => {
-        console.log("failure to create team", err);
+        console.error("failure to create team", err);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -55,7 +54,7 @@ export default () => {
         const resJSON = res.json();
         return resJSON;
       })
-      .catch((err) => console.log("failure to fetch teams", err));
+      .catch((err) => console.error("failure to fetch teams", err));
     //reset team array
     teams.length = 0;
     setTeams(

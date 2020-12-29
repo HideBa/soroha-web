@@ -11,7 +11,6 @@ export type Props = {
 };
 
 const NavBar: React.FC<Props> = ({ userName, teamName }) => {
-  console.log("passwd---", teamName, userName);
   const {
     links,
     // teamName,
