@@ -40,7 +40,10 @@ const Header: React.FC<Props> = ({
             isOpen={!!notification}
           />
           <LeftWrapper>
-            <NavLink key="logo" link={{ type: "child", linkTo: "/" }}>
+            <NavLink
+              key="logo"
+              link={{ type: "child", linkTo: teamName ? `/${teamName}` : "/" }}
+            >
               <Logo />
             </NavLink>
             <UserIndicator

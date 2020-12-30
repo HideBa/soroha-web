@@ -1,6 +1,7 @@
 import React from "react";
 import SummaryPage from "@soroha/components/organisms/SummaryPage";
 import { match } from "react-router";
+import AuthenticationRequiredPage from "../AuthenticationRequiredPage";
 
 type SummaryMatch = {
   teamName?: string;
@@ -12,7 +13,11 @@ export type Props = {
 
 const Summary: React.FC<Props> = ({ className, match }) => {
   const teamName = match?.params.teamName;
-  return <SummaryPage className={className} teamName={teamName} />;
+  return (
+    <AuthenticationRequiredPage>
+      <SummaryPage className={className} teamName={teamName} />
+    </AuthenticationRequiredPage>
+  );
 };
 
 export default Summary;

@@ -1,7 +1,7 @@
 import { CREATE_TEAM, TEAM_LIST } from "@soroha/entryPoint";
 import { userState } from "@soroha/recoil/atoms";
 import { useCallback, useEffect, useState } from "react";
-import { useHistory, useRouteMatch } from "react-router";
+import { useHistory } from "react-router";
 import { useRecoilState } from "recoil";
 
 export default () => {

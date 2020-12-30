@@ -1,7 +1,7 @@
 import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { LinkType } from "../../atoms/NavLink";
 import useAuth from "@soroha/components/Auth";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   isExpenseModalOpen,
   notificationState,
@@ -66,7 +66,7 @@ export default (teamNameFromURL?: string) => {
           icon: "user",
         },
         {
-          linkTo: `/${userLocalState.teamId ?? userLocalState.userName}`,
+          linkTo: userLocalState.teamId ? `/${userLocalState.teamId}` : "/",
           type: "icon",
           icon: "home",
         },

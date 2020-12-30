@@ -1,14 +1,18 @@
 import React from "react";
 import Signup from "@soroha/components/organisms/Auth/Signup";
 import styled from "@emotion/styled";
-import { colors } from "@soroha/components/styles";
+import useAuth from "@soroha/components/Auth";
+import { Redirect } from "react-router";
 
 export type Props = {
   className?: string;
 };
 
 const SignupPage: React.FC<Props> = ({ className }) => {
-  return (
+  const { user, isSignedIn } = useAuth();
+  return isSignedIn ? (
+    <Redirect to={`/${user.teamId}`} />
+  ) : (
     <Body>
       <Signup />
     </Body>
