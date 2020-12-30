@@ -1,3 +1,4 @@
+import Loading from "@soroha/components/atoms/Loading";
 import useAuth from "@soroha/components/Auth";
 import React from "react";
 import { Redirect } from "react-router";
@@ -8,8 +9,13 @@ export type Props = {
 
 const AuthenticationRequiredPage: React.FC<Props> = ({ children }) => {
   const { isSignedIn: isAuthenticated, loading } = useAuth();
-  console.log("is---", isAuthenticated);
-  return isAuthenticated && !!children ? <>{children}</> : <Redirect to="/" />;
+  return loading ? (
+    <Loading />
+  ) : isAuthenticated && !!children ? (
+    <>{children}</>
+  ) : (
+    <Redirect to="/signin" />
+  );
 };
 
 export default AuthenticationRequiredPage;

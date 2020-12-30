@@ -22,7 +22,6 @@ export default () => {
 
   const fetchMe = useCallback(async () => {
     setLoading(true);
-    console.log("fetching--");
     const beforeURL = window.location.pathname;
     const url = ME_URL;
     const token = localStorage.getItem("token");

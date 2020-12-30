@@ -63,5 +63,5 @@ export default (setErr: (err: string | undefined) => void) => {
     isModalOpen,
     handleToggleModal,
     sendExpense,
-  };
+    loading
 };

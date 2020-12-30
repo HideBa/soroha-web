@@ -7,6 +7,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { AiOutlineInfoCircle, AiOutlineSetting } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { GrAdd, GrRadialSelected } from "react-icons/gr";
+import { CgNotes } from "react-icons/cg";
 import styled from "@emotion/styled";
 
 export type Props = {
@@ -33,6 +34,7 @@ const icons = {
   selected: GrRadialSelected,
   team: RiGroupLine,
   notice: AiOutlineInfoCircle,
+  summary: CgNotes,
 };
 
 export type Icons = keyof typeof icons;

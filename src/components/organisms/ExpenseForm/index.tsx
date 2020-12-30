@@ -8,7 +8,9 @@ export type Props = {
 
 const ExpenseForm: React.FC<Props> = ({ className }) => {
   const [err, setErr] = useState<string | undefined>(undefined);
-  const { isModalOpen, handleToggleModal, sendExpense } = useHooks(setErr);
+  const { isModalOpen, handleToggleModal, sendExpense, loading } = useHooks(
+    setErr,
+  );
   return (
     <RawExpenseForm
       className={className}
@@ -16,6 +18,7 @@ const ExpenseForm: React.FC<Props> = ({ className }) => {
       isModalOpen={isModalOpen}
       setIsModalOpen={handleToggleModal}
       err={err}
+      isLoading={loading}
     />
   );
 };

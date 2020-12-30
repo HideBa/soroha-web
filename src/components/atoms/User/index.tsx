@@ -7,7 +7,6 @@ export type Props = {
   className?: string;
   imagePath?: string;
   teamName?: string;
-  userName?: string;
   teams?: string[];
   onTeamSwitch?: (teamName: string) => void;
 };
@@ -16,7 +15,6 @@ const UserIndicator: React.FC<Props> = ({
   className,
   imagePath,
   teamName,
-  userName,
   teams,
   onTeamSwitch,
 }) => {

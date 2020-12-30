@@ -10,6 +10,7 @@ import {
 import useTeam from "@soroha/components/UtilFunctions/use-team";
 import { Notification } from "@soroha/components/molecules/Header";
 import { useEffect } from "react";
+import { colors } from "@soroha/components/styles";
 
 export default (teamNameFromURL?: string) => {
   const isPC = useIsPC();
@@ -23,12 +24,6 @@ export default (teamNameFromURL?: string) => {
     setNotification(notification);
   };
 
-  // teamNameFromURL &&
-  //   setUserLocalState({
-  //     userName: userLocalState.userName,
-  //     teamId: teamNameFromURL,
-  //   });
-
   const closeNotification = () => setNotification(undefined);
 
   useEffect(() => {
@@ -36,16 +31,23 @@ export default (teamNameFromURL?: string) => {
     setUserLocalState((oldState) => ({ ...oldState, teamId: teamNameFromURL }));
   }, [setUserLocalState, teamNameFromURL]);
 
-  console.log("local state----", userLocalState);
   const links: LinkType[] = isPC
     ? isSignedIn
       ? [
+          {
+            linkTo: userLocalState.teamId
+              ? `summary/${userLocalState.teamId}`
+              : "/",
+            type: "both",
+            text: "Summary",
+            icon: "summary",
+            color: colors.textDarkBrown,
+          },
           {
             linkTo: `settings/${userLocalState.userName}`,
             type: "both",
             text: "Setting",
             icon: "setting",
-            color: undefined,
           },
           {
             linkTo: "/",
@@ -70,7 +72,13 @@ export default (teamNameFromURL?: string) => {
           type: "icon",
           icon: "home",
         },
-        { linkTo: "/", type: "icon", icon: "menu" },
+        {
+          linkTo: userLocalState.teamId
+            ? `summary/${userLocalState.teamId}`
+            : "/",
+          type: "icon",
+          icon: "summary",
+        },
       ];
 
   // const userName = userLocalState.userName;

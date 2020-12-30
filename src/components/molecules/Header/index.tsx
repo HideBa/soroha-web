@@ -47,7 +47,6 @@ const Header: React.FC<Props> = ({
               <Logo />
             </NavLink>
             <UserIndicator
-              userName={userName}
               teamName={teamName}
               teams={teams}
               onTeamSwitch={switchTeam}

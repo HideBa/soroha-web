@@ -10,6 +10,7 @@ import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
 import { Formik, FormikHelpers } from "formik";
 import useHooks from "./hooks";
 import FormError from "@soroha/components/atoms/FormError";
+import Loading from "@soroha/components/atoms/Loading";
 
 export type Props = {
   className?: string;
@@ -17,6 +18,7 @@ export type Props = {
   setIsModalOpen?: (willOpen: boolean) => void;
   onSend?: (price: number, comment: string) => void;
   err?: string;
+  isLoading?: boolean;
 };
 
 export type ExpenseFormValues = {
@@ -30,13 +32,16 @@ const ExpenseForm: React.FC<Props> = ({
   setIsModalOpen,
   onSend,
   err,
+  isLoading,
 }) => {
   const isPC = useIsPC();
   const closeModal = () => setIsModalOpen && setIsModalOpen(false);
   const { validate } = useHooks();
 
   const Form = () => {
-    return (
+    return isLoading ? (
+      <Loading />
+    ) : (
       <Formik
         initialValues={{ price: "", comment: "" }}
         validate={validate}

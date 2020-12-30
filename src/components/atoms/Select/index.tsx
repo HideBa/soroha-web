@@ -30,7 +30,6 @@ const Select: React.FC<Props> = ({
     if (!newValue) return;
     onSelect?.(newValue.value);
   };
-
   const colorStyle = {
     control: (
       styles: CSSProperties | undefined,

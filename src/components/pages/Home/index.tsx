@@ -31,17 +31,6 @@ const Home: React.FC<Props> = ({ className, match }) => {
       />
     </AuthenticationRequiredPage>
   );
-  // return isSignedIn ? (
-  //   <HomePageMolecule
-  //     // header={<NavBar />}
-  //     header={<NavBar teamName={teamName} />}
-  //     bodyLeft={<DoughbutChartSummary isPC={isPC} />}
-  //     bodyRight={<ExpenseForm />}
-  //     footer={<MenuBar />}
-  //   />
-  // ) : (
-  //   <Redirect to="/signin" />
-  // );
 };
 
 export default Home;
