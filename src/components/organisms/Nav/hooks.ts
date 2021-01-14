@@ -27,8 +27,12 @@ export default (teamNameFromURL?: string) => {
   const closeNotification = () => setNotification(undefined);
 
   useEffect(() => {
-    if (!teamNameFromURL) return;
+    let unmounted = false;
+    if (!teamNameFromURL || unmounted) return;
     setUserLocalState((oldState) => ({ ...oldState, teamId: teamNameFromURL }));
+    return () => {
+      unmounted = false;
+    };
   }, [setUserLocalState, teamNameFromURL]);
 
   const links: LinkType[] = isPC

@@ -1,6 +1,6 @@
 import { ME_URL } from "@soroha/entryPoint";
 import { notificationState, userState } from "@soroha/recoil/atoms";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
@@ -57,8 +57,12 @@ export default () => {
   const isSignedIn = !!user.userName;
 
   useEffect(() => {
-    if (loading || isSignedIn) return;
+    let unmounted = false;
+    if (loading || isSignedIn || unmounted) return;
     fetchMe();
+    return () => {
+      unmounted = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

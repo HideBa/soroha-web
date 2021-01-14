@@ -76,7 +76,7 @@ export default () => {
   }, [currentTeam]);
 
   useEffect(() => {
-    const unmounted = false;
+    let unmounted = false;
     const execFetchExpenses = async () => {
       const te = await fetchTeamExpenses();
       const myet = await fetchMyExpensesInTeam();
@@ -86,7 +86,10 @@ export default () => {
       }
     };
     execFetchExpenses();
-  }, []);
+    return () => {
+      unmounted = true;
+    };
+  }, [fetchMyExpensesInTeam, fetchTeamExpenses]);
 
   return {
     fetchTeamExpenses,
