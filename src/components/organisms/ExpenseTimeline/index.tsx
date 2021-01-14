@@ -24,11 +24,20 @@ const temp: TimelineItem[] = [
 const ExpenseTimeline: React.FC<Props> = ({ className }) => {
   const {
     fetchTeamExpenses,
+    fetchMyExpensesInTeam,
     myExpensesInTeam,
     teamExpenses,
-    fetchMyExpensesInTeam,
   } = useHooks();
-  return <Timeline items={temp} className={className} />;
+  console.log(myExpensesInTeam);
+  console.log(teamExpenses);
+  return (
+    <Timeline
+      items={temp}
+      className={className}
+      teamExpenses={teamExpenses}
+      myExpensesInTeam={myExpensesInTeam}
+    />
+  );
 };
 
 export default ExpenseTimeline;

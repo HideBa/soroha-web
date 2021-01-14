@@ -8,33 +8,28 @@ import {
   TimelineOppositeContent,
   TimelineSeparator,
 } from "@material-ui/lab";
-import Icon, { Icons } from "@soroha/components/atoms/icons";
-
-export type TimelineItem = {
-  title: string;
-  content?: string;
-  icon?: Icons;
-  time?: string;
-};
+import Icon from "@soroha/components/atoms/icons";
+import { Expense } from "./hooks";
 
 export type Props = {
   className?: string;
-  item?: TimelineItem;
+  item?: Expense;
 };
 
 const TimelineItem: React.FC<Props> = ({ className, item }) => {
   return item ? (
     <StyledTimelineItem className={className}>
       <TimelineOppositeContent>
-        <div>{item.time}</div>
+        <div>{item.createdAt}</div>
       </TimelineOppositeContent>
       <TimelineSeparator>
         <TimelineDot>
-          <Icon icon={item.icon} />
+          {/* <Icon icon={item.icon} /> */}
+          <Icon icon="summary" />
         </TimelineDot>
       </TimelineSeparator>
       <TimelineContent>
-        <Card title={item.title} content={item.content} type="horizontal" />
+        <Card content={item.comment} type="horizontal" />
       </TimelineContent>
     </StyledTimelineItem>
   ) : null;

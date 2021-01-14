@@ -10,7 +10,6 @@ export type Props = {
 
 const SigninPage: React.FC<Props> = ({ className }) => {
   const { isSignedIn, user } = useAuth();
-  console.log(isSignedIn);
   return isSignedIn ? (
     <Redirect to={`/${user.teamId}`} />
   ) : (

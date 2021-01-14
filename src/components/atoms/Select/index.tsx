@@ -7,17 +7,17 @@ export type Option = {
   label?: string;
 };
 
-export type Props = {
+export type Props<T> = {
   className?: string;
   defaultOption?: Option;
-  onSelect?: (value: string) => void;
+  onSelect?: (value: T) => void;
   options?: Option[];
   title?: string;
   isMulti?: boolean;
   value?: Option;
 };
 
-const Select: React.FC<Props> = ({
+const Select = <T extends string>({
   className,
   defaultOption,
   onSelect,
@@ -25,7 +25,7 @@ const Select: React.FC<Props> = ({
   title,
   isMulti = false,
   value,
-}) => {
+}: Props<T>) => {
   const handleSelect = (newValue: any) => {
     if (!newValue) return;
     onSelect?.(newValue.value);

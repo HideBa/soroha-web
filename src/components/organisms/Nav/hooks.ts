@@ -36,7 +36,7 @@ export default (teamNameFromURL?: string) => {
       ? [
           {
             linkTo: userLocalState.teamId
-              ? `summary/${userLocalState.teamId}`
+              ? `/summary/${userLocalState.teamId}`
               : "/",
             type: "both",
             text: "Summary",
@@ -44,7 +44,7 @@ export default (teamNameFromURL?: string) => {
             color: colors.textDarkBrown,
           },
           {
-            linkTo: `settings/${userLocalState.userName}`,
+            linkTo: `/settings/${userLocalState.teamId}`,
             type: "both",
             text: "Setting",
             icon: "setting",
@@ -63,7 +63,7 @@ export default (teamNameFromURL?: string) => {
         ]
     : [
         {
-          linkTo: `settings/${userLocalState.userName}`,
+          linkTo: `/settings/${userLocalState.teamId}`,
           type: "icon",
           icon: "user",
         },
@@ -74,7 +74,7 @@ export default (teamNameFromURL?: string) => {
         },
         {
           linkTo: userLocalState.teamId
-            ? `summary/${userLocalState.teamId}`
+            ? `/summary/${userLocalState.teamId}`
             : "/",
           type: "icon",
           icon: "summary",
