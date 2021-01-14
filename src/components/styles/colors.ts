@@ -9,6 +9,7 @@ const colors = {
   notice: "#5AB93B",
   warning: "#EBF748",
   gray: "#C4C4C4",
+  shadow: "",
 };
 
 export default colors;

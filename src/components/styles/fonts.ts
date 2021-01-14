@@ -49,6 +49,17 @@ export const FormTitle = styled.p`
   font-weight: ${weight.bold};
 `;
 
+export const Medium = styled.p`
+  font-size: ${size.medium}px;
+  font-weight: ${weight.normal};
+`;
+
+export const Tiny = styled.p`
+  font-size: ${size.extraSmall}px;
+  font-weight: ${weight.normal};
+  font-family: ${type.base};
+`;
+
 const styles = {
   H1,
   H2,

@@ -1,25 +1,10 @@
 import Timeline from "@soroha/components/molecules/Timeline";
-import { TimelineItem } from "@soroha/components/molecules/Timeline/item";
 import React from "react";
 import useHooks from "./hooks";
 
 export type Props = {
   className?: string;
 };
-const temp: TimelineItem[] = [
-  {
-    title: "hoge",
-    content: "fuga",
-    icon: "menu",
-    time: "2020.1.21",
-  },
-  {
-    title: "hoo",
-    content: "fuuuu",
-    icon: "menu",
-    time: "2020.1.21",
-  },
-];
 
 const ExpenseTimeline: React.FC<Props> = ({ className }) => {
   const {
@@ -28,11 +13,10 @@ const ExpenseTimeline: React.FC<Props> = ({ className }) => {
     myExpensesInTeam,
     teamExpenses,
   } = useHooks();
-  console.log(myExpensesInTeam);
-  console.log(teamExpenses);
+  console.log("my----", myExpensesInTeam);
+  console.log("team---", teamExpenses);
   return (
     <Timeline
-      items={temp}
       className={className}
       teamExpenses={teamExpenses}
       myExpensesInTeam={myExpensesInTeam}

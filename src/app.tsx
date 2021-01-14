@@ -24,8 +24,8 @@ const App = () => {
             <Route exact path="/settings/:teamName" component={Setting} />
             <Route exact path="/:teamName" component={Home} />
             <Route exact path="/summary/:teamName" component={Summary} />
+            <Route component={NotFound} />
           </Switch>
-          <Route component={NotFound} />
         </Router>
       </RecoilRoot>
     </>

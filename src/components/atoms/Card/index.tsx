@@ -11,6 +11,7 @@ export type Props = {
   img?: string;
   alt?: string;
   type?: CardType;
+  children?: React.ReactNode;
 };
 
 const Card: React.FC<Props> = ({
@@ -20,18 +21,19 @@ const Card: React.FC<Props> = ({
   img,
   alt,
   type,
+  children,
 }) => {
   return (
     <StyledCard>
       <Title>{title}</Title>
       <Content>{content}</Content>
+      {children}
     </StyledCard>
   );
 };
 
 const StyledCard = styled(MaterialUICard)`
   display: flex;
-  color: red;
 `;
 
 const Title = styled.div``;

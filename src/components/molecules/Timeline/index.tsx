@@ -3,8 +3,9 @@ import MaterialUITimeline from "@material-ui/lab/Timeline";
 import styled from "@emotion/styled";
 import TimelineItem from "./item";
 import Select from "@soroha/components/atoms/Select";
-import useHooks from "./hooks";
+import useHooks, { SelectableType } from "./hooks";
 import { Expense as ExpenseType } from "./hooks";
+import { colors, metrics } from "@soroha/components/styles";
 
 export type Expense = ExpenseType;
 
@@ -19,16 +20,20 @@ const Timeline: React.FC<Props> = ({
   teamExpenses,
   myExpensesInTeam,
 }) => {
+  const defaultOption: { value: SelectableType; label: string } = {
+    value: "team",
+    label: "チーム",
+  };
   const { handleSelectChange, options, expenses } = useHooks(
     teamExpenses,
     myExpensesInTeam,
+    defaultOption.value,
   );
-  console.log(expenses);
   return (
     <Wrapper>
       <Select
         options={options}
-        defaultOption={{ value: "team", label: "チーム" }}
+        defaultOption={defaultOption}
         onSelect={handleSelectChange}
       />
       <StyledTimeline className={className}>
@@ -42,6 +47,11 @@ const Timeline: React.FC<Props> = ({
 
 const Wrapper = styled.div``;
 
-const StyledTimeline = styled(MaterialUITimeline)``;
+const StyledTimeline = styled(MaterialUITimeline)`
+  background-color: ${colors.orangeBrown};
+  border-radius: ${metrics.borderRadius.container}px;
+  padding: ${metrics.padding.timeline};
+  margin: ${metrics.margin.timeline};
+`;
 
 export default Timeline;
