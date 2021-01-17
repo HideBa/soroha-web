@@ -34,6 +34,7 @@ export const metrics = {
     validationText: "10px 0 0",
     timeline: "30px",
     timelineItem: "10px",
+    cardText: "5px",
   },
   breakPoint: {
     tabletOrSP: 769,

@@ -1,6 +1,7 @@
 import React from "react";
 import MaterialUICard from "@material-ui/core/Card";
 import styled from "@emotion/styled";
+import { metrics } from "@soroha/components/styles";
 
 export type CardType = "vertical" | "horizontal";
 
@@ -34,6 +35,7 @@ const Card: React.FC<Props> = ({
 
 const StyledCard = styled(MaterialUICard)`
   display: flex;
+  padding: ${metrics.padding.card};
 `;
 
 const Title = styled.div``;

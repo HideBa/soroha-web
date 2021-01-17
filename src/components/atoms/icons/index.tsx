@@ -4,7 +4,11 @@ import { RiMenuLine, RiGroupLine, RiCloseLine } from "react-icons/ri";
 import { TiHome } from "react-icons/ti";
 import { FaPen } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
-import { AiOutlineInfoCircle, AiOutlineSetting } from "react-icons/ai";
+import {
+  AiOutlineCheck,
+  AiOutlineInfoCircle,
+  AiOutlineSetting,
+} from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { GrAdd, GrRadialSelected } from "react-icons/gr";
 import { CgNotes } from "react-icons/cg";
@@ -35,6 +39,7 @@ const icons = {
   team: RiGroupLine,
   notice: AiOutlineInfoCircle,
   summary: CgNotes,
+  done: AiOutlineCheck,
 };
 
 export type Icons = keyof typeof icons;

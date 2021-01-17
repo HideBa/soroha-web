@@ -1,44 +1,25 @@
-import React from "react";
 import styled from "@emotion/styled";
-import { colors } from "@soroha/components/styles";
-import { FormTitle } from "@soroha/components/styles/fonts";
-import FormSubmit from "@soroha/components/atoms/FormSubmit";
-import FormContainer from "@soroha/components/atoms/FormContainer";
 import FormInput from "@soroha/components/atoms/FormInput";
-import Modal from "@soroha/components/atoms/Modal";
-import { useIsPC } from "@soroha/components/UtilFunctions/use-is-pc";
-import { Formik, FormikHelpers } from "formik";
-import useHooks from "./hooks";
-import FormError from "@soroha/components/atoms/FormError";
 import Loading from "@soroha/components/atoms/Loading";
-import { Expense } from "../Timeline";
+import { Formik, FormikHelpers } from "formik";
+import React from "react";
+import useHooks from "./hooks";
 
 export type Props = {
   className?: string;
-  isModalOpen?: boolean;
-  setIsModalOpen?: (willOpen: boolean) => void;
+  defaultValues?: FormValues;
   onSend?: (price: number, comment: string) => void;
-  err?: string;
   isLoading?: boolean;
-  defaultValus?: ExpenseFormValues;
 };
 
-export type ExpenseFormValues = {
-  price: string;
-  comment: string;
-};
+export type FormValues = { price: string; comment: string };
 
-const ExpenseForm: React.FC<Props> = ({
+const EditForm: React.FC<Props> = ({
   className,
-  isModalOpen,
-  setIsModalOpen,
+  defaultValues,
   onSend,
-  err,
   isLoading,
-  defaultValus,
 }) => {
-  const isPC = useIsPC();
-  const closeModal = () => setIsModalOpen && setIsModalOpen(false);
   const { validate } = useHooks();
 
   const Form = () => {
@@ -47,13 +28,13 @@ const ExpenseForm: React.FC<Props> = ({
     ) : (
       <Formik
         initialValues={{
-          price: defaultValus?.price ?? "",
-          comment: defaultValus?.comment ?? "",
+          price: defaultValues?.price ?? "",
+          comment: defaultValues?.comment ?? "",
         }}
         validate={validate}
         onSubmit={(
-          values: ExpenseFormValues,
-          { setSubmitting }: FormikHelpers<ExpenseFormValues>,
+          values: FormValues,
+          { setSubmitting }: FormikHelpers<FormValues>,
         ) => {
           if (!onSend) return;
           setSubmitting(true);
@@ -71,8 +52,7 @@ const ExpenseForm: React.FC<Props> = ({
           isSubmitting,
         }) => (
           <form onSubmit={handleSubmit}>
-            <Title>入力</Title>
-            <FormInput
+            <StyledInput
               key={"price"}
               title={"金額"}
               placeHolder={"1000"}
@@ -83,7 +63,7 @@ const ExpenseForm: React.FC<Props> = ({
               touched={touched.price}
               value={values.price}
             />
-            <FormInput
+            <StyledInput
               key={"comment"}
               title={"メモ"}
               placeHolder={"りんごを100個買ったよ"}
@@ -94,32 +74,25 @@ const ExpenseForm: React.FC<Props> = ({
               touched={touched.comment}
               value={values.comment}
             />
-            {err && <FormError err={err} />}
-            <FormSubmit
+            {/* {err && <FormError err={err} />} */}
+            {/* <FormSubmit
               type="submit"
               text={isSubmitting ? "送信中..." : "追加"}
               disabled={isSubmitting}
-            />
+            /> */}
           </form>
         )}
       </Formik>
     );
   };
 
-  return isPC ? (
-    <FormContainer className={className}>
-      <Form />
-    </FormContainer>
-  ) : (
-    <Modal className={className} onClose={closeModal} open={isModalOpen}>
-      <Form />
-    </Modal>
-  );
+  return <Form />;
 };
 
-const Title = styled(FormTitle)`
-  color: ${colors.textDarkBrown};
-  text-align: center;
+const StyledInput = styled(FormInput)`
+  /* height: 20px; */
+  /* height: 60px; */
+  margin: 5px;
 `;
 
-export default ExpenseForm;
+export default EditForm;
