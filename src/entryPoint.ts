@@ -27,3 +27,6 @@ export const TEAM_EXPENSES = (teamName: string) =>
 
 export const TEAM_MY_EXPENSES = (teamName: string) =>
   API_BASE_URL + "/teams/" + teamName + "/user" + "/expenses";
+
+export const CALCULATE = (teamName: string) =>
+  API_BASE_URL + "/teams/" + teamName + "/calculations";

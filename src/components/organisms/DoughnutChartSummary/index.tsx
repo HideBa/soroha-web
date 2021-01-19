@@ -5,6 +5,7 @@ import ChartTexts, {
   PrimarySubChartData,
 } from "@soroha/components/molecules/ChartTexts";
 import CalculateSubmit from "@soroha/components/molecules/Calculate";
+import Calculation from "../Calculation";
 
 export type Props = {
   className?: string;
@@ -88,7 +89,7 @@ const DoughbutChartSummary: React.FC<Props> = ({ isPC, className }) => {
         {/* TODO: must cahnge data later */}
         <ChartTexts primarySubChartData={sampleTextData} />
       </UpperContainer>
-      <CalculateSubmit />
+      <Calculation />
     </Wrapper>
   );
 };

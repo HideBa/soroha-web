@@ -17,7 +17,11 @@ const CalculateSubmit: React.FC<Props> = ({ onCalculate }) => {
     openModal(true);
   };
 
-  const handleCalculate = () => console.log("calculate");
+  const handleCalculate = () => {
+    if (!onCalculate) return;
+    onCalculate();
+    handleCloseModal();
+  };
 
   return (
     <>
