@@ -42,7 +42,7 @@ const ModalWrapper = styled.div<{ isModalOpen?: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
-  display: ${props => (props.isModalOpen ? "block" : "none")};
+  display: ${(props) => (props.isModalOpen ? "block" : "none")};
   z-index: ${zIndexes.fullScreenModal};
 `;
 
@@ -57,7 +57,8 @@ const ModalBg = styled.div`
 const ModalPopup = styled.div`
   background-color: ${colors.orangeBrown};
   padding: ${metrics.padding.formWrapper};
-  width: calc(100% - 80px);
+  /* width: calc(100% - 80px); */
+  min-width: 300px;
   margin: ${metrics.margin.formBody};
   border-radius: ${metrics.borderRadius.container}px;
   position: absolute;

@@ -57,7 +57,7 @@ export default () => {
         const resJSON = res.json();
         return resJSON;
       })
-      .catch((err) => console.log("failure to fetch teams", err));
+      .catch((err) => console.error("failure to fetch teams", err));
     //reset team array
     teams.length = 0;
     setTeams(
@@ -77,7 +77,6 @@ export default () => {
 
   const switchTeam = (teamName: string) => {
     // TODO: should be refactored
-    console.log("histroy", history.location.pathname);
     const TargetURL = history.location.pathname.replace(
       /[A-Za-z0-9_-]*$/,
       teamName,

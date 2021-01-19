@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import FormSubmit from "@soroha/components/atoms/FormSubmit";
 import { metrics, colors } from "@soroha/components/styles";
+import ConfirmationModal from "./ConfirmationModal";
 
 export type Props = {
-  onClick?: () => void;
+  onCalculate?: () => void;
 };
 
-const CalculateSubmit: React.FC<Props> = ({ onClick }) => {
+const CalculateSubmit: React.FC<Props> = ({ onCalculate }) => {
+  const [modalOpen, openModal] = useState(false);
+
+  const handleCloseModal = () => openModal(false);
+
+  const handleOpenModal = () => {
+    openModal(true);
+  };
+
+  const handleCalculate = () => console.log("calculate");
+
   return (
-    <SubmitButton
-      text="精算する"
-      className="calculate-submit"
-      onClick={onClick}
-    />
+    <>
+      <SubmitButton
+        text="精算する"
+        className="calculate-submit"
+        onClick={handleOpenModal}
+      />
+      <ConfirmationModal
+        open={modalOpen}
+        onClose={handleCloseModal}
+        closable
+        onCalculate={handleCalculate}
+      />
+    </>
   );
 };
 

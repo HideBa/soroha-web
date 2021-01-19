@@ -44,7 +44,6 @@ const TimelineItem: React.FC<Props> = ({
 
   const handleDeleteExpense = useCallback(
     (slug: string) => {
-      console.log(slug);
       if (!onExpenseDelete || !slug) return;
       onExpenseDelete(slug);
     },
