@@ -19,23 +19,31 @@ import EditingForm from "./Form";
 export type Props = {
   className?: string;
   item?: Expense;
+  onExpenseUpdate?: (price: number, comment: string, slug: string) => void;
 };
 
-const TimelineItem: React.FC<Props> = ({ className, item }) => {
+const TimelineItem: React.FC<Props> = ({
+  className,
+  item,
+  onExpenseUpdate,
+}) => {
   const [isEditing, setEditing] = useState(false);
 
   const startEditing = () => setEditing(true);
 
-  const endEditing = () => setEditing(false);
-
-  const updateExpense = () => {
-    console.log("update");
-  };
+  const updateExpense = useCallback(
+    (price: number, comment: string, slug: string) => {
+      if (!slug || !onExpenseUpdate) return;
+      onExpenseUpdate(price, comment, slug);
+      setEditing(false);
+    },
+    [onExpenseUpdate],
+  );
 
   return item ? (
     <StyledTimelineItem className={className}>
       <StyledTimelineOppositeContent>
-        <DateTime>{dayjs(item.createdAt).format("MM/DD")}</DateTime>
+        <DateTime>{dayjs(item.updatedAt).format("MM/DD")}</DateTime>
       </StyledTimelineOppositeContent>
       <TimelineSeparator>
         <StyledTimelineDot />
@@ -49,31 +57,31 @@ const TimelineItem: React.FC<Props> = ({ className, item }) => {
                 price: String(item.price),
                 comment: item.comment,
               }}
+              submitButton={
+                <StyledIcon icon="done" color={colors.textDarkBrown} />
+              }
+              slug={item.slug}
+              onSend={updateExpense}
             />
           ) : (
             <ContentWrapper>
               <ContentContainer>
-                <Comment>{item.comment}</Comment>
-                <Price>￥{item.price}</Price>
                 <IsCalculated>
                   {item.isCalculated ? "精算済み" : "未精算"}
                 </IsCalculated>
+                <Price>￥{item.price}</Price>
+                <Comment>{item.comment}</Comment>
               </ContentContainer>
             </ContentWrapper>
           )}
-          {!isEditing && !item.isCalculated ? (
+          {!isEditing && !item.isCalculated && (
             <StyledIcon
               icon="pen"
               color={colors.textDarkBrown}
               onClick={startEditing}
             />
-          ) : (
-            <StyledIcon
-              icon="done"
-              color={colors.textDarkBrown}
-              onClick={endEditing}
-            />
           )}
+          <TrashIcon icon="trash" color={colors.textDarkBrown} onClick={} />
         </Card>
       </StyledTimelineContent>
     </StyledTimelineItem>
@@ -131,9 +139,13 @@ const StyledIcon = styled(Icon)`
     background-color: ${colors.orangeBrown};
   }
   position: absolute;
-  right: 30px;
+  right: 75px;
   top: 20px;
   box-shadow: 3px 3px 10px gray;
+`;
+
+const TrashIcon = styled(StyledIcon)`
+  right: 30px;
 `;
 
 const Comment = styled(Medium)`

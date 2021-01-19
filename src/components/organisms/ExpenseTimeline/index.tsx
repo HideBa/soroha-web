@@ -1,3 +1,4 @@
+import Loading from "@soroha/components/atoms/Loading";
 import Timeline from "@soroha/components/molecules/Timeline";
 import React from "react";
 import useHooks from "./hooks";
@@ -12,14 +13,17 @@ const ExpenseTimeline: React.FC<Props> = ({ className }) => {
     fetchMyExpensesInTeam,
     myExpensesInTeam,
     teamExpenses,
+    updateExpenseBySlug,
+    loading,
   } = useHooks();
-  console.log("my----", myExpensesInTeam);
-  console.log("team---", teamExpenses);
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <Timeline
       className={className}
       teamExpenses={teamExpenses}
       myExpensesInTeam={myExpensesInTeam}
+      updateExpenseBySlug={updateExpenseBySlug}
     />
   );
 };

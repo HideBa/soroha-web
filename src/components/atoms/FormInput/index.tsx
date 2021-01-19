@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { metrics, colors, fonts } from "@soroha/components/styles";
+import { TextareaAutosize } from "@material-ui/core";
 
 export type Props = {
   className?: string;
@@ -9,9 +10,14 @@ export type Props = {
   title?: string;
   error?: string;
   touched?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void;
   name?: string;
   type?: string;
+  adjastableHeight?: boolean;
 };
 
 const FormInput: React.FC<Props> = ({
@@ -24,18 +30,28 @@ const FormInput: React.FC<Props> = ({
   onChange,
   name,
   type,
+  adjastableHeight,
 }) => {
   return (
     <Wrapper className={className}>
       {title && <Title>{title}</Title>}
       {error && touched && <ValidationError>{error}</ValidationError>}
-      <StyledInput
-        placeholder={placeHolder}
-        value={value}
-        onChange={onChange}
-        name={name}
-        type={type}
-      ></StyledInput>
+      {adjastableHeight ? (
+        <StyledTextareaAutosize
+          placeholder={placeHolder}
+          value={value}
+          onChange={onChange}
+          name={name}
+        />
+      ) : (
+        <StyledInput
+          placeholder={placeHolder}
+          value={value}
+          onChange={onChange}
+          name={name}
+          type={type}
+        />
+      )}
     </Wrapper>
   );
 };
@@ -66,6 +82,17 @@ const StyledInput = styled.input`
   background-color: ${colors.whiteBrown};
   color: ${colors.textDarkBrown};
   border-radius: ${metrics.borderRadius.input}px;
+  ::placeholder {
+    color: ${colors.gray};
+  }
+`;
+
+const StyledTextareaAutosize = styled(TextareaAutosize)`
+  padding: ${metrics.padding.inputMedium};
+  background-color: ${colors.whiteBrown};
+  color: ${colors.textDarkBrown};
+  border-radius: ${metrics.borderRadius.input}px;
+  border: none;
   ::placeholder {
     color: ${colors.gray};
   }

@@ -8,8 +8,10 @@ import useHooks from "./hooks";
 export type Props = {
   className?: string;
   defaultValues?: FormValues;
-  onSend?: (price: number, comment: string) => void;
+  onSend?: (price: number, comment: string, slug: string) => void;
   isLoading?: boolean;
+  submitButton?: React.ReactNode;
+  slug?: string;
 };
 
 export type FormValues = { price: string; comment: string };
@@ -19,6 +21,8 @@ const EditForm: React.FC<Props> = ({
   defaultValues,
   onSend,
   isLoading,
+  submitButton,
+  slug,
 }) => {
   const { validate } = useHooks();
 
@@ -36,9 +40,9 @@ const EditForm: React.FC<Props> = ({
           values: FormValues,
           { setSubmitting }: FormikHelpers<FormValues>,
         ) => {
-          if (!onSend) return;
+          if (!onSend || !slug) return;
           setSubmitting(true);
-          onSend(parseInt(values.price), values.comment);
+          onSend(parseInt(values.price), values.comment, slug);
           setSubmitting(false);
         }}
       >
@@ -73,13 +77,13 @@ const EditForm: React.FC<Props> = ({
               name="comment"
               touched={touched.comment}
               value={values.comment}
+              adjastableHeight
             />
-            {/* {err && <FormError err={err} />} */}
-            {/* <FormSubmit
-              type="submit"
-              text={isSubmitting ? "送信中..." : "追加"}
-              disabled={isSubmitting}
-            /> */}
+            {!!submitButton && (
+              <button type="submit" disabled={isSubmitting}>
+                {submitButton}
+              </button>
+            )}
           </form>
         )}
       </Formik>
@@ -90,8 +94,6 @@ const EditForm: React.FC<Props> = ({
 };
 
 const StyledInput = styled(FormInput)`
-  /* height: 20px; */
-  /* height: 60px; */
   margin: 5px;
 `;
 

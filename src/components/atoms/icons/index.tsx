@@ -11,7 +11,7 @@ import {
 } from "react-icons/ai";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { GrAdd, GrRadialSelected } from "react-icons/gr";
-import { CgNotes } from "react-icons/cg";
+import { CgNotes, CgTrash } from "react-icons/cg";
 import styled from "@emotion/styled";
 
 export type Props = {
@@ -40,6 +40,7 @@ const icons = {
   notice: AiOutlineInfoCircle,
   summary: CgNotes,
   done: AiOutlineCheck,
+  trash: CgTrash,
 };
 
 export type Icons = keyof typeof icons;

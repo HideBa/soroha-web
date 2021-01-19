@@ -55,7 +55,7 @@ export default (setErr: (err: string | undefined) => void) => {
         .catch((err) => console.error("failure to send expense ", err));
       setLoading(false);
     },
-    [userLocalState.teamId],
+    [setErr, setNotification, userLocalState.teamId],
   );
   // const sendExpense = console.log("expense---");
 
@@ -63,5 +63,6 @@ export default (setErr: (err: string | undefined) => void) => {
     isModalOpen,
     handleToggleModal,
     sendExpense,
-    loading
+    loading,
+  };
 };

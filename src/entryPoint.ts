@@ -16,6 +16,12 @@ export const TEAM_LIST = API_BASE_URL + "/teams";
 // ################# Expenses
 export const SEND_EXPENSE = API_BASE_URL + "/expenses";
 
+export const UPDATE_EXPENSE = (slug: string) =>
+  API_BASE_URL + "/expenses/" + slug;
+
+export const DELETE_EXPENSE = (slug: string) =>
+  API_BASE_URL + "/expenses/" + slug;
+
 export const TEAM_EXPENSES = (teamName: string) =>
   API_BASE_URL + "/teams/" + teamName + "/expenses";
 
