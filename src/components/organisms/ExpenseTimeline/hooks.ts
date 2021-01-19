@@ -139,15 +139,36 @@ export default () => {
     [fetchMyExpensesInTeam, fetchTeamExpenses, setNotification],
   );
 
-  const deleteExpense = useCallback(async (slug: string) => {
-    setErr("");
-    setLoading(true);
-    const token = localStorage.getItem("token");
-    await fetch(DELETE_EXPENSE(slug)).then((res) => {
-      if (res.ok) {
-      }
-    });
-  }, []);
+  const deleteExpense = useCallback(
+    async (slug: string) => {
+      setErr("");
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      await fetch(DELETE_EXPENSE(slug), {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Token: `${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (res) => {
+          if (res.ok) {
+            setMyExpensesInTeam((await fetchMyExpensesInTeam()) ?? []);
+            setTeamExpenses((await fetchTeamExpenses()) ?? []);
+            setNotification({ type: "notice", message: "削除しました" });
+          }
+        })
+        .catch((err) => {
+          console.error("failure to delete", err);
+          setNotification({ type: "alert", message: "削除に失敗しました。" });
+        });
+      setLoading(false);
+    },
+    [fetchMyExpensesInTeam, fetchTeamExpenses, setNotification],
+  );
 
   return {
     loading,
@@ -156,5 +177,6 @@ export default () => {
     teamExpenses,
     myExpensesInTeam,
     updateExpenseBySlug,
+    deleteExpense,
   };
 };

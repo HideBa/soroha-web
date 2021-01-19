@@ -14,6 +14,7 @@ export type Props = {
   teamExpenses?: Expense[];
   myExpensesInTeam?: Expense[];
   updateExpenseBySlug?: (price: number, comment: string, slug: string) => void;
+  deleteExpenseBySlug?: (slug: string) => void;
 };
 
 const Timeline: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const Timeline: React.FC<Props> = ({
   teamExpenses,
   myExpensesInTeam,
   updateExpenseBySlug,
+  deleteExpenseBySlug,
 }) => {
   const defaultOption: { value: SelectableType; label: string } = {
     value: "team",
@@ -44,6 +46,7 @@ const Timeline: React.FC<Props> = ({
             item={expense}
             key={i}
             onExpenseUpdate={updateExpenseBySlug}
+            onExpenseDelete={deleteExpenseBySlug}
           />
         ))}
       </StyledTimeline>

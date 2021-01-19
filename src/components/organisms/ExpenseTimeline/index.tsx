@@ -15,6 +15,7 @@ const ExpenseTimeline: React.FC<Props> = ({ className }) => {
     teamExpenses,
     updateExpenseBySlug,
     loading,
+    deleteExpense,
   } = useHooks();
   return loading ? (
     <Loading />
@@ -24,6 +25,7 @@ const ExpenseTimeline: React.FC<Props> = ({ className }) => {
       teamExpenses={teamExpenses}
       myExpensesInTeam={myExpensesInTeam}
       updateExpenseBySlug={updateExpenseBySlug}
+      deleteExpenseBySlug={deleteExpense}
     />
   );
 };

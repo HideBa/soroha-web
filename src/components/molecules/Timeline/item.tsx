@@ -20,12 +20,14 @@ export type Props = {
   className?: string;
   item?: Expense;
   onExpenseUpdate?: (price: number, comment: string, slug: string) => void;
+  onExpenseDelete?: (slug: string) => void;
 };
 
 const TimelineItem: React.FC<Props> = ({
   className,
   item,
   onExpenseUpdate,
+  onExpenseDelete,
 }) => {
   const [isEditing, setEditing] = useState(false);
 
@@ -38,6 +40,15 @@ const TimelineItem: React.FC<Props> = ({
       setEditing(false);
     },
     [onExpenseUpdate],
+  );
+
+  const handleDeleteExpense = useCallback(
+    (slug: string) => {
+      console.log(slug);
+      if (!onExpenseDelete || !slug) return;
+      onExpenseDelete(slug);
+    },
+    [onExpenseDelete],
   );
 
   return item ? (
@@ -81,7 +92,11 @@ const TimelineItem: React.FC<Props> = ({
               onClick={startEditing}
             />
           )}
-          <TrashIcon icon="trash" color={colors.textDarkBrown} onClick={} />
+          <TrashIcon
+            icon="trash"
+            color={colors.textDarkBrown}
+            onClick={() => handleDeleteExpense(item.slug)}
+          />
         </Card>
       </StyledTimelineContent>
     </StyledTimelineItem>
