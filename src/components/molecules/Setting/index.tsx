@@ -3,6 +3,7 @@ import Accordion from "@soroha/components/atoms/Accordion";
 import Loading from "@soroha/components/atoms/Loading";
 import React from "react";
 import Team from "./Team";
+import Users from "./User";
 
 export type Props = {
   className?: string;
@@ -10,6 +11,8 @@ export type Props = {
   onTeamCreate?: (teamName: string) => void;
   teams?: string[];
   onGetTeams?: () => void;
+  users?: string[];
+  onAddUserOnTeam?: (username: string) => void;
 };
 
 const Setting: React.FC<Props> = ({
@@ -18,6 +21,8 @@ const Setting: React.FC<Props> = ({
   loading,
   teams,
   onGetTeams,
+  users,
+  onAddUserOnTeam,
 }) => {
   return loading ? (
     <Loading />
@@ -31,8 +36,8 @@ const Setting: React.FC<Props> = ({
           onGetTeams={onGetTeams}
         />
       </Accordion>
-      <Accordion title="sample" disabled>
-        チーム設定
+      <Accordion title="Users">
+        <Users users={users} onAddUserOnTeam={onAddUserOnTeam} />
       </Accordion>
     </Wrapper>
   );

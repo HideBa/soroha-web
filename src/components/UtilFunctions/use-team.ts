@@ -67,6 +67,8 @@ export default () => {
     );
   };
 
+  const fetchUsers = {};
+
   useEffect(() => {
     let unmounted = false;
     !unmounted && fetchTeams();
