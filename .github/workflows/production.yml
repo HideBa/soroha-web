@@ -7,6 +7,7 @@ on:
 env:
   GCP_PROJECT: soroha
   GCS_DEST: gs://app.soroha.work/
+  CACHE_CONTROL: no-store
 
 jobs:
   build:
@@ -32,5 +33,5 @@ jobs:
           export_default_credentials: true
       - name: Build
         run: yarn build
-      # - name: rsync
-      #   run: gsutil -m -h "Cache-Control:${{ env.CACHE_CONTROL }}" rsync -dr build/ ${{ env.GCS_DEST }}
+      - name: Deploy
+        run: gsutil -m -h "Cache-Control:${{ env.CACHE_CONTROL }}" rsync -dr build/ ${{ env.GCS_DEST }}
