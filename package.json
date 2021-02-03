@@ -16,6 +16,7 @@
     "format:ts": "prettier --write '**/*.ts' --write '**/*.tsx'",
     "type": "tsc --noEmit",
     "lint": "eslint .",
+    "check": "run-p lint type",
     "storybook": "start-storybook -p 9001",
     "storybook:build": "build-storybook"
   },
