@@ -23,8 +23,8 @@ export default ({ createTeam, getTeams }: Props) => {
     };
   }, []);
 
-  const handleTeamNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTeamName(e.currentTarget.value);
+  const handleTeamNameChange = (teamName: string) => {
+    setTeamName(teamName);
   };
 
   const handleTeamCreate = () => createTeam && createTeam(teamName);

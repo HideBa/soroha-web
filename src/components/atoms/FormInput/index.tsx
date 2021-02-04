@@ -10,16 +10,11 @@ export type Props = {
   title?: string;
   error?: string;
   touched?: boolean;
-  onChange?: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
-  ) => void;
+  onChange?: (e: string) => void;
   name?: string;
   type?: string;
   adjastableHeight?: boolean;
 };
-
 const FormInput: React.FC<Props> = ({
   className,
   placeHolder,
@@ -32,6 +27,12 @@ const FormInput: React.FC<Props> = ({
   type,
   adjastableHeight,
 }) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    onChange?.(e.currentTarget.value);
+  };
+
   return (
     <Wrapper className={className}>
       {title && <Title>{title}</Title>}
@@ -40,14 +41,14 @@ const FormInput: React.FC<Props> = ({
         <StyledTextareaAutosize
           placeholder={placeHolder}
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           name={name}
         />
       ) : (
         <StyledInput
           placeholder={placeHolder}
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           name={name}
           type={type}
         />
