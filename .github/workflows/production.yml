@@ -3,12 +3,10 @@ on:
   push:
     branches:
       - master
-
 env:
   GCP_PROJECT: soroha
   GCS_DEST: gs://app.soroha.work/
   CACHE_CONTROL: no-store
-
 jobs:
   build:
     name: production deployment
@@ -19,7 +17,7 @@ jobs:
         with:
           node-version: 14.x
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: yarn install
         run: yarn install
       - name: check
